@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Eagle.Models;
+using Eagle.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Eagle.Controllers
+namespace Eagle.Web.Controllers
 {
     [Route("api/features")]
     [ApiController]

@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 
-namespace Eagle
+namespace Eagle.Web
 {
     public class Startup
     {
