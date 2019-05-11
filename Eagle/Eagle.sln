@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eagle.Web", "Eagle.Web\Eagle.Web.csproj", "{CBD9A780-E51F-4E4A-B35C-E881B13E8FDA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CBD9A780-E51F-4E4A-B35C-E881B13E8FDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBD9A780-E51F-4E4A-B35C-E881B13E8FDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBD9A780-E51F-4E4A-B35C-E881B13E8FDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBD9A780-E51F-4E4A-B35C-E881B13E8FDA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6D98AFBB-52AE-4B22-AE1E-537083D2FBC9}
+	EndGlobalSection
+EndGlobal
