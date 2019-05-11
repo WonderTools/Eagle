@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eagle.Web", "Eagle.Web\Eagl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eagle", "Eagle\Eagle.csproj", "{96B4688D-F92F-4C28-A538-C48246233B02}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Feature.Infrastructure", "Feature.Infrastructure\Feature.Infrastructure.csproj", "{D84EDFE1-8640-4CF2-B3F3-04ACAF6557D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{96B4688D-F92F-4C28-A538-C48246233B02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96B4688D-F92F-4C28-A538-C48246233B02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96B4688D-F92F-4C28-A538-C48246233B02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D84EDFE1-8640-4CF2-B3F3-04ACAF6557D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D84EDFE1-8640-4CF2-B3F3-04ACAF6557D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D84EDFE1-8640-4CF2-B3F3-04ACAF6557D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D84EDFE1-8640-4CF2-B3F3-04ACAF6557D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

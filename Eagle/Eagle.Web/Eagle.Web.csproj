@@ -12,7 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Eagle\Eagle.csproj" />
+    <ProjectReference Include="..\Eagle\Eagle.csproj">
+      <Private>true</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Feature.Infrastructure\Feature.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
