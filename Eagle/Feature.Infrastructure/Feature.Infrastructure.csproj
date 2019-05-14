@@ -6,10 +6,28 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.1.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.13.0" />
+    <PackageReference Include="SpecFlow.NUnit" Version="3.0.213" />
+    <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.0.213" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Eagle\Eagle.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Eagle.feature.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Eagle.feature</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <SpecFlowFeatureFiles Update="Eagle.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Eagle.feature.cs</LastGenOutput>
+    </SpecFlowFeatureFiles>
   </ItemGroup>
 
 </Project>

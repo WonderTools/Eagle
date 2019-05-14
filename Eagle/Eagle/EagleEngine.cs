@@ -17,7 +17,8 @@ namespace Eagle
             var currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
             var assemblies = GetAssemblies(currentDirectory);
-            var featureAssemblies = assemblies.Where(IsAssemblyFeatureAssembly).ToList();
+            var validAssemblies = assemblies.Where(a => a.FullName.StartsWith("Feature.")).ToList();
+            var featureAssemblies = validAssemblies.Where(IsAssemblyFeatureAssembly).ToList();
             return featureAssemblies.SelectMany(GetFeatureNames).ToList();
         }
 
