@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,10 +35,11 @@ namespace Eagle.Web
             });
 
             services.AddTransient<EagleEngine>();
+            services.AddSingleton<HttpClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, HttpClient client)
         {
 
 
@@ -65,10 +67,10 @@ namespace Eagle.Web
             app.UseMvc();
 
 
-            TriggerProcess(app);
+            TriggerProcess(app, client);
         }
 
-        private static void TriggerProcess(IApplicationBuilder app)
+        private static void TriggerProcess(IApplicationBuilder app, HttpClient httpClient)
         {
             var serverAddressesFeature = app.ServerFeatures.Get<IServerAddressesFeature>();
             var addresses = serverAddressesFeature.Addresses;
@@ -78,7 +80,8 @@ namespace Eagle.Web
             var timer = new System.Threading.Timer(PostToProcess, null, 5000, 5000);
             void PostToProcess(object o)
             {
-                Console.WriteLine("Triggered "+ address);
+                var url = address + "/api/features/process";
+                httpClient.PostAsync(url, new StringContent(""));
             }
         }
     }
