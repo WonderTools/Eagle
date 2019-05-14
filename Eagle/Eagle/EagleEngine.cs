@@ -5,14 +5,42 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Xml;
 using Newtonsoft.Json;
 using Formatting = Newtonsoft.Json.Formatting;
 
 namespace Eagle
 {
+    public class TestQueue
+    {
+        public int Add(string id, string name)
+        {
+            return 0;
+        }
+
+        public List<QueueElement> GetElements()
+        {
+            return new List<QueueElement>();
+        }
+    }
+
+    public class QueueElement
+    {
+        public string TestId { get; set; }
+        public string Name { get; set; }
+        public string Id { get; set; }
+    }
+
+
+
     public class EagleEngine
     {
+        public async Task Process()
+        {
+            Console.WriteLine("Triggered");
+        }
+
         public List<NameAndId> GetFeatureNames()
         {
             var currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
