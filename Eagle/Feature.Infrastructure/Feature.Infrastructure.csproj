@@ -26,7 +26,6 @@
   <ItemGroup>
     <SpecFlowFeatureFiles Update="Eagle.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Eagle.feature.cs</LastGenOutput>
     </SpecFlowFeatureFiles>
   </ItemGroup>
 

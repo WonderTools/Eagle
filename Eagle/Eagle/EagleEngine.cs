@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Xml;
 using Newtonsoft.Json;
@@ -51,6 +52,17 @@ namespace Eagle
 
         private List<NameAndId> GetFeatureNames(Assembly assembly)
         {
+            var names = GetTestCaseNames(assembly);
+            return names.Select(n => new NameAndId()
+            {
+                Name = n,
+                //TBD: UrlEncode seems to happening wrong for "Abc( xyz )"
+                Id = WebUtility.UrlEncode(n),
+            }).ToList();
+        }
+
+        private List<string> GetTestCaseNames(Assembly assembly)
+        {
             var testPackage = GetTestPackage(assembly);
             using (var engine = TestEngineActivator.CreateInstance())
             {
@@ -58,11 +70,22 @@ namespace Eagle
                 {
                     var xml = runner.Explore(TestFilter.Empty);
                     var json = ToJson(xml);
-
+                    return ParseNames(json);
                 }
             }
+        }
 
-            return new List<NameAndId>();
+        private static List<string> ParseNames(string json)
+        {
+            //TBD: Remove the hard code
+            return new List<string>()
+            {
+                "Feature.Infrastructure.EagleFeature.AddTwoNumbers",
+                "Feature.Infrastructure.EagleFeature.SubtractTwoNumbers",
+                "Feature.Infrastructure.TestClass",
+                "Feature.Infrastructure.TestClass.TestMethod",
+                "Abc( xyz )"
+            };
         }
 
         private TestPackage GetTestPackage(Assembly assembly)
