@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Eagle.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -51,9 +52,9 @@ namespace Eagle.Web.Controllers
 
         [HttpPost]
         [ApiExplorerSettings(IgnoreApi = true)]
-        public ActionResult Process()
+        public async Task<ActionResult> Process()
         {
-            Console.WriteLine("Triggered ***");
+            await _eagleEngine.Process();
             return Ok();
         }
     }

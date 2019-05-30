@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using Newtonsoft.Json;
@@ -16,13 +17,34 @@ namespace Eagle
     public class EagleEngine
     {
         TestQueue _testQueue = new TestQueue();
-
+        private object _lockable = new object();
+        private ScheduledFeature _runningTest;
 
         public async Task Process()
         {
+            lock (_lockable)
+            {
+                if (_runningTest != null) return;
+            }
+
+            ScheduledFeature scheduledFeature = null;
             lock (_testQueue)
             {
-                //_testQueue
+                _runningTest = _testQueue.RemoveTopQueueElement();
+            }
+
+            var t = Task.Run(() =>
+            {
+                Console.WriteLine("****");
+                Console.WriteLine($"{_runningTest.Id}--{_runningTest.Name}--{_runningTest.TestId}");
+                Thread.Sleep(5000);
+                Console.WriteLine("****");
+            });
+
+
+            lock (_lockable)
+            {
+                _runningTest = null;
             }
         }
 
