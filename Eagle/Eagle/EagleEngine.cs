@@ -16,9 +16,15 @@ namespace Eagle
 {
     public class EagleEngine
     {
+        private readonly IMyLogger _logger;
         TestQueue _testQueue = new TestQueue();
         private object _lockable = new object();
         private ScheduledFeature _runningTest;
+
+        public EagleEngine(IMyLogger logger)
+        {
+            _logger = logger;
+        }
 
         public async Task Process()
         {
@@ -27,25 +33,26 @@ namespace Eagle
                 if (_runningTest != null) return;
             }
 
-            ScheduledFeature scheduledFeature = null;
-            lock (_testQueue)
-            {
-                _runningTest = _testQueue.RemoveTopQueueElement();
-            }
-
-            var t = Task.Run(() =>
-            {
-                Console.WriteLine("****");
-                Console.WriteLine($"{_runningTest.Id}--{_runningTest.Name}--{_runningTest.TestId}");
-                Thread.Sleep(5000);
-                Console.WriteLine("****");
-            });
-
-
             lock (_lockable)
             {
-                _runningTest = null;
+                lock (_testQueue)
+                {
+                    _runningTest = _testQueue.RemoveTopQueueElement();
+                    if (_runningTest == null) return;
+                }
             }
+
+            var t = Task.Run(async () =>
+            {
+                _logger.Log("****11");
+                _logger.Log($"-->{_runningTest.Id}--{_runningTest.Name}--{_runningTest.TestId}");
+                await Task.Delay(1000);
+                _logger.Log("****11");
+                lock (_lockable)
+                {
+                    _runningTest = null;
+                }
+            });
         }
 
         public List<NameAndId> GetFeatureNames()

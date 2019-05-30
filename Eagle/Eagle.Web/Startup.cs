@@ -34,8 +34,10 @@ namespace Eagle.Web
                 c.SwaggerDoc("v1", new OpenApiInfo  { Title = "Eagle Api", Version = "v1" });
             });
 
+            services.AddTransient<IMyLogger, MyLogger>();
             services.AddSingleton<EagleEngine>();
             services.AddSingleton<HttpClient>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -77,12 +79,27 @@ namespace Eagle.Web
             if (addresses.Count == 0) throw new Exception("No listening addresses available");
             var address = addresses.ElementAt(0);
 
-            var timer = new System.Threading.Timer(PostToProcess, null, 5000, 5000);
+            var timer = new System.Threading.Timer(PostToProcess, null, 30000, 30000);
             void PostToProcess(object o)
             {
                 var url = address + "/api/process";
                 httpClient.PostAsync(url, new StringContent(""));
             }
+        }
+    }
+
+    public class MyLogger : IMyLogger
+    {
+        private readonly ILogger<MyLogger> _logger;
+
+        public MyLogger(ILogger<MyLogger> logger)
+        {
+            _logger = logger;
+        }
+
+        public void Log(string log)
+        {
+            _logger.LogError(log);
         }
     }
 }
