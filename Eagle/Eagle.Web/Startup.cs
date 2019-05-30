@@ -80,7 +80,7 @@ namespace Eagle.Web
             var timer = new System.Threading.Timer(PostToProcess, null, 5000, 5000);
             void PostToProcess(object o)
             {
-                var url = address + "/api/features/process";
+                var url = address + "/api/process";
                 httpClient.PostAsync(url, new StringContent(""));
             }
         }

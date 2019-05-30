@@ -34,12 +34,28 @@ namespace Eagle.Web.Controllers
             return Ok();
         }
 
-        [HttpPost("process")]
+           
+    }
+
+    [Route("api/process/")]
+    [ApiExplorerSettings(IgnoreApi = true)]
+    public class ProcessController : Controller
+    {
+        private readonly EagleEngine _eagleEngine;
+
+        public ProcessController(EagleEngine eagleEngine)
+        {
+            _eagleEngine = eagleEngine;
+        }
+
+
+        [HttpPost]
         [ApiExplorerSettings(IgnoreApi = true)]
         public ActionResult Process()
         {
             Console.WriteLine("Triggered ***");
             return Ok();
-        }    
+        }
     }
+
 }   
