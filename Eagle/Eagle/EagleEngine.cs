@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Xml;
@@ -12,33 +13,17 @@ using Formatting = Newtonsoft.Json.Formatting;
 
 namespace Eagle
 {
-    public class TestQueue
-    {
-        public int Add(string id, string name)
-        {
-            return 0;
-        }
-
-        public List<QueueElement> GetElements()
-        {
-            return new List<QueueElement>();
-        }
-    }
-
-    public class QueueElement
-    {
-        public string TestId { get; set; }
-        public string Name { get; set; }
-        public string Id { get; set; }
-    }
-
-
-
     public class EagleEngine
     {
+        TestQueue _testQueue = new TestQueue();
+
+
         public async Task Process()
         {
-            Console.WriteLine("Triggered");
+            lock (_testQueue)
+            {
+                //_testQueue
+            }
         }
 
         public List<NameAndId> GetFeatureNames()
@@ -126,5 +111,23 @@ namespace Eagle
             
             return package;
         }
+
+        public string ScheduleFeature(string id)
+        {
+            var namesAndId = GetFeatureNames().FirstOrDefault(x => x.Id == id);
+            if(namesAndId == null) throw new Exception("The Id is not found");
+            lock (_testQueue)
+            {
+                return _testQueue.Add(id, namesAndId.Name);
+            }
+        }
+
+        public List<ScheduledFeature> GetScheduledFeatures()
+        {
+            lock (_testQueue)
+            {
+                return _testQueue.GetElements();
+            }
+        }
     }
-}
+}   

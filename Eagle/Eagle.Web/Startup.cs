@@ -34,7 +34,7 @@ namespace Eagle.Web
                 c.SwaggerDoc("v1", new OpenApiInfo  { Title = "Eagle Api", Version = "v1" });
             });
 
-            services.AddTransient<EagleEngine>();
+            services.AddSingleton<EagleEngine>();
             services.AddSingleton<HttpClient>();
         }
 

@@ -17,15 +17,6 @@ namespace Eagle.Web.Controllers
             _eagleEngine = eagleEngine;
         }
 
-        [HttpPost("process")]
-        [ApiExplorerSettings(IgnoreApi = true)]
-        public ActionResult Process()
-        {
-            Console.WriteLine("Triggered ***" );
-            return Ok();
-        }
-
-
         [HttpGet]
         public ActionResult<List<FeatureIdAndNames>> GetFeatureNames()
         {
@@ -34,5 +25,21 @@ namespace Eagle.Web.Controllers
                 .ToList();
             
         }
+
+
+        [HttpPost("{id}/schedule")]
+        public ActionResult<string> ScheduleFeature(string id)
+        {
+            _eagleEngine.ScheduleFeature(id);
+            return Ok();
+        }
+
+        [HttpPost("process")]
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public ActionResult Process()
+        {
+            Console.WriteLine("Triggered ***");
+            return Ok();
+        }    
     }
-}
+}   
