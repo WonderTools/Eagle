@@ -15,7 +15,7 @@ namespace Eagle.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<ScheduledFeature>> GetScheduledFeatures(string id)
+        public ActionResult<List<ScheduledFeature>> GetScheduledFeatures()
         {
             var result = _eagleEngine.GetScheduledFeatures();
             return Ok(result);
