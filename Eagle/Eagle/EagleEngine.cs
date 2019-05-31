@@ -44,10 +44,8 @@ namespace Eagle
 
             var t = Task.Run(async () =>
             {
-                _logger.Log("****11");
-                _logger.Log($"-->{_runningTest.Id}--{_runningTest.Name}--{_runningTest.TestId}");
-                await Task.Delay(1000);
-                _logger.Log("****11");
+                _logger.Log($"-->{DateTime.Now.TimeOfDay}-{_runningTest.Id}--{_runningTest.Name}--{_runningTest.TestId}");
+                await Task.Delay(15000);
                 lock (_lockable)
                 {
                     _runningTest = null;
