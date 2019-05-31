@@ -9,7 +9,7 @@ namespace Feature.Infrastructure
         [Test]
         public void TestMethod()
         {
-
+            Assert.Fail();
         }
     }
 

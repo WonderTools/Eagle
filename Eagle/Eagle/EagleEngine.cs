@@ -127,7 +127,9 @@ namespace Eagle
                 {
                     var filterService = engine.Services.GetService<ITestFilterService>();
                     var builder = filterService.GetTestFilterBuilder();
-                    builder.AddTest("Feature.Infrastructure.TestClass.TestMethod");
+                    //builder.AddTest("Feature.Infrastructure.TestClass.TestMethod");
+                    builder.AddTest("Feature.Infrastructure.TestMyClass.MyTest");
+                    //builder.AddTest("Feature.Infrastructure.TestMyClass.MyTest(4)");
                     var filter = builder.GetFilter();
                     var result = runner.Run(new TestEventListener(), filter);
                 }
