@@ -13,6 +13,25 @@ namespace Feature.Infrastructure
         }
     }
 
+
+    public class NewTestSuite
+    {
+        [TestCase(4)]
+        [TestCase(3)]
+        [TestCase(2)]
+        [TestCase(1)]
+        [TestCase(0)]
+        public void TestMe(int r)
+        {
+
+        }
+
+        [Test]
+        public void GoodTest()
+        {
+        }
+    }
+
     [FeaturePackage]
 
     public class ConfigruationMy
