@@ -104,6 +104,9 @@ namespace Eagle
         private List<string> GetTestCaseNames(Assembly assembly)
         {
             var testPackage = GetTestPackage(assembly);
+
+            //RunTestCase(testPackage);
+
             using (var engine = TestEngineActivator.CreateInstance())
             {
                 using (var runner = engine.GetRunner(testPackage))
@@ -111,6 +114,22 @@ namespace Eagle
                     var xml = runner.Explore(TestFilter.Empty);
                     var json = ToJson(xml);
                     return ParseNames(json);
+                }
+            }
+        }
+
+
+        private void RunTestCase(TestPackage testPackage)
+        {
+            using (var engine = TestEngineActivator.CreateInstance())
+            {
+                using (var runner = engine.GetRunner(testPackage))
+                {
+                    var filterService = engine.Services.GetService<ITestFilterService>();
+                    var builder = filterService.GetTestFilterBuilder();
+                    builder.AddTest("Feature.Infrastructure.TestClass.TestMethod");
+                    var filter = builder.GetFilter();
+                    var result = runner.Run(new TestEventListener(), filter);
                 }
             }
         }
@@ -155,6 +174,15 @@ namespace Eagle
             {
                 return _testQueue.GetElements();
             }
+        }
+    }
+
+
+    public class TestEventListener : ITestEventListener
+    {
+        public void OnTestEvent(string report)
+        {
+            
         }
     }
 }   
