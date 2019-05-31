@@ -105,7 +105,7 @@ namespace Eagle
         {
             var testPackage = GetTestPackage(assembly);
 
-            //RunTestCase(testPackage);
+            RunTestCase(testPackage);
 
             using (var engine = TestEngineActivator.CreateInstance())
             {
@@ -182,7 +182,7 @@ namespace Eagle
     {
         public void OnTestEvent(string report)
         {
-            
+            Console.WriteLine(report);    
         }
     }
 }   
