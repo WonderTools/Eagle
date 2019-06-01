@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Threading.Tasks;
+using Feature.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server.Features;
@@ -13,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using NUnit.Engine;
 
 namespace Eagle.Web
 {
@@ -69,7 +73,23 @@ namespace Eagle.Web
             app.UseMvc();
 
 
+            var serviceProvider = app.ApplicationServices;
+            var eagleEngine = serviceProvider.GetService<EagleEngine>();
+            var eagleSeed = new EagleSeed();
+            eagleSeed.TestPackages.Add(new TestPackage(new List<string>()
+            {
+                GetFile<TestClass>(),
+            }));
+            eagleEngine.Initialize(eagleSeed);
+
             TriggerProcess(app, client);
+        }
+
+
+        private string GetFile<T>()
+        {
+            var assembly = typeof(T).Assembly;
+            return assembly.Location;
         }
 
         private static void TriggerProcess(IApplicationBuilder app, HttpClient httpClient)

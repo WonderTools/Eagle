@@ -20,11 +20,15 @@ namespace Eagle
         TestQueue _testQueue = new TestQueue();
         private object _lockable = new object();
         private ScheduledFeature _runningTest;
+        private List<TestPackage> _testPackages;
+
 
         public EagleEngine(IMyLogger logger)
         {
             _logger = logger;
         }
+
+        public int Value { get; set; }
 
         public async Task Process()
         {
@@ -55,33 +59,9 @@ namespace Eagle
 
         public List<NameAndId> GetFeatureNames()
         {
-            var currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-
-            var assemblies = GetAssemblies(currentDirectory);
-            var validAssemblies = assemblies.Where(a => a.FullName.StartsWith("Feature.")).ToList();
-            var featureAssemblies = validAssemblies.Where(IsAssemblyFeatureAssembly).ToList();
-            return featureAssemblies.SelectMany(GetFeatureNames).ToList();
+            return _testPackages.SelectMany(GetFeatureNames).ToList();
         }
-
-        private  List<Assembly> GetAssemblies(string currentDirectory)
-        {
-            List<Assembly> assemblies = new List<Assembly>();
-            string path = Path.GetDirectoryName(currentDirectory);
-
-            foreach (string dll in Directory.GetFiles(path, "*.dll"))
-                assemblies.Add(Assembly.LoadFile(dll));
-            return assemblies;
-        }
-
-        private bool IsAssemblyFeatureAssembly(Assembly assembly)
-        {
-            var types = assembly.GetTypes().Where(x => x.IsClass)
-                .Where(x => x.GetCustomAttribute<FeaturePackageAttribute>() != null);
-            if (types.Count() != 0) return true;
-            return false;
-        }
-
-
+        
         private static string ToJson(XmlNode exploredNodes)
         {
             var myData = exploredNodes.OuterXml;
@@ -90,9 +70,9 @@ namespace Eagle
             return JsonConvert.SerializeXmlNode(doc, Formatting.Indented);
         }
 
-        private List<NameAndId> GetFeatureNames(Assembly assembly)
+        private List<NameAndId> GetFeatureNames(TestPackage testPackage)
         {
-            var names = GetTestCaseNames(assembly);
+            var names = GetTestCaseNames(testPackage);
             return names.Select(n => new NameAndId()
             {
                 Name = n,
@@ -101,10 +81,8 @@ namespace Eagle
             }).ToList();
         }
 
-        private List<string> GetTestCaseNames(Assembly assembly)
+        private List<string> GetTestCaseNames(TestPackage testPackage)
         {
-            var testPackage = GetTestPackage(assembly);
-
             RunTestCase(testPackage);
 
             using (var engine = TestEngineActivator.CreateInstance())
@@ -177,8 +155,12 @@ namespace Eagle
                 return _testQueue.GetElements();
             }
         }
-    }
 
+        public void Initialize(EagleSeed eagleSeed)
+        {
+            _testPackages = eagleSeed.TestPackages;
+        }
+    }
 
     public class TestEventListener : ITestEventListener
     {
