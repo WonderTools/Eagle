@@ -28,8 +28,6 @@ namespace Eagle
             _logger = logger;
         }
 
-        public int Value { get; set; }
-
         public async Task Process()
         {
             lock (_lockable)
