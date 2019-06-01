@@ -1,0 +1,171 @@
+{
+  "test-run": {
+    "@id": "2",
+    "@testcasecount": "7",
+    "test-suite": {
+      "@type": "Assembly",
+      "@id": "0-1026",
+      "@name": "Feature.Infrastructure.dll",
+      "@fullname": "Feature.Infrastructure.dll",
+      "@runstate": "Runnable",
+      "@testcasecount": "7",
+      "properties": {
+        "property": [
+          {
+            "@name": "_PID",
+            "@value": "22404"
+          },
+          {
+            "@name": "_APPDOMAIN",
+            "@value": "Eagle.Web"
+          }
+        ]
+      },
+      "test-suite": {
+        "@type": "TestSuite",
+        "@id": "0-1027",
+        "@name": "Feature",
+        "@fullname": "Feature",
+        "@runstate": "Runnable",
+        "@testcasecount": "7",
+        "test-suite": {
+          "@type": "TestSuite",
+          "@id": "0-1028",
+          "@name": "Infrastructure",
+          "@fullname": "Feature.Infrastructure",
+          "@runstate": "Runnable",
+          "@testcasecount": "7",
+          "test-suite": [
+            {
+              "@type": "TestFixture",
+              "@id": "0-1015",
+              "@name": "EagleFeature",
+              "@fullname": "Feature.Infrastructure.EagleFeature",
+              "@classname": "Feature.Infrastructure.EagleFeature",
+              "@runstate": "Runnable",
+              "@testcasecount": "2",
+              "properties": {
+                "property": {
+                  "@name": "Description",
+                  "@value": "Eagle"
+                }
+              },
+              "test-case": [
+                {
+                  "@id": "0-1016",
+                  "@name": "AddTwoNumbers",
+                  "@fullname": "Feature.Infrastructure.EagleFeature.AddTwoNumbers",
+                  "@methodname": "AddTwoNumbers",
+                  "@classname": "Feature.Infrastructure.EagleFeature",
+                  "@runstate": "Runnable",
+                  "@seed": "739454917",
+                  "properties": {
+                    "property": [
+                      {
+                        "@name": "Description",
+                        "@value": "Add two numbers"
+                      },
+                      {
+                        "@name": "Category",
+                        "@value": "mytag"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "@id": "0-1017",
+                  "@name": "SubtractTwoNumbers",
+                  "@fullname": "Feature.Infrastructure.EagleFeature.SubtractTwoNumbers",
+                  "@methodname": "SubtractTwoNumbers",
+                  "@classname": "Feature.Infrastructure.EagleFeature",
+                  "@runstate": "Runnable",
+                  "@seed": "590407306",
+                  "properties": {
+                    "property": {
+                      "@name": "Description",
+                      "@value": "Subtract two numbers"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "@type": "TestFixture",
+              "@id": "0-1018",
+              "@name": "TestClass",
+              "@fullname": "Feature.Infrastructure.TestClass",
+              "@classname": "Feature.Infrastructure.TestClass",
+              "@runstate": "Runnable",
+              "@testcasecount": "1",
+              "test-case": {
+                "@id": "0-1019",
+                "@name": "TestMethod",
+                "@fullname": "Feature.Infrastructure.TestClass.TestMethod",
+                "@methodname": "TestMethod",
+                "@classname": "Feature.Infrastructure.TestClass",
+                "@runstate": "Runnable",
+                "@seed": "813983850"
+              }
+            },
+            {
+              "@type": "TestFixture",
+              "@id": "0-1020",
+              "@name": "TestMyClass",
+              "@fullname": "Feature.Infrastructure.TestMyClass",
+              "@classname": "Feature.Infrastructure.TestMyClass",
+              "@runstate": "Runnable",
+              "@testcasecount": "4",
+              "test-suite": {
+                "@type": "ParameterizedMethod",
+                "@id": "0-1025",
+                "@name": "MyTest",
+                "@fullname": "Feature.Infrastructure.TestMyClass.MyTest",
+                "@classname": "Feature.Infrastructure.TestMyClass",
+                "@runstate": "Runnable",
+                "@testcasecount": "4",
+                "test-case": [
+                  {
+                    "@id": "0-1021",
+                    "@name": "MyTest(1)",
+                    "@fullname": "Feature.Infrastructure.TestMyClass.MyTest(1)",
+                    "@methodname": "MyTest",
+                    "@classname": "Feature.Infrastructure.TestMyClass",
+                    "@runstate": "Runnable",
+                    "@seed": "1155829879"
+                  },
+                  {
+                    "@id": "0-1022",
+                    "@name": "MyTest(2)",
+                    "@fullname": "Feature.Infrastructure.TestMyClass.MyTest(2)",
+                    "@methodname": "MyTest",
+                    "@classname": "Feature.Infrastructure.TestMyClass",
+                    "@runstate": "Runnable",
+                    "@seed": "1200618465"
+                  },
+                  {
+                    "@id": "0-1023",
+                    "@name": "MyTest(3)",
+                    "@fullname": "Feature.Infrastructure.TestMyClass.MyTest(3)",
+                    "@methodname": "MyTest",
+                    "@classname": "Feature.Infrastructure.TestMyClass",
+                    "@runstate": "Runnable",
+                    "@seed": "279457900"
+                  },
+                  {
+                    "@id": "0-1024",
+                    "@name": "MyTest(4)",
+                    "@fullname": "Feature.Infrastructure.TestMyClass.MyTest(4)",
+                    "@methodname": "MyTest",
+                    "@classname": "Feature.Infrastructure.TestMyClass",
+                    "@runstate": "Runnable",
+                    "@seed": "39004450"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
