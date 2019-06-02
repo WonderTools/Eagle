@@ -2,11 +2,7 @@
 {
     public abstract class Testable
     {
-        public string Id
-        {
-            //TBD: Id has to be computed
-            get { return FullName; }
-        }
+        public string Id => "id"+ FullName;
 
         public string FullName { get; set; }
 

@@ -113,28 +113,28 @@ namespace Eagle
 
         
 
-        private List<string> GetIds(TestSuite suite)
+        private List<(string FullName, string Id)> GetFullNameAndIds(TestSuite suite)
         {
-            List<string> GetIdsFromCases(List<TestCase> testCases)
+            List<(string FullName, string Id)> GetFullNameAndIdsFromCases(List<TestCase> testCases)
             {
-                return testCases.Select(x => x.Id).ToList();
+                return testCases.Select(x => (x.FullName, x.Id)).ToList();
             }
 
-            List<string> GetIdsFromSuites(List<TestSuite> testSuites)
+            List<(string FullName, string Id)> GetFullNameAndIdsFromSuites(List<TestSuite> testSuites)
             {
-                var results = new List<string>();
-                var r = testSuites.Select(GetIds).ToList();
+                var results = new List<(string FullName, string Id)>();
+                var r = testSuites.Select(GetFullNameAndIds).ToList();
                 r.ForEach(x => results.AddRange(x));
                 return results;
             }
 
-            var result = new List<string>() {suite.Id};
-            result.AddRange(GetIdsFromSuites(suite.TestSuites));
-            result.AddRange(GetIdsFromCases(suite.TestCases));
+            var result = new List<(string FullName, string Id)>() {(suite.FullName, suite.Id)};
+            result.AddRange(GetFullNameAndIdsFromSuites(suite.TestSuites));
+            result.AddRange(GetFullNameAndIdsFromCases(suite.TestCases));
             return result;
         }
 
-        public (List<TestPackage> TestPackages, List<TestSuite> TestSuites, Dictionary<string, TestPackage>
+        public (List<TestPackage> TestPackages, List<TestSuite> TestSuites, Dictionary<string, (TestPackage TestPackage, string Name)>
             IdToTestPackageMap)
             GetInitializationParameters(params TestAssemblyLocationHolder[] testAssembliesLocationHolder)
         {
@@ -146,20 +146,20 @@ namespace Eagle
 
             List<TestSuite> testSuites = packageToSuiteMap.Values.ToList();
 
-            Dictionary<string, TestPackage> map = GetMap(packageToSuiteMap);
+            Dictionary<string, (TestPackage TestPackage, string Name)> map = GetMap(packageToSuiteMap);
             return (testPackages, testSuites, map);
         }
 
-        private Dictionary<string, TestPackage> GetMap(Dictionary<TestPackage, TestSuite> packageAndSuites)
+        private Dictionary<string, (TestPackage TestPackage, string Name)> GetMap(Dictionary<TestPackage, TestSuite> packageAndSuites)
         {
-            Dictionary<string, TestPackage> result = new Dictionary<string, TestPackage>();
+            var result = new Dictionary<string, (TestPackage TestPackage, string Name)>();
             foreach (var packageAndSuite in packageAndSuites)
             {
-                var ids = GetIds(packageAndSuite.Value);
-                foreach (var id in ids)
+                var fullNameAndIds = GetFullNameAndIds(packageAndSuite.Value);
+                foreach (var fullNameAndId in fullNameAndIds)
                 {
-                    if(result.ContainsKey(id)) throw new Exception($"The testable id {id} is present more that one");
-                    result.Add(id, packageAndSuite.Key);
+                    if(result.ContainsKey(fullNameAndId.Id)) throw new Exception($"The testable id {fullNameAndId.Id} is present more that one");
+                    result.Add(fullNameAndId.Id, (packageAndSuite.Key, fullNameAndId.FullName));
                 }
             }
             return result;

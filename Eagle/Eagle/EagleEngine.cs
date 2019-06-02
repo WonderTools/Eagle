@@ -17,7 +17,7 @@ namespace Eagle
     {
         private List<TestPackage> _testPackages;
         private List<TestSuite> _testSuites;
-        private Dictionary<string,TestPackage> _idToTestPackageMap;
+        private Dictionary<string,(TestPackage TestPackage, string Name)> _idToTestPackageMap;
 
 
         private readonly IMyLogger _logger;
@@ -50,7 +50,7 @@ namespace Eagle
 
             var t = Task.Run(async () =>
             {
-                RunTestCase(_idToTestPackageMap[_runningTest.Id], _runningTest.Id);
+                RunTestCase(_idToTestPackageMap[_runningTest.Id].TestPackage, _runningTest.Id);
                 lock (_lockable)
                 {
                     _runningTest = null;
@@ -71,10 +71,11 @@ namespace Eagle
                     //builder.AddTest("Feature.Infrastructure.TestMyClass.MyTest(4)");
                     builder.AddTest(name);
                     var filter = builder.GetFilter();
-                    var result = runner.Run(new TestEventListener(), filter);
-                    _logger.Log("");
-                    _logger.Log(result.InnerText);
-                    _logger.Log("");
+                    var result = runner.Run(new TestEventListener(), filter).ToJson();
+                    //runner.RunAsync(new TestEventListener(), filter).Result.ToJson();
+                    _logger.Log("***start***");
+                    _logger.Log(result);
+                    _logger.Log("***end***");
                 }
             }
         }
@@ -106,7 +107,6 @@ namespace Eagle
         {
             Initializer initializer = new Initializer();
             var initializationParameters = initializer.GetInitializationParameters(testAssembliesLocationHolder);
-            _testPackages = initializationParameters.TestPackages;
             _testSuites = initializationParameters.TestSuites;
             _idToTestPackageMap = initializationParameters.IdToTestPackageMap;
         }
