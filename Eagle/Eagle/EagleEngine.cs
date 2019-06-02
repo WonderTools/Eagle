@@ -50,8 +50,7 @@ namespace Eagle
 
             var t = Task.Run(async () =>
             {
-                _logger.Log($"-->{DateTime.Now.TimeOfDay}-{_runningTest.Id}--{_runningTest.Name}--{_runningTest.TestId}");
-                await Task.Delay(15000);
+                RunTestCase(_idToTestPackageMap[_runningTest.Id], _runningTest.Id);
                 lock (_lockable)
                 {
                     _runningTest = null;
@@ -59,23 +58,7 @@ namespace Eagle
             });
         }
 
-        //public List<NameAndId> GetFeatureNames()
-        //{
-        //    return _testPackages.SelectMany(GetFeatureNames).ToList();
-        //}
-        
-        //private List<NameAndId> GetFeatureNames(TestPackage testPackage)
-        //{
-        //    var names = GetTestCaseNames(testPackage);
-        //    return names.Select(n => new NameAndId()
-        //    {
-        //        Name = n,
-        //        //TBD: UrlEncode seems to happening wrong for "Abc( xyz )"
-        //        Id = WebUtility.UrlEncode(n),
-        //    }).ToList();
-        //}
-
-        private void RunTestCase(TestPackage testPackage)
+        private void RunTestCase(TestPackage testPackage, string name)
         {
             using (var engine = TestEngineActivator.CreateInstance())
             {
@@ -84,24 +67,27 @@ namespace Eagle
                     var filterService = engine.Services.GetService<ITestFilterService>();
                     var builder = filterService.GetTestFilterBuilder();
                     //builder.AddTest("Feature.Infrastructure.TestClass.TestMethod");
-                    builder.AddTest("Feature.Infrastructure.TestMyClass.MyTest");
+                    //builder.AddTest("Feature.Infrastructure.TestMyClass.MyTest");
                     //builder.AddTest("Feature.Infrastructure.TestMyClass.MyTest(4)");
+                    builder.AddTest(name);
                     var filter = builder.GetFilter();
                     var result = runner.Run(new TestEventListener(), filter);
+                    _logger.Log("");
+                    _logger.Log(result.InnerText);
+                    _logger.Log("");
                 }
             }
         }
 
 
-        //public string ScheduleFeature(string id)
-        //{
-        //    var namesAndId = GetFeatureNames().FirstOrDefault(x => x.Id == id);
-        //    if(!_idToTestPackageMap.ContainsKey(id)) throw new Exception("The Id is not found");
-        //    lock (_testQueue)
-        //    {
-        //        return _testQueue.Add(id, "some name");
-        //    }
-        //}
+        public string ScheduleTest(string id)
+        {
+            if (!_idToTestPackageMap.ContainsKey(id)) throw new Exception("The Id is not found");
+            lock (_testQueue)
+            {
+                return _testQueue.Add(id, id);
+            }
+        }
 
         public List<ScheduledFeature> GetScheduledFeatures()
         {

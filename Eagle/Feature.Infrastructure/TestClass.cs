@@ -1,5 +1,4 @@
-﻿using Eagle;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace Feature.Infrastructure
 {
@@ -11,12 +10,5 @@ namespace Feature.Infrastructure
         {
             Assert.Fail();
         }
-    }
-
-    [FeaturePackage]
-
-    public class ConfigruationMy
-    {
-
     }
 }

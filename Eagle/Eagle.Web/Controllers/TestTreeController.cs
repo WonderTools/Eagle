@@ -8,11 +8,11 @@ namespace Eagle.Web.Controllers
 {
     [Route("api/test-tree/")]
     [ApiController]
-    public class Tests : ControllerBase
+    public class TestTreeController : ControllerBase
     {
         private readonly EagleEngine _eagleEngine;
 
-        public Tests(EagleEngine eagleEngine)
+        public TestTreeController(EagleEngine eagleEngine)
         {
             _eagleEngine = eagleEngine;
         }
@@ -22,15 +22,5 @@ namespace Eagle.Web.Controllers
         {
             return _eagleEngine.GetDiscoveredTestSuites();
         }
-
-
-        //[HttpPost("{id}/schedule")]
-        //public ActionResult<string> ScheduleFeature(string id)
-        //{
-        //    _eagleEngine.ScheduleFeature(id);
-        //    return Ok();
-        //}
-
-
     }
 }   
