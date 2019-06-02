@@ -1,28 +1,22 @@
 ﻿using NUnit.Engine;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
+
 
 namespace Eagle
 {
     public class EagleEngine
     {
         private readonly IMyLogger _logger;
+        private readonly ITestQueue _testQueue;
+        private TestRunner _testRunner;
         private List<TestSuite> _testSuites;
         private Dictionary<string,(TestPackage TestPackage, string FullName)> _idToSchedulingParametersMap;
-
-        ITestQueue _testQueue = new ThreadSafeQueue();
         
-        private TestRunner _testRunner;
-
         public EagleEngine(IMyLogger logger)
         {
+            _testQueue = new ThreadSafeQueue();
             _logger = logger;
         }
 
@@ -37,9 +31,16 @@ namespace Eagle
             return _testQueue.AddToQueue(id);
         }
 
-        public List<ScheduledTestInternal> GetScheduledFeatures()
+        public List<ScheduledTest> GetScheduledFeatures()
         {
-            return _testQueue.GetQueueElements();
+            var queueElements = _testQueue.GetQueueElements();
+            return queueElements.Select(x => new ScheduledTest()
+            {
+                //TBD Refactor to use auto mapper
+                FullName = _idToSchedulingParametersMap[x.Id].FullName,
+                Id = x.Id,
+                SerialNumber = x.SerialNumber,
+            }).ToList();
         }
 
         public List<TestSuite> GetDiscoveredTestSuites()
