@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
+using Eagle.Web.Database;
 using Eagle.Web.Service;
 using Feature.Infrastructure;
 using Microsoft.AspNetCore.Builder;
@@ -12,6 +13,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -43,6 +45,8 @@ namespace Eagle.Web
             services.AddSingleton<EagleEngine>();
             services.AddSingleton<HttpClient>();
             services.AddTransient<TestTreeService>();
+            services.AddDbContext<ResultContext>(options => options.UseInMemoryDatabase("BoardGames"));
+            services.AddTransient<IResultRepository, ResultRepository>();
 
         }
 

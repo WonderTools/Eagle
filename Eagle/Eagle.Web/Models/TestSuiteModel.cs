@@ -9,8 +9,7 @@ namespace Eagle.Web.Models
         public string Id { get; set; }
         public string FullName { get; set; }
         public string Name { get; set; }
-        public string Result { get; set; }
-        public List<TestSuiteModel> TestSuites { get; set; }
-        public List<TestCaseModel> TestCases { get; set; }
+        public List<TestSuiteModel> TestSuites { get; set; } = new List<TestSuiteModel>();
+        public List<TestCaseModel> TestCases { get; set; } = new List<TestCaseModel>();
     }
 }

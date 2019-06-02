@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using Eagle.Web.Models;
 using Eagle.Web.Service;
@@ -20,9 +21,9 @@ namespace Eagle.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<TestSuiteModel>> GetTestTree()
+        public async Task<ActionResult<List<TestSuiteModel>>> GetTestTree()
         {
-            return _service.GetTestTree();
+            return await _service.GetTestTree();
         }
     }
 }   

@@ -8,7 +8,8 @@ namespace Eagle.Web.Models
         public string FullName { get; set; }
         public string Name { get; set; }
         public string Result { get; set; }
-        public DateTime? ExecutionStartTime { get; set; }
-        public DateTime? ExecutionEndTime { get; set; }
+        public DateTime? FinishingTime { get; set; }
+        public DateTime? StartingTime { get; set; }
+        public double DurationInMs { get; set; }
     }
 }
