@@ -21,24 +21,21 @@ namespace PlayGround
         public string Fullname { get; set; }
 
         [JsonProperty("test-suite")]
-        public TestRunTestSuite TestSuite { get; set; }
+        public TestSuite TestSuite { get; set; }
     }
 
-    public class TestRunTestSuite
+    public class TestSuite
     {
         [JsonProperty("@fullname")]
         public string Fullname { get; set; }
 
-        [JsonProperty("@runstate")]
-        public string Runstate { get; set; }
-
-        [JsonConverter(typeof(MyConverter<TestRunTestSuite>))]
+        [JsonConverter(typeof(MyConverter<TestSuite>))]
         [JsonProperty("test-suite")]
-        public List<TestRunTestSuite> TestSuites { get; set; }
+        public List<TestSuite> TestSuites { get; set; }
 
-        [JsonConverter(typeof(MyConverter<TestCaseElement>))]
+        [JsonConverter(typeof(MyConverter<TestCase>))]
         [JsonProperty("test-case")]
-        public List<TestCaseElement> TestCases { get; set; }
+        public List<TestCase> TestCases { get; set; }
     }
 
     public class MyConverter<T> : JsonConverter
@@ -66,7 +63,7 @@ namespace PlayGround
     }
 
 
-    public class TestCaseElement
+    public class TestCase
     {
         [JsonProperty("@id")]
         public string Id { get; set; }

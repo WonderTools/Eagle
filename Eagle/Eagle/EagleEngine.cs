@@ -20,7 +20,7 @@ namespace Eagle
         TestQueue _testQueue = new TestQueue();
         private object _lockable = new object();
         private ScheduledFeature _runningTest;
-        private List<TestPackage> _testPackages;
+        private List<TestPackage> _testPackages = new List<TestPackage>();
 
 
         public EagleEngine(IMyLogger logger)
@@ -154,10 +154,25 @@ namespace Eagle
             }
         }
 
-        public void Initialize(EagleSeed eagleSeed)
+        public void Initialize(params TestAssembly[] testAssemblies)
         {
-            _testPackages = eagleSeed.TestPackages;
+            var testPackages = testAssemblies.Select(x => new TestPackage(x.Location));
+            _testPackages.AddRange(testPackages);
         }
+    }
+
+    public class TestAssembly
+    {
+        public static implicit operator TestAssembly(Assembly assembly)
+        {
+            return new TestAssembly() {Location = assembly.Location};
+        }
+
+        public static implicit operator TestAssembly(Type type)
+        {
+            return new TestAssembly() { Location = type.Assembly.Location };
+        }
+        public string Location { get; private set; }
     }
 
     public class TestEventListener : ITestEventListener

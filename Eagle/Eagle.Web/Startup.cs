@@ -75,13 +75,7 @@ namespace Eagle.Web
 
             var serviceProvider = app.ApplicationServices;
             var eagleEngine = serviceProvider.GetService<EagleEngine>();
-            var eagleSeed = new EagleSeed();
-            eagleSeed.TestPackages.Add(new TestPackage(new List<string>()
-            {
-                GetFile<TestClass>(),
-            }));
-            eagleEngine.Initialize(eagleSeed);
-
+            eagleEngine.Initialize(typeof(TestClass));
             TriggerProcess(app, client);
         }
 
