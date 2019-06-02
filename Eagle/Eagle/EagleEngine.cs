@@ -17,7 +17,7 @@ namespace Eagle
     {
         private List<TestPackage> _testPackages;
         private List<TestSuite> _testSuites;
-        private Dictionary<string, TestPackage> _idToTestPackageMap;
+        private Dictionary<string,TestPackage> _idToTestPackageMap;
 
 
         private readonly IMyLogger _logger;
@@ -117,6 +117,17 @@ namespace Eagle
         public void OnTestEvent(string report)
         {
             Console.WriteLine(report);    
+        }
+    }
+
+    public static class XmlExtensions
+    {
+        public static string ToJson(this XmlNode xmlNode)
+        {
+            var myData = xmlNode.OuterXml;
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(myData);
+            return JsonConvert.SerializeXmlNode(doc, Newtonsoft.Json.Formatting.Indented);
         }
     }
 }   

@@ -17,7 +17,7 @@ namespace Eagle
                 using (var runner = engine.GetRunner(testPackage))
                 {
                     var xml = runner.Explore(TestFilter.Empty);
-                    var json = ToJson(xml);
+                    var json = xml.ToJson();
                     return GetHardCodedTestSuite(json);
                 }
             }
@@ -111,13 +111,7 @@ namespace Eagle
             };
         }
 
-        private static string ToJson(XmlNode exploredNodes)
-        {
-            var myData = exploredNodes.OuterXml;
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(myData);
-            return JsonConvert.SerializeXmlNode(doc, Newtonsoft.Json.Formatting.Indented);
-        }
+        
 
         private List<string> GetIds(TestSuite suite)
         {
