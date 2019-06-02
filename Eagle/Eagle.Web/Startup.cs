@@ -79,13 +79,6 @@ namespace Eagle.Web
             TriggerProcess(app, client);
         }
 
-
-        private string GetFile<T>()
-        {
-            var assembly = typeof(T).Assembly;
-            return assembly.Location;
-        }
-
         private static void TriggerProcess(IApplicationBuilder app, HttpClient httpClient)
         {
             var serverAddressesFeature = app.ServerFeatures.Get<IServerAddressesFeature>();

@@ -18,22 +18,22 @@ namespace Eagle.Web.Controllers
             _eagleEngine = eagleEngine;
         }
 
-        [HttpGet]
-        public ActionResult<List<FeatureIdAndNames>> GetFeatureNames()
-        {
-            return _eagleEngine.GetFeatureNames()
-                .Select(x => new FeatureIdAndNames() { Id = x.Id, Name = x.Name})
-                .ToList();
+        //[HttpGet]
+        //public ActionResult<List<FeatureIdAndNames>> GetFeatureNames()
+        //{
+        //    return _eagleEngine.GetFeatureNames()
+        //        .Select(x => new FeatureIdAndNames() { Id = x.Id, Name = x.Name})
+        //        .ToList();
             
-        }
+        //}
 
 
-        [HttpPost("{id}/schedule")]
-        public ActionResult<string> ScheduleFeature(string id)
-        {
-            _eagleEngine.ScheduleFeature(id);
-            return Ok();
-        }
+        //[HttpPost("{id}/schedule")]
+        //public ActionResult<string> ScheduleFeature(string id)
+        //{
+        //    _eagleEngine.ScheduleFeature(id);
+        //    return Ok();
+        //}
 
            
     }

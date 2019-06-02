@@ -10,17 +10,21 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using Newtonsoft.Json;
-using Formatting = Newtonsoft.Json.Formatting;
 
 namespace Eagle
 {
     public class EagleEngine
     {
+        private List<TestPackage> _testPackages;
+        private List<TestSuite> _testSuites;
+        private Dictionary<string, TestPackage> _idToTestPackageMap;
+
+
         private readonly IMyLogger _logger;
         TestQueue _testQueue = new TestQueue();
         private object _lockable = new object();
         private ScheduledFeature _runningTest;
-        private List<TestPackage> _testPackages = new List<TestPackage>();
+        
 
 
         public EagleEngine(IMyLogger logger)
@@ -55,45 +59,21 @@ namespace Eagle
             });
         }
 
-        public List<NameAndId> GetFeatureNames()
-        {
-            return _testPackages.SelectMany(GetFeatureNames).ToList();
-        }
+        //public List<NameAndId> GetFeatureNames()
+        //{
+        //    return _testPackages.SelectMany(GetFeatureNames).ToList();
+        //}
         
-        private static string ToJson(XmlNode exploredNodes)
-        {
-            var myData = exploredNodes.OuterXml;
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(myData);
-            return JsonConvert.SerializeXmlNode(doc, Formatting.Indented);
-        }
-
-        private List<NameAndId> GetFeatureNames(TestPackage testPackage)
-        {
-            var names = GetTestCaseNames(testPackage);
-            return names.Select(n => new NameAndId()
-            {
-                Name = n,
-                //TBD: UrlEncode seems to happening wrong for "Abc( xyz )"
-                Id = WebUtility.UrlEncode(n),
-            }).ToList();
-        }
-
-        private List<string> GetTestCaseNames(TestPackage testPackage)
-        {
-            RunTestCase(testPackage);
-
-            using (var engine = TestEngineActivator.CreateInstance())
-            {
-                using (var runner = engine.GetRunner(testPackage))
-                {
-                    var xml = runner.Explore(TestFilter.Empty);
-                    var json = ToJson(xml);
-                    return ParseNames(json);
-                }
-            }
-        }
-
+        //private List<NameAndId> GetFeatureNames(TestPackage testPackage)
+        //{
+        //    var names = GetTestCaseNames(testPackage);
+        //    return names.Select(n => new NameAndId()
+        //    {
+        //        Name = n,
+        //        //TBD: UrlEncode seems to happening wrong for "Abc( xyz )"
+        //        Id = WebUtility.UrlEncode(n),
+        //    }).ToList();
+        //}
 
         private void RunTestCase(TestPackage testPackage)
         {
@@ -112,39 +92,16 @@ namespace Eagle
             }
         }
 
-        private static List<string> ParseNames(string json)
-        {
-            //TBD: Remove the hard code
-            return new List<string>()
-            {
-                "Feature.Infrastructure.EagleFeature.AddTwoNumbers",
-                "Feature.Infrastructure.EagleFeature.SubtractTwoNumbers",
-                "Feature.Infrastructure.TestClass",
-                "Feature.Infrastructure.TestClass.TestMethod",
-                "Abc( xyz )"
-            };
-        }
 
-        private TestPackage GetTestPackage(Assembly assembly)
-        {
-            var currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string path = Path.GetDirectoryName(currentDirectory);
-
-            var assemblyName = path +"\\"+ assembly.GetName().Name + ".dll";
-            TestPackage package = new TestPackage(assemblyName);
-            
-            return package;
-        }
-
-        public string ScheduleFeature(string id)
-        {
-            var namesAndId = GetFeatureNames().FirstOrDefault(x => x.Id == id);
-            if(namesAndId == null) throw new Exception("The Id is not found");
-            lock (_testQueue)
-            {
-                return _testQueue.Add(id, namesAndId.Name);
-            }
-        }
+        //public string ScheduleFeature(string id)
+        //{
+        //    var namesAndId = GetFeatureNames().FirstOrDefault(x => x.Id == id);
+        //    if(!_idToTestPackageMap.ContainsKey(id)) throw new Exception("The Id is not found");
+        //    lock (_testQueue)
+        //    {
+        //        return _testQueue.Add(id, "some name");
+        //    }
+        //}
 
         public List<ScheduledFeature> GetScheduledFeatures()
         {
@@ -154,25 +111,19 @@ namespace Eagle
             }
         }
 
-        public void Initialize(params TestAssembly[] testAssemblies)
+        public List<TestSuite> GetDiscoveredTestSuites()
         {
-            var testPackages = testAssemblies.Select(x => new TestPackage(x.Location));
-            _testPackages.AddRange(testPackages);
-        }
-    }
-
-    public class TestAssembly
-    {
-        public static implicit operator TestAssembly(Assembly assembly)
-        {
-            return new TestAssembly() {Location = assembly.Location};
+            return _testSuites;
         }
 
-        public static implicit operator TestAssembly(Type type)
+        public void Initialize(params TestAssemblyLocationHolder[] testAssembliesLocationHolder)
         {
-            return new TestAssembly() { Location = type.Assembly.Location };
+            Initializer initializer = new Initializer();
+            var initializationParameters = initializer.GetInitializationParameters(testAssembliesLocationHolder);
+            _testPackages = initializationParameters.TestPackages;
+            _testSuites = initializationParameters.TestSuites;
+            _idToTestPackageMap = initializationParameters.IdToTestPackageMap;
         }
-        public string Location { get; private set; }
     }
 
     public class TestEventListener : ITestEventListener
