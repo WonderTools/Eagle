@@ -19,7 +19,7 @@ namespace Eagle.Web.Controllers
         [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<ActionResult> Process()
         {
-            await _eagleEngine.Process();
+            _eagleEngine.Process();
             return Ok();
         }
     }

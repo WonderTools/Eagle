@@ -6,23 +6,23 @@ namespace Eagle
     public class TestQueue : ITestQueue
     {
         public int _id = 1;
-        private List<ScheduledTest> QueueElements { get; set; } = new List<ScheduledTest>();
+        private List<ScheduledTestInternal> QueueElements { get; set; } = new List<ScheduledTestInternal>();
 
 
         public string AddToQueue(string id)
         {
             var myId = _id.ToString();
             _id++;
-            QueueElements.Add(new ScheduledTest(){Id = id, SerialNumber = myId});
+            QueueElements.Add(new ScheduledTestInternal(){Id = id, SerialNumber = myId});
             return myId;
         }
 
-        public List<ScheduledTest> GetQueueElements()
+        public List<ScheduledTestInternal> GetQueueElements()
         {
             return QueueElements.ToList();
         }
 
-        public ScheduledTest RemoveTopOfQueue()
+        public ScheduledTestInternal RemoveTopOfQueue()
         {
             if (QueueElements.Count != 0)
             {

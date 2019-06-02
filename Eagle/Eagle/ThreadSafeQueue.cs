@@ -18,7 +18,7 @@ namespace Eagle
             }
         }
 
-        public List<ScheduledTest> GetQueueElements()
+        public List<ScheduledTestInternal> GetQueueElements()
         {
             lock (_testQueue)
             {
@@ -26,7 +26,7 @@ namespace Eagle
             }
         }
 
-        public ScheduledTest RemoveTopOfQueue()
+        public ScheduledTestInternal RemoveTopOfQueue()
         {
             lock (_testQueue)
             {

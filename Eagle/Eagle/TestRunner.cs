@@ -9,7 +9,7 @@ namespace Eagle
         private readonly IMyLogger _logger;
         private readonly Dictionary<string, (TestPackage TestPackage, string FullName)> _idToSchedulingParametersMap;
         private readonly ITestQueue _testQueue;
-        private ScheduledTest _runningTest;
+        private ScheduledTestInternal _runningTest;
         private object _lockable = new object();
 
         public TestRunner(IMyLogger logger, Dictionary<string, (TestPackage TestPackage, string FullName)> idToSchedulingParametersMap, ITestQueue testQueue)

@@ -13,23 +13,23 @@ namespace Eagle
 {
     public class EagleEngine
     {
+        private readonly IMyLogger _logger;
         private List<TestSuite> _testSuites;
         private Dictionary<string,(TestPackage TestPackage, string FullName)> _idToSchedulingParametersMap;
 
         ITestQueue _testQueue = new ThreadSafeQueue();
         
-        private readonly TestRunner _testRunner;
+        private TestRunner _testRunner;
 
         public EagleEngine(IMyLogger logger)
         {
-            _testRunner = new TestRunner(logger, _idToSchedulingParametersMap, _testQueue);
+            _logger = logger;
         }
 
-        public async Task Process()
+        public void Process()
         {
             _testRunner.Process();
         }
-
 
         public string ScheduleTest(string id)
         {
@@ -37,7 +37,7 @@ namespace Eagle
             return _testQueue.AddToQueue(id);
         }
 
-        public List<ScheduledTest> GetScheduledFeatures()
+        public List<ScheduledTestInternal> GetScheduledFeatures()
         {
             return _testQueue.GetQueueElements();
         }
@@ -53,6 +53,7 @@ namespace Eagle
             var packageToSuiteMap = initializer.GetTestPackageToTestSuiteMap(testAssembliesLocationHolder);
             _testSuites = packageToSuiteMap.Values.ToList();
             _idToSchedulingParametersMap = initializer.GetIdToSchedulingParametersMap(packageToSuiteMap);
+            _testRunner = new TestRunner(_logger, _idToSchedulingParametersMap, _testQueue);
         }
     }
 }   
