@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using Eagle.Web.Models;
+using Eagle.Web.Service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Eagle.Web.Controllers
@@ -10,17 +12,17 @@ namespace Eagle.Web.Controllers
     [ApiController]
     public class TestTreeController : ControllerBase
     {
-        private readonly EagleEngine _eagleEngine;
+        private readonly TestTreeService _service;
 
-        public TestTreeController(EagleEngine eagleEngine)
+        public TestTreeController(TestTreeService service)
         {
-            _eagleEngine = eagleEngine;
+            _service = service;
         }
 
         [HttpGet]
-        public ActionResult<List<TestSuite>> GetFeatureNames()
+        public ActionResult<List<TestSuiteModel>> GetTestTree()
         {
-            return _eagleEngine.GetDiscoveredTestSuites();
+            return _service.GetTestTree();
         }
     }
 }   

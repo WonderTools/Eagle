@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
+using Eagle.Web.Service;
 using Feature.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -41,6 +42,7 @@ namespace Eagle.Web
             services.AddTransient<IMyLogger, MyLogger>();
             services.AddSingleton<EagleEngine>();
             services.AddSingleton<HttpClient>();
+            services.AddTransient<TestTreeService>();
 
         }
 
