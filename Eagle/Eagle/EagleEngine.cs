@@ -6,11 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Reflection;
+using System.Runtime.Serialization.Formatters;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using Newtonsoft.Json;
 using Formatting = Newtonsoft.Json.Formatting;
+//using System.Web.Script.Serialization;
 
 namespace Eagle
 {
@@ -87,7 +89,7 @@ namespace Eagle
             var myData = exploredNodes.OuterXml;
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(myData);
-            return JsonConvert.SerializeXmlNode(doc, Formatting.Indented);
+            return JsonConvert.SerializeObject(doc, _jsonSettings);
         }
 
         private List<NameAndId> GetFeatureNames(Assembly assembly)
@@ -115,8 +117,16 @@ namespace Eagle
             }
         }
 
+        private static JsonSerializerSettings _jsonSettings = new JsonSerializerSettings
+        {
+            TypeNameHandling = TypeNameHandling.All,
+            TypeNameAssemblyFormat = FormatterAssemblyStyle.Full
+        };
         private static List<string> ParseNames(string json)
         {
+            //var dict = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
+            var dict = JsonConvert.DeserializeObject<IDictionary<string, object>>(json, new DictionaryConverter());
+            //object obj = JsonHelper.Deserialize(json);
             //TBD: Remove the hard code
             return new List<string>()
             {
