@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 
 namespace Eagle
@@ -20,9 +21,9 @@ namespace Eagle
             _logger = logger;
         }
 
-        public void Process()
+        public async Task Process()
         {
-            _testRunner.Process();
+            await _testRunner.Process();
         }
 
         public string ScheduleTest(string id)
@@ -48,13 +49,13 @@ namespace Eagle
             return _testSuites;
         }
 
-        public void Initialize(params TestAssemblyLocationHolder[] testAssembliesLocationHolder)
+        public void Initialize(IEagleEventListener eventListener, params TestAssemblyLocationHolder[] testAssembliesLocationHolder)
         {
             Initializer initializer = new Initializer();
             var packageToSuiteMap = initializer.GetTestPackageToTestSuiteMap(testAssembliesLocationHolder);
             _testSuites = packageToSuiteMap.Values.ToList();
             _idToSchedulingParametersMap = initializer.GetIdToSchedulingParametersMap(packageToSuiteMap);
-            _testRunner = new TestRunner(_logger, _idToSchedulingParametersMap, _testQueue);
+            _testRunner = new TestRunner(_logger, _idToSchedulingParametersMap, _testQueue, eventListener);
         }
     }
 }   

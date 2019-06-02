@@ -47,6 +47,7 @@ namespace Eagle.Web
             services.AddTransient<TestTreeService>();
             services.AddDbContext<ResultContext>(options => options.UseInMemoryDatabase("BoardGames"));
             services.AddTransient<IResultRepository, ResultRepository>();
+            services.AddSingleton<IEagleEventListener, EagleEventListener>();
 
         }
 
@@ -81,7 +82,8 @@ namespace Eagle.Web
 
             var serviceProvider = app.ApplicationServices;
             var eagleEngine = serviceProvider.GetService<EagleEngine>();
-            eagleEngine.Initialize(typeof(TestClass));
+            var eventListener = serviceProvider.GetService<IEagleEventListener>();
+            eagleEngine.Initialize(eventListener, typeof(TestClass));
             TriggerProcess(app, client);
         }
 
@@ -92,7 +94,7 @@ namespace Eagle.Web
             if (addresses.Count == 0) throw new Exception("No listening addresses available");
             var address = addresses.ElementAt(0);
 
-            var timer = new System.Threading.Timer(PostToProcess, null, 30000, 30000);
+            var timer = new System.Threading.Timer(PostToProcess, null, 5000, 5000);
             void PostToProcess(object o)
             {
                 var url = address + "/api/process";
@@ -113,6 +115,32 @@ namespace Eagle.Web
         public void Log(string log)
         {
             _logger.LogError(log);
+        }
+    }
+
+    public class EagleEventListener : IEagleEventListener
+    {
+        private readonly IServiceScopeFactory _serviceScopeFactory;
+
+        public EagleEventListener(IServiceScopeFactory serviceScopeFactory)
+        {
+            _serviceScopeFactory = serviceScopeFactory;
+        }
+
+        public async Task TestCompleted(string id, string result, DateTime startingTime, DateTime finishingTime, int duration)
+        {
+            using (var scope = _serviceScopeFactory.CreateScope())
+            {
+                var repo = scope.ServiceProvider.GetRequiredService<IResultRepository>();
+                await repo.InsertTestResult(new TestResult()
+                {
+                    Id = id,
+                    StartingTime = startingTime,
+                    FinishingTime = finishingTime,
+                    Result = result,
+                    DurationInMs = duration,
+                });
+            }
         }
     }
 }
