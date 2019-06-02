@@ -8,31 +8,29 @@ using System.Net.Http;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Xml;
-using Newtonsoft.Json;
 
 namespace Eagle
 {
     public class EagleEngine
     {
-        private List<TestPackage> _testPackages;
         private List<TestSuite> _testSuites;
-        private Dictionary<string,(TestPackage TestPackage, string Name)> _idToTestPackageMap;
-
+        private Dictionary<string,(TestPackage TestPackage, string FullName)> _idToSchedulingParametersMap;
 
         private readonly IMyLogger _logger;
-        TestQueue _testQueue = new TestQueue();
+        ITestQueue _testQueue = new ThreadSafeQueue();
         private object _lockable = new object();
-        private ScheduledFeature _runningTest;
-        
-
-
+        private ScheduledTest _runningTest;
         public EagleEngine(IMyLogger logger)
-        {
+        {       
             _logger = logger;
         }
 
         public async Task Process()
+        {
+            ProcessInternal();
+        }
+
+        private void ProcessInternal()
         {
             lock (_lockable)
             {
@@ -41,16 +39,14 @@ namespace Eagle
 
             lock (_lockable)
             {
-                lock (_testQueue)
-                {
-                    _runningTest = _testQueue.RemoveTopQueueElement();
-                    if (_runningTest == null) return;
-                }
+                _runningTest = _testQueue.RemoveTopOfQueue();
+                if (_runningTest == null) return;
             }
 
             var t = Task.Run(async () =>
             {
-                RunTestCase(_idToTestPackageMap[_runningTest.Id].TestPackage, _runningTest.Id);
+                var schedulingParameters = _idToSchedulingParametersMap[_runningTest.Id];
+                RunTestCase(schedulingParameters.TestPackage, schedulingParameters.FullName);
                 lock (_lockable)
                 {
                     _runningTest = null;
@@ -83,19 +79,13 @@ namespace Eagle
 
         public string ScheduleTest(string id)
         {
-            if (!_idToTestPackageMap.ContainsKey(id)) throw new Exception("The Id is not found");
-            lock (_testQueue)
-            {
-                return _testQueue.Add(id, id);
-            }
+            if (!_idToSchedulingParametersMap.ContainsKey(id)) throw new Exception("The Id is not found");
+            return _testQueue.AddToQueue(id);
         }
 
-        public List<ScheduledFeature> GetScheduledFeatures()
+        public List<ScheduledTest> GetScheduledFeatures()
         {
-            lock (_testQueue)
-            {
-                return _testQueue.GetElements();
-            }
+            return _testQueue.GetQueueElements();
         }
 
         public List<TestSuite> GetDiscoveredTestSuites()
@@ -106,28 +96,9 @@ namespace Eagle
         public void Initialize(params TestAssemblyLocationHolder[] testAssembliesLocationHolder)
         {
             Initializer initializer = new Initializer();
-            var initializationParameters = initializer.GetInitializationParameters(testAssembliesLocationHolder);
-            _testSuites = initializationParameters.TestSuites;
-            _idToTestPackageMap = initializationParameters.IdToTestPackageMap;
-        }
-    }
-
-    public class TestEventListener : ITestEventListener
-    {
-        public void OnTestEvent(string report)
-        {
-            Console.WriteLine(report);    
-        }
-    }
-
-    public static class XmlExtensions
-    {
-        public static string ToJson(this XmlNode xmlNode)
-        {
-            var myData = xmlNode.OuterXml;
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(myData);
-            return JsonConvert.SerializeXmlNode(doc, Newtonsoft.Json.Formatting.Indented);
+            var packageToSuiteMap = initializer.GetTestPackageToTestSuiteMap(testAssembliesLocationHolder);
+            _testSuites = packageToSuiteMap.Values.ToList();
+            _idToSchedulingParametersMap = initializer.GetIdToSchedulingParametersMap(packageToSuiteMap);
         }
     }
 }   

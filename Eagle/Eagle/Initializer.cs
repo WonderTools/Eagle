@@ -111,8 +111,6 @@ namespace Eagle
             };
         }
 
-        
-
         private List<(string FullName, string Id)> GetFullNameAndIds(TestSuite suite)
         {
             List<(string FullName, string Id)> GetFullNameAndIdsFromCases(List<TestCase> testCases)
@@ -134,31 +132,25 @@ namespace Eagle
             return result;
         }
 
-        public (List<TestPackage> TestPackages, List<TestSuite> TestSuites, Dictionary<string, (TestPackage TestPackage, string Name)>
-            IdToTestPackageMap)
-            GetInitializationParameters(params TestAssemblyLocationHolder[] testAssembliesLocationHolder)
+        public Dictionary<TestPackage, TestSuite> GetTestPackageToTestSuiteMap
+            (params TestAssemblyLocationHolder[] testAssembliesLocationHolder)
         {
             List<TestPackage> testPackages =
                 testAssembliesLocationHolder.Select(x => new TestPackage(x.Location)).ToList();
-
-            Dictionary<TestPackage, TestSuite> packageToSuiteMap =
-                testPackages.ToDictionary(x => x, GetTestSuite);
-
-            List<TestSuite> testSuites = packageToSuiteMap.Values.ToList();
-
-            Dictionary<string, (TestPackage TestPackage, string Name)> map = GetMap(packageToSuiteMap);
-            return (testPackages, testSuites, map);
+            return testPackages.ToDictionary(x => x, GetTestSuite);
         }
 
-        private Dictionary<string, (TestPackage TestPackage, string Name)> GetMap(Dictionary<TestPackage, TestSuite> packageAndSuites)
+
+        public Dictionary<string, (TestPackage TestPackage, string FullName)>
+            GetIdToSchedulingParametersMap(Dictionary<TestPackage, TestSuite> packageToSuiteMap)
         {
             var result = new Dictionary<string, (TestPackage TestPackage, string Name)>();
-            foreach (var packageAndSuite in packageAndSuites)
+            foreach (var packageAndSuite in packageToSuiteMap)
             {
                 var fullNameAndIds = GetFullNameAndIds(packageAndSuite.Value);
                 foreach (var fullNameAndId in fullNameAndIds)
                 {
-                    if(result.ContainsKey(fullNameAndId.Id)) throw new Exception($"The testable id {fullNameAndId.Id} is present more that one");
+                    if (result.ContainsKey(fullNameAndId.Id)) throw new Exception($"The testable id {fullNameAndId.Id} is present more that one");
                     result.Add(fullNameAndId.Id, (packageAndSuite.Key, fullNameAndId.FullName));
                 }
             }

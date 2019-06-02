@@ -3,27 +3,26 @@ using System.Linq;
 
 namespace Eagle
 {
-    public class TestQueue
+    public class TestQueue : ITestQueue
     {
         public int _id = 1;
-        private List<ScheduledFeature> QueueElements { get; set; } = new List<ScheduledFeature>();
+        private List<ScheduledTest> QueueElements { get; set; } = new List<ScheduledTest>();
 
 
-        public string Add(string id, string name)
+        public string AddToQueue(string id)
         {
             var myId = _id.ToString();
             _id++;
-            QueueElements.Add(new ScheduledFeature(){Id = id, Name = name, TestId = myId});
+            QueueElements.Add(new ScheduledTest(){Id = id, SerialNumber = myId});
             return myId;
         }
 
-
-        public List<ScheduledFeature> GetElements()
+        public List<ScheduledTest> GetQueueElements()
         {
             return QueueElements.ToList();
         }
 
-        public ScheduledFeature RemoveTopQueueElement()
+        public ScheduledTest RemoveTopOfQueue()
         {
             if (QueueElements.Count != 0)
             {
@@ -32,26 +31,6 @@ namespace Eagle
                 return element;
             }
             return null;
-        }
-
-        public void AdvanceQueueElement(int elementId)
-        {
-
-        }
-
-        public void AdvanceQueueElementToTop(int elementId)
-        {
-
-        }
-
-        public void DelayQueueElement(int elementId)
-        {
-
-        }
-
-        public void DelayQueueElementToBottom(int elementId)
-        {
-                
         }
     }
 }
