@@ -25,10 +25,10 @@ namespace PlayGround
     public class TestRun
     {
         [JsonProperty("test-suite")]
-        public TestRunTestSuite TestSuite { get; set; }
+        public NunitTestSuite NunitTestSuite { get; set; }
     }
 
-    public class TestRunTestSuite
+    public class NunitTestSuite
     {
 
         [JsonProperty("@name")]
@@ -37,17 +37,17 @@ namespace PlayGround
         [JsonProperty("@fullname")]
         public string Fullname { get; set; }
 
-
+        [JsonConverter(typeof(MyConverter<NunitTestSuite>))]
         [JsonProperty("test-suite", NullValueHandling = NullValueHandling.Ignore)]
-        public List<TestRunTestSuite> TestSuite { get; set; }
+        public List<NunitTestSuite> TestSuite { get; set; }
 
+        [JsonConverter(typeof(MyConverter<TestCase>))]
         [JsonProperty("test-case", NullValueHandling = NullValueHandling.Ignore)]
-        public List<TestCaseElement> TestCase { get; set; }
+        public List<TestCase> TestCase { get; set; }
     }
 
 
-
-    public class TestCaseElement
+    public class TestCase
     {
         [JsonProperty("@name")]
         public string Name { get; set; }
@@ -56,6 +56,28 @@ namespace PlayGround
         public string Fullname { get; set; }
     }
 
+
+    public class MyConverter<T> : JsonConverter
+    {
+        public override bool CanConvert(Type objectType)
+        {
+            return false;
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            if (reader.TokenType == JsonToken.StartArray)
+            {
+                return serializer.Deserialize(reader, objectType);
+            }
+            return serializer.Deserialize(reader, typeof(T));
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            throw new NotImplementedException();
+        }
+    }
 
 
 }
