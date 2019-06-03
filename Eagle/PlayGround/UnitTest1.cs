@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace Tests
@@ -15,15 +14,5 @@ namespace Tests
         {
             Assert.Pass();
         }
-
-        
-    }
-
-    public class TestSuite1
-    {
-        public string FullName { get; set; }
-
-        public TestSuite1[][] TestCase { get; set; }
-
     }
 }
