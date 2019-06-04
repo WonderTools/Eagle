@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using Newtonsoft.Json;
 using NUnit.Framework;
@@ -22,8 +23,10 @@ namespace Tests
                 json = r.ReadToEnd();
             }
             var deserializeJsonObject = JsonConvert.DeserializeObject<RootObject>(json);
-            
 
+            var serializeData = JsonConvert.SerializeObject(deserializeJsonObject);
+
+            Console.WriteLine(serializeData);
 
         }
     }

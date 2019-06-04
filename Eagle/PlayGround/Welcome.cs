@@ -39,11 +39,11 @@ namespace PlayGround
         [JsonProperty("@fullname")]
         public string Fullname { get; set; }
 
-        [JsonConverter(typeof(MyConverter<NUnitTestSuite>))]
+        [JsonConverter(typeof(ListOrObjectConverter<NUnitTestSuite>))]
         [JsonProperty("test-suite", NullValueHandling = NullValueHandling.Ignore)]
         public List<NUnitTestSuite> TestSuites { get; set; }
 
-        [JsonConverter(typeof(MyConverter<NUnitTestCase>))]
+        [JsonConverter(typeof(ListOrObjectConverter<NUnitTestCase>))]
         [JsonProperty("test-case", NullValueHandling = NullValueHandling.Ignore)]
         public List<NUnitTestCase> TestCases { get; set; }
     }
@@ -59,12 +59,14 @@ namespace PlayGround
     }
 
 
-    public class MyConverter<T> : JsonConverter
+    public class ListOrObjectConverter<T> : JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {
             return false;
         }
+
+        
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             if (reader.TokenType == JsonToken.StartArray)
@@ -74,6 +76,9 @@ namespace PlayGround
             var result = (T) serializer.Deserialize(reader, typeof(T));
             return new List<T> {result};
         }
+
+        public override bool CanWrite { get; } = false;
+        
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             throw new NotImplementedException();
