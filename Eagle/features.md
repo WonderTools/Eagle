@@ -7,6 +7,8 @@ Done|None|Run the real nunit test case
 Done|None|Implement inmemory db using entity framework core
 Done|None|record the test result in the inmemory database
 Done|None|Implement an api to get test results
+To be Done|None|Remove CORS restrictions in the backend. Implment the policy, so the front end developement could be done
+To be Done|None|To facilitate front end dev, in Eagle.TestCase add a string property for Logs. The value of the property can be empty for now.
 To be Done|None|Instead of using swagger, write postman scripts to facilitate debugging
 To be Done|None|Get the results of the nunit test case
 To be Done|None|Get the execution logs of the nunit test case
