@@ -12,17 +12,11 @@ namespace Eagle
 
             var config = new MapperConfiguration(cfg =>
             {
-                //TBD: Currently all spaces are replace. This must be changed as per url encoding
-                //TBD: Temporarily id is prefixed
                 cfg.CreateMap<NUnitTestSuite, TestSuite>();
-                    //.ForMember(dest => dest.Id, opt => opt.MapFrom(src => "id-"+ src.Name.Replace(" ", "")));
-
                 cfg.CreateMap<NUnitTestCase, TestCase>();
-                    //.ForMember(dest => dest.Id, opt => opt.MapFrom(src => "id-" + src.Name.Replace(" ", "")));
             });
 
-            var testSuite =  config.CreateMapper().Map <TestSuite>(root.TestRun.TestSuite);
-            return testSuite;
+            return config.CreateMapper().Map<TestSuite>(root.TestRun.TestSuite);
         }
     }
 }
