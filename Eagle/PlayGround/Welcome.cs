@@ -18,13 +18,13 @@ namespace PlayGround
     using Newtonsoft.Json.Converters;
 
 
-    public class RootObject
+    public class NUnitDiscoveryRoot
     {
         [JsonProperty("test-run")]
-        public TestRun TestRun { get; set; }
+        public NUnitTestRun NUnitTestRun { get; set; }
     }
 
-    public class TestRun
+    public class NUnitTestRun
     {
         [JsonProperty("test-suite")]
         public NUnitTestSuite NUnitTestSuite { get; set; }

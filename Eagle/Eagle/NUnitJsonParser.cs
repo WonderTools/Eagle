@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Eagle
 {
@@ -6,6 +7,9 @@ namespace Eagle
     {
         public TestSuite GetTestSuiteFromDiscoveryJson(string json)
         {
+            var nUnitTestSuite = JsonConvert.DeserializeObject<NUnitTestSuite>(json);
+
+
             //TBD: This has to be refactored
             return new TestSuite()
             {

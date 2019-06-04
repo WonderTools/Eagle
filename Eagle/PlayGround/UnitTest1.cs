@@ -22,7 +22,7 @@ namespace PlayGround
             {
                 json = r.ReadToEnd();
             }
-            var deserializeJsonObject = JsonConvert.DeserializeObject<RootObject>(json);
+            var deserializeJsonObject = JsonConvert.DeserializeObject<NUnitDiscoveryRoot>(json);
 
             var serializeData = JsonConvert.SerializeObject(deserializeJsonObject);
 
