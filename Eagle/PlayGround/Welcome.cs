@@ -71,8 +71,8 @@ namespace PlayGround
             {
                 return serializer.Deserialize(reader, objectType);
             }
-
-            return serializer.Deserialize(reader, typeof(T)) as List<T>;
+            var result = (T) serializer.Deserialize(reader, typeof(T));
+            return new List<T> {result};
         }
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
