@@ -1,4 +1,7 @@
+using System.IO;
+using Newtonsoft.Json;
 using NUnit.Framework;
+using PlayGround;
 
 namespace Tests
 {
@@ -10,9 +13,18 @@ namespace Tests
         }
 
         [Test]
-        public void Test1()
+
+        public void TestJson()
         {
-            Assert.Pass();
+            string json;
+            using (StreamReader r = new StreamReader("file.json"))
+            {
+                json = r.ReadToEnd();
+            }
+            var deserializeJsonObject = JsonConvert.DeserializeObject<RootObject>(json);
+            
+
+
         }
     }
 }

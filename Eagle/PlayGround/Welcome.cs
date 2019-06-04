@@ -6,6 +6,8 @@
 //
 //    var welcome = Welcome.FromJson(jsonString);
 
+using NUnit.Framework;
+
 namespace PlayGround
 {
     using System;
@@ -63,16 +65,15 @@ namespace PlayGround
         {
             return false;
         }
-
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             if (reader.TokenType == JsonToken.StartArray)
             {
                 return serializer.Deserialize(reader, objectType);
             }
-            return serializer.Deserialize(reader, typeof(T));
-        }
 
+            return serializer.Deserialize(reader, typeof(T)) as List<T>;
+        }
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             throw new NotImplementedException();
