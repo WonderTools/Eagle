@@ -27,10 +27,10 @@ namespace PlayGround
     public class TestRun
     {
         [JsonProperty("test-suite")]
-        public NunitTestSuite NunitTestSuite { get; set; }
+        public NUnitTestSuite NUnitTestSuite { get; set; }
     }
 
-    public class NunitTestSuite
+    public class NUnitTestSuite
     {
 
         [JsonProperty("@name")]
@@ -39,17 +39,17 @@ namespace PlayGround
         [JsonProperty("@fullname")]
         public string Fullname { get; set; }
 
-        [JsonConverter(typeof(MyConverter<NunitTestSuite>))]
+        [JsonConverter(typeof(MyConverter<NUnitTestSuite>))]
         [JsonProperty("test-suite", NullValueHandling = NullValueHandling.Ignore)]
-        public List<NunitTestSuite> TestSuite { get; set; }
+        public List<NUnitTestSuite> TestSuites { get; set; }
 
-        [JsonConverter(typeof(MyConverter<TestCase>))]
+        [JsonConverter(typeof(MyConverter<NUnitTestCase>))]
         [JsonProperty("test-case", NullValueHandling = NullValueHandling.Ignore)]
-        public List<TestCase> TestCase { get; set; }
+        public List<NUnitTestCase> TestCases { get; set; }
     }
 
 
-    public class TestCase
+    public class NUnitTestCase
     {
         [JsonProperty("@name")]
         public string Name { get; set; }
