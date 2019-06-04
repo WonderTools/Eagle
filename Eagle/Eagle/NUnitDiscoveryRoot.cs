@@ -5,6 +5,6 @@ namespace Eagle
     public class NUnitDiscoveryRoot
     {
         [JsonProperty("test-run")]
-        public NUnitTestRun NUnitTestRun { get; set; }
+        public NUnitTestRun TestRun { get; set; }
     }
 }

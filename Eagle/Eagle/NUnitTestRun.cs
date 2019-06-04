@@ -5,6 +5,6 @@ namespace Eagle
     public class NUnitTestRun
     {
         [JsonProperty("test-suite")]
-        public NUnitTestSuite NUnitTestSuite { get; set; }
+        public NUnitTestSuite TestSuite { get; set; }
     }
 }

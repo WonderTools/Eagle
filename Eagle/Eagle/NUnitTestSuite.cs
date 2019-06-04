@@ -5,7 +5,6 @@ namespace Eagle
 {
     public class NUnitTestSuite
     {
-
         [JsonProperty("@name")]
         public string Name { get; set; }
 
@@ -14,10 +13,10 @@ namespace Eagle
 
         [JsonConverter(typeof(ListOrObjectConverter<NUnitTestSuite>))]
         [JsonProperty("test-suite", NullValueHandling = NullValueHandling.Ignore)]
-        public List<NUnitTestSuite> TestSuites { get; set; }
+        public List<NUnitTestSuite> TestSuites { get; set; } = new List<NUnitTestSuite>();
 
         [JsonConverter(typeof(ListOrObjectConverter<NUnitTestCase>))]
         [JsonProperty("test-case", NullValueHandling = NullValueHandling.Ignore)]
-        public List<NUnitTestCase> TestCases { get; set; }
+        public List<NUnitTestCase> TestCases { get; set; } = new List<NUnitTestCase>();
     }
 }

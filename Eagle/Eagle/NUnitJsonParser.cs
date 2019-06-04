@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using AutoMapper;
 using Newtonsoft.Json;
 
 namespace Eagle
@@ -7,93 +8,21 @@ namespace Eagle
     {
         public TestSuite GetTestSuiteFromDiscoveryJson(string json)
         {
-            var nUnitTestSuite = JsonConvert.DeserializeObject<NUnitTestSuite>(json);
+            var root = JsonConvert.DeserializeObject<NUnitDiscoveryRoot>(json);
 
-
-            //TBD: This has to be refactored
-            return new TestSuite()
+            var config = new MapperConfiguration(cfg =>
             {
-                Name = "Feature.Infrastructure.dll",
-                FullName = "Feature.Infrastructure.dll",
-                TestSuites = new List<TestSuite>()
-                {
-                    new TestSuite()
-                    {
-                        Name = "Feature",
-                        FullName = "Feature",
-                        TestSuites = new List<TestSuite>()
-                        {
-                            new TestSuite()
-                            {
-                                Name = "Infrastructure",
-                                FullName = "Feature.Infrastructure",
-                                TestSuites = new List<TestSuite>()
-                                {
-                                    new TestSuite()
-                                    {
-                                        Name = "EagleFeature",
-                                        FullName = "Feature.Infrastructure.EagleFeature",
-                                        TestCases = new List<TestCase>()
-                                        {
-                                            new TestCase()
-                                            {
-                                                Name = "AddTwoNumbers",
-                                                FullName = "Feature.Infrastructure.EagleFeature.AddTwoNumbers",
-                                            },
-                                            new TestCase()
-                                            {
-                                                Name = "SubtractTwoNumbers",
-                                                FullName = "Feature.Infrastructure.EagleFeature.SubtractTwoNumbers",
-                                            },
-                                        }
-                                    },
-                                    new TestSuite()
-                                    {
-                                        Name = "TestClass",
-                                        FullName = "Feature.Infrastructure.TestClass",
-                                        TestCases = new List<TestCase>()
-                                        {
-                                            new TestCase()
-                                            {
-                                                Name = "TestMethod",
-                                                FullName = "Feature.Infrastructure.TestClass.TestMethod",
-                                            },
-                                        }
-                                    },
-                                    new TestSuite()
-                                    {
-                                        Name = "TestMyClass",
-                                        FullName = "Feature.Infrastructure.TestMyClass",
-                                        TestCases = new List<TestCase>()
-                                        {
-                                            new TestCase()
-                                            {
-                                                Name = "MyTest(1)",
-                                                FullName = "Feature.Infrastructure.TestMyClass.MyTest(1)",
-                                            },
-                                            new TestCase()
-                                            {
-                                                Name = "MyTest(2)",
-                                                FullName = "Feature.Infrastructure.TestMyClass.MyTest(2)",
-                                            },
-                                            new TestCase()
-                                            {
-                                                Name = "MyTest(3)",
-                                                FullName = "Feature.Infrastructure.TestMyClass.MyTest(3)",
-                                            },
-                                            new TestCase()
-                                            {
-                                                Name = "MyTest(4)",
-                                                FullName = "Feature.Infrastructure.TestMyClass.MyTest(4)",
-                                            },
-                                        }
-                                    },
-                                }
-                            }
-                        }
-                    }
-                }
-            };
+                //TBD: Currently all spaces are replace. This must be changed as per url encoding
+                //TBD: Temporarily id is prefixed
+                cfg.CreateMap<NUnitTestSuite, TestSuite>();
+                    //.ForMember(dest => dest.Id, opt => opt.MapFrom(src => "id-"+ src.Name.Replace(" ", "")));
+
+                cfg.CreateMap<NUnitTestCase, TestCase>();
+                    //.ForMember(dest => dest.Id, opt => opt.MapFrom(src => "id-" + src.Name.Replace(" ", "")));
+            });
+
+            var testSuite =  config.CreateMapper().Map <TestSuite>(root.TestRun.TestSuite);
+            return testSuite;
         }
     }
 }
