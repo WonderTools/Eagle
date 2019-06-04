@@ -1,17 +1,19 @@
 ### Nunit on the cloud
 Status |Assigned To| Task
 ------------ | ---------| ----
-To be Done|None|Get the list of test case names in nunit by parsing the json
-To be Done|None|IF the json parsing is not straight away, then modify WonderTools.JsonSectionReader
+Done|None|Get|None|Get the list of test case names in nunit by parsing the json
+Terminated|None|IF the json parsing is not straight away, then modify WonderTools.JsonSectionReader
+Done|None|Run the real nunit test case
+Done|None|Implement inmemory db using entity framework core
+Done|None|record the test result in the inmemory database
+Done|None|Implement an api to get test results
 To be Done|None|Instead of using swagger, write postman scripts to facilitate debugging
-To be Done|None|Run the real nunit test case
 To be Done|None|Get the results of the nunit test case
 To be Done|None|Get the execution logs of the nunit test case
-To bo Done|None|Implement inmemory db using entity framework core
-To be Done|None|record the test result in the inmemory database
 To be Done|None|record the logs in the inmemory database
-To be Done|None|Implement an api to get test results
 To be Done|None|Implement an api to get test logs
+To be Done|None|Implement an api Get the detailed results of one test case
+To be Done|None|Implement the id generation. The id generation has to url encoded value of the full name
  
 ### Basic UI
 Status |Assigned To| Task
