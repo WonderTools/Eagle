@@ -3,8 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Eagle.Web.Controllers
 {
-    [Route("api/process/")]
-    [ApiExplorerSettings(IgnoreApi = true)]
+    [Route("api/")]
     public class ProcessController : Controller
     {
         private readonly EagleEngine _eagleEngine;
@@ -15,11 +14,19 @@ namespace Eagle.Web.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost("process")]
         [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<ActionResult> Process()
         {
             await _eagleEngine.Process();
+            return Ok();
+        }
+
+
+        [HttpPost("execute-one")]
+        public async Task<ActionResult> ExecuteOne()
+        {
+            await _eagleEngine.ExecuteOne();
             return Ok();
         }
     }
