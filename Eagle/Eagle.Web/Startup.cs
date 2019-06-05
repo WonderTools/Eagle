@@ -103,7 +103,8 @@ namespace Eagle.Web
             void PostToProcess(object o)
             {
                 var url = address + "/api/process";
-                httpClient.PostAsync(url, new StringContent(""));
+                //TBD: This should be uncommented in production or configured by config file
+                //httpClient.PostAsync(url, new StringContent(""));
             }
         }
     }

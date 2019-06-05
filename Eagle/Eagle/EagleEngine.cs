@@ -26,6 +26,11 @@ namespace Eagle
             await _testRunner.Process();
         }
 
+        public async Task ExecuteOne()
+        {
+            await _testRunner.ExecuteOne();
+        }
+
         public string ScheduleTest(string id)
         {
             if (!_idToSchedulingParametersMap.ContainsKey(id)) throw new Exception("The Id is not found");

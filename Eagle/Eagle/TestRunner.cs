@@ -39,13 +39,25 @@ namespace Eagle
 
             await Task.Run(async () =>
             {
-                var schedulingParameters = _idToSchedulingParametersMap[_runningTest.Id];
-                await RunTestCase(schedulingParameters.TestPackage, schedulingParameters.FullName);
+                await RunTestCase(_runningTest.Id);
                 lock (_lockable)
                 {
                     _runningTest = null;
                 }
             });
+        }
+
+        public async Task ExecuteOne()
+        {
+            var top = _testQueue.RemoveTopOfQueue();
+            if(top == null) return;
+            await RunTestCase(top.Id);
+        }
+
+        private async Task RunTestCase(string id)
+        {
+            var schedulingParameters = _idToSchedulingParametersMap[id];
+            await RunTestCase(schedulingParameters.TestPackage, schedulingParameters.FullName);
         }
 
         private async Task RunTestCase(TestPackage testPackage, string name)
