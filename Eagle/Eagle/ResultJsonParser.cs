@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
+using Eagle.NUnitResult;
 using Newtonsoft.Json;
 
-namespace Eagle.NUnitResult
+namespace Eagle
 {
     public class ResultJsonParser
     {
