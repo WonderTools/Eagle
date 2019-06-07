@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Eagle.TestRun
 {
-    public class TestRunTestSuite
+    public class ResultTestSuite
     {
 
         [JsonProperty("@fullname")]
@@ -22,13 +22,13 @@ namespace Eagle.TestRun
         [JsonProperty("@duration")]
         public string Duration { get; set; }
 
-        [JsonConverter(typeof(ListOrObjectConverter<TestRunTestSuite>))]
+        [JsonConverter(typeof(ListOrObjectConverter<ResultTestSuite>))]
         [JsonProperty("test-suite", NullValueHandling = NullValueHandling.Ignore)]
-        public List<TestRunTestSuite> TestSuites { get; set; } = new List<TestRunTestSuite>();
+        public List<ResultTestSuite> TestSuites { get; set; } = new List<ResultTestSuite>();
 
-        [JsonConverter(typeof(ListOrObjectConverter<TestRunTestCase>))]
+        [JsonConverter(typeof(ListOrObjectConverter<ResultTestCase>))]
         [JsonProperty("test-case", NullValueHandling = NullValueHandling.Ignore)]
-        public List<TestRunTestCase> TestCases { get; set; } = new List<TestRunTestCase>();
+        public List<ResultTestCase> TestCases { get; set; } = new List<ResultTestCase>();
 
 
     }

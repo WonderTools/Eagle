@@ -4,9 +4,9 @@ namespace Eagle.TestRun
 {
     
 
-    public class TestRoot
+    public class ResultRoot
     {
         [JsonProperty("test-run")]
-        public TestRun TestRun { get; set; }
+        public ResultRun TestRun { get; set; }
     }
 }

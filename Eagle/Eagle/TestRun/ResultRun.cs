@@ -2,9 +2,9 @@
 
 namespace Eagle.TestRun
 {
-    public class TestRun
+    public class ResultRun
     {
         [JsonProperty("test-suite")]
-        public TestRunTestSuite TestSuite { get; set; }
+        public ResultTestSuite TestSuite { get; set; }
     }
 }

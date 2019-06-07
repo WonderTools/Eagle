@@ -81,14 +81,24 @@ namespace Eagle
         private async Task HandleResults(string json)
         {
             Console.WriteLine("Handling result" + json);
-            var testRunJsonParser = new TestRunJsonParser();
-            var testrunTestSuite= testRunJsonParser.GetTestSuiteFromDiscoveryJson(json);
-            ////TBD: This has to be implemented
+            var testRunJsonParser = new ResultJsonParser();
+            var runTestSuite= testRunJsonParser.GetTestSuiteFromDiscoveryJson(json);
+            //GetTestCases(runTestSuite.TestSuites);
             await _eventListener.TestCompleted("idFeature.Infrastructure.EagleFeature.AddTwoNumbers", "pass", DateTime.Now,
                 DateTime.Now ,10 );
 
 
         }
 
+        private List<ResultTestCase> GetTestCases(ResultTestSuite testSuite)
+        {
+            var result = new List<ResultTestCase>();
+            result.AddRange(testSuite.TestCases);
+            foreach (var tSuite in testSuite.TestSuites)
+            {
+                result.AddRange(GetTestCases(tSuite));
+            }
+            return result;
+        }
     }
 }

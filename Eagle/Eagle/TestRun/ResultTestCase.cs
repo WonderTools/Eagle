@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Eagle.TestRun
 {
-    public class TestRunTestCase
+    public class ResultTestCase
     {
         [JsonProperty("@fullname")]
         public string Fullname { get; set; }
