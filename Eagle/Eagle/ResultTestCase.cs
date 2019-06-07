@@ -7,11 +7,11 @@ namespace Eagle
         public string FullName { get; set; }
 
         public string Result { get; set; }
-        public DateTimeOffset StartTime { get; set; }
+        public DateTime StartTime { get; set; }
 
-        public DateTimeOffset EndTime { get; set; }
+        public DateTime EndTime { get; set; }
 
-        public string Duration { get; set; }
+        public double Duration { get; set; }
 
     }
 }

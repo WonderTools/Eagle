@@ -12,13 +12,13 @@ namespace Eagle.NUnitResult
         public string Result { get; set; }
 
         [JsonProperty("@start-time")]
-        public DateTimeOffset StartTime { get; set; }
+        public DateTime StartTime { get; set; }
 
         [JsonProperty("@end-time")]
-        public DateTimeOffset EndTime { get; set; }
+        public DateTime EndTime { get; set; }
 
         [JsonProperty("@duration")]
-        public string Duration { get; set; }
+        public double Duration { get; set; }
 
     }
 

@@ -84,10 +84,11 @@ namespace Eagle
             var jsonParser = new NUnitJsonParser();
             var runTestSuite= jsonParser.GetTestSuiteFromResultJson(json);
             var testCases= GetTestCases(runTestSuite);
-            await _eventListener.TestCompleted("idFeature.Infrastructure.EagleFeature.AddTwoNumbers", "pass", DateTime.Now,
-                DateTime.Now ,10 );
-
-
+            foreach (var testCase in testCases)
+            {
+                await _eventListener.TestCompleted("idFeature.Infrastructure.EagleFeature.AddTwoNumbers",
+                    testCase.Result, testCase.StartTime, testCase.EndTime, (int)testCase.Duration);
+            }
         }
 
         private List<ResultTestCase> GetTestCases(ResultTestSuite testSuite)
