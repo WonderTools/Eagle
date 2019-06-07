@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Eagle.TestRun;
 using NUnit.Engine;
 
 namespace Eagle
@@ -80,11 +81,14 @@ namespace Eagle
         private async Task HandleResults(string json)
         {
             Console.WriteLine("Handling result" + json);
-
+            var testRunJsonParser = new TestRunJsonParser();
+            var testrunTestSuite= testRunJsonParser.GetTestSuiteFromDiscoveryJson(json);
             ////TBD: This has to be implemented
             await _eventListener.TestCompleted("idFeature.Infrastructure.EagleFeature.AddTwoNumbers", "pass", DateTime.Now,
                 DateTime.Now ,10 );
 
+
         }
+
     }
 }
