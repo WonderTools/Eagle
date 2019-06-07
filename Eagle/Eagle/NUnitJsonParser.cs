@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using AutoMapper;
+﻿using AutoMapper;
+using Eagle.NUnitDiscovery;
 using Newtonsoft.Json;
 
 namespace Eagle
