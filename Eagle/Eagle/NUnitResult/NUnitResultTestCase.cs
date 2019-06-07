@@ -1,9 +1,9 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Eagle.TestRun
+namespace Eagle.NUnitResult
 {
-    public class ResultTestCase
+    public class NUnitResultTestCase
     {
         [JsonProperty("@fullname")]
         public string Fullname { get; set; }

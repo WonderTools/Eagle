@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Eagle.TestRun
+namespace Eagle.NUnitResult
 {
-    public class ResultTestSuite
+    public class NUnitResultTestSuite
     {
 
         [JsonProperty("@fullname")]
@@ -22,13 +22,13 @@ namespace Eagle.TestRun
         [JsonProperty("@duration")]
         public string Duration { get; set; }
 
-        [JsonConverter(typeof(ListOrObjectConverter<ResultTestSuite>))]
+        [JsonConverter(typeof(ListOrObjectConverter<NUnitResultTestSuite>))]
         [JsonProperty("test-suite", NullValueHandling = NullValueHandling.Ignore)]
-        public List<ResultTestSuite> TestSuites { get; set; } = new List<ResultTestSuite>();
+        public List<NUnitResultTestSuite> TestSuites { get; set; } = new List<NUnitResultTestSuite>();
 
-        [JsonConverter(typeof(ListOrObjectConverter<ResultTestCase>))]
+        [JsonConverter(typeof(ListOrObjectConverter<NUnitResultTestCase>))]
         [JsonProperty("test-case", NullValueHandling = NullValueHandling.Ignore)]
-        public List<ResultTestCase> TestCases { get; set; } = new List<ResultTestCase>();
+        public List<NUnitResultTestCase> TestCases { get; set; } = new List<NUnitResultTestCase>();
 
 
     }

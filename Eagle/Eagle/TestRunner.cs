@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Eagle.TestRun;
+using Eagle.NUnitResult;
 using NUnit.Engine;
 
 namespace Eagle
@@ -90,9 +90,9 @@ namespace Eagle
 
         }
 
-        private List<ResultTestCase> GetTestCases(ResultTestSuite testSuite)
+        private List<NUnitResultTestCase> GetTestCases(NUnitResultTestSuite testSuite)
         {
-            var result = new List<ResultTestCase>();
+            var result = new List<NUnitResultTestCase>();
             result.AddRange(testSuite.TestCases);
             foreach (var tSuite in testSuite.TestSuites)
             {
