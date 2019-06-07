@@ -83,16 +83,16 @@ namespace Eagle
             Console.WriteLine("Handling result" + json);
             var jsonParser = new NUnitJsonParser();
             var runTestSuite= jsonParser.GetTestSuiteFromResultJson(json);
-            //GetTestCases(runTestSuite.TestSuites);
+            var testCases= GetTestCases(runTestSuite);
             await _eventListener.TestCompleted("idFeature.Infrastructure.EagleFeature.AddTwoNumbers", "pass", DateTime.Now,
                 DateTime.Now ,10 );
 
 
         }
 
-        private List<NUnitResultTestCase> GetTestCases(NUnitResultTestSuite testSuite)
+        private List<ResultTestCase> GetTestCases(ResultTestSuite testSuite)
         {
-            var result = new List<NUnitResultTestCase>();
+            var result = new List<ResultTestCase>();
             result.AddRange(testSuite.TestCases);
             foreach (var tSuite in testSuite.TestSuites)
             {

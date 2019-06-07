@@ -20,17 +20,17 @@ namespace Eagle
             return config.CreateMapper().Map<TestSuite>(root.TestRun.TestSuite);
         }
 
-        public RunTestSuite GetTestSuiteFromResultJson(string json)
+        public ResultTestSuite GetTestSuiteFromResultJson(string json)
         {
             var root = JsonConvert.DeserializeObject<NUnitResultRoot>(json);
 
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<NUnitResultTestSuite, RunTestSuite>();
-                cfg.CreateMap<NUnitResultTestCase, RunTestCase>();
+                cfg.CreateMap<NUnitResultTestSuite, ResultTestSuite>();
+                cfg.CreateMap<NUnitResultTestCase, ResultTestCase>();
             });
 
-            return config.CreateMapper().Map<RunTestSuite>(root.TestRun.TestSuite);
+            return config.CreateMapper().Map<ResultTestSuite>(root.TestRun.TestSuite);
         }
     }
 }
