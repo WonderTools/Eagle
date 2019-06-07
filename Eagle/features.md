@@ -16,6 +16,11 @@ To be Done|None|record the logs in the inmemory database
 To be Done|None|Implement an api to get test logs
 To be Done|None|Implement an api Get the detailed results of one test case
 To be Done|None|Implement the id generation. The id generation has to url encoded value of the full name
+To be Done|None|low priority - Evaluate if engine should be instantiated onces or multiple times
+To be Done|None|low priority - Scheduled tests as event should be transimitted
+To be Done|None|low priority - computation of tests results should be available as and when they are completed
+To be Done|None|low priority - Check if the service worked could be used for processing
+
  
 ### Basic UI
 Status |Assigned To| Task
