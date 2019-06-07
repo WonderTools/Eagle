@@ -86,7 +86,7 @@ namespace Eagle
             var testCases= GetTestCases(runTestSuite);
             foreach (var testCase in testCases)
             {
-                await _eventListener.TestCompleted("idFeature.Infrastructure.EagleFeature.AddTwoNumbers",
+                await _eventListener.TestCompleted(testCase.FullName.GetIdFromFullName(),
                     testCase.Result, testCase.StartTime, testCase.EndTime, (int)testCase.Duration);
             }
         }
