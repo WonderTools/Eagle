@@ -2,6 +2,7 @@
 
 namespace Eagle
 {
+    //Should this be renamed to DiscoveryTestSuite
     public class TestSuite : Testable
     {
         public TestSuite()

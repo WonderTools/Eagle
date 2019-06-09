@@ -1,9 +1,7 @@
 ﻿namespace Eagle
 {
+    //Should this be renamed to DiscoveryTestCase
     public class TestCase : Testable
     {
-        public void Log(string log)
-        {
-        }
     }
 }

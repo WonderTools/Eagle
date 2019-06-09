@@ -63,7 +63,7 @@ namespace Eagle.Web.Service
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<TestSuite, TestSuiteModel>();
-                cfg.CreateMap<TestCase, TestCaseModel>();
+                cfg.CreateMap<TestCase, TestCaseModel>().ForMember(x => x.Logs, opt => opt.MapFrom(src => string.Empty));
             });
             var mapper = config.CreateMapper();
             return mapper.Map<List<TestSuiteModel>>(suites);

@@ -10,6 +10,7 @@ namespace Eagle.Web.Models
         public string Result { get; set; }
         public DateTime? FinishingTime { get; set; }
         public DateTime? StartingTime { get; set; }
-        public double DurationInMs { get; set; }
+        public double? DurationInMs { get; set; }
+        public string Logs { get; set; }
     }
 }
