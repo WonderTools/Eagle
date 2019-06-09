@@ -1,0 +1,81 @@
+{
+	"info": {
+		"_postman_id": "3e32e90d-ad78-4f1f-b401-084e348e0c9f",
+		"name": "EagleCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Tree",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/test-tree",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"test-tree"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ScheduleTest",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json-patch+json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\"idFeature\""
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/scheduled-tests",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"scheduled-tests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RunTest-DevelopmentMode",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/execute-one",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"execute-one"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
