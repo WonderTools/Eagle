@@ -16,6 +16,7 @@ To be Done|None|Implement an api Get the detailed results of one test case
 To be Done|None|record the logs in the inmemory database
 To be Done|None|Implement an api to get test logs
 To be Done|None|Get the TestSuite result similar to TestCase
+To be Done|None|low priority - Have a config to switch between development mode and execute Mode
 To be Done|None|low priority - Implement the id generation. The id generation has to url encoded value of the full name
 To be Done|None|low priority - Evaluate if engine should be instantiated onces or multiple times
 To be Done|None|low priority - Scheduled tests as event should be transimitted
