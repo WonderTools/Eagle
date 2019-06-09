@@ -92,18 +92,24 @@ namespace Eagle.Web
             TriggerProcess(app, client);
         }
 
-        private static void TriggerProcess(IApplicationBuilder app, HttpClient httpClient)
+        private void TriggerProcess(IApplicationBuilder app, HttpClient httpClient)
         {
             var serverAddressesFeature = app.ServerFeatures.Get<IServerAddressesFeature>();
             var addresses = serverAddressesFeature.Addresses;
             if (addresses.Count == 0) throw new Exception("No listening addresses available");
             var address = addresses.ElementAt(0);
 
+            var settings = Configuration.GetSection("DevelopmentMode");
+            var isDevelopmentMOde = (string.CompareOrdinal(settings.Value.ToLower(), "true") == 0);
+
             var timer = new System.Threading.Timer(PostToProcess, null, 5000, 5000);
             void PostToProcess(object o)
             {
-                var url = address + "/api/process";
-                httpClient.PostAsync(url, new StringContent(""));
+                if (!isDevelopmentMOde)
+                {
+                    var url = address + "/api/process";
+                    httpClient.PostAsync(url, new StringContent(""));
+                }
             }
         }
     }
