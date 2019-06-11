@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eagle", "Eagle\Eagle.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Feature.Infrastructure", "Feature.Infrastructure\Feature.Infrastructure.csproj", "{D84EDFE1-8640-4CF2-B3F3-04ACAF6557D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayGround", "PlayGround\PlayGround.csproj", "{879359A7-E770-44AC-94A0-8A6E492AB544}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlayGround", "PlayGround\PlayGround.csproj", "{879359A7-E770-44AC-94A0-8A6E492AB544}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eagle.TestNode1", "Eagle.TestNode1\Eagle.TestNode1.csproj", "{CDD9141F-7F72-4B80-94C4-7BBBA85F7C97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{879359A7-E770-44AC-94A0-8A6E492AB544}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{879359A7-E770-44AC-94A0-8A6E492AB544}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{879359A7-E770-44AC-94A0-8A6E492AB544}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDD9141F-7F72-4B80-94C4-7BBBA85F7C97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDD9141F-7F72-4B80-94C4-7BBBA85F7C97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDD9141F-7F72-4B80-94C4-7BBBA85F7C97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDD9141F-7F72-4B80-94C4-7BBBA85F7C97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

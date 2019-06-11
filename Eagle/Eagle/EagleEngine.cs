@@ -37,6 +37,19 @@ namespace Eagle
             return _testQueue.AddToQueue(id);
         }
 
+        public async Task<MyResult> ExecuteTest(string id)
+        {
+            var result = await _testRunner.RunTestCaseNew(id);
+            var discoveredTestSuites = GetDiscoveredTestSuites();
+            return new MyResult()
+            {
+                TestResults = result,
+                TestSuites = discoveredTestSuites,
+            };
+        }
+
+
+
         public List<ScheduledTest> GetScheduledFeatures()
         {
             var queueElements = _testQueue.GetQueueElements();
@@ -62,5 +75,12 @@ namespace Eagle
             _idToSchedulingParametersMap = initializer.GetIdToSchedulingParametersMap(packageToSuiteMap);
             _testRunner = new TestRunner(_logger, _idToSchedulingParametersMap, _testQueue, eventListener);
         }
+    }
+
+    public class MyResult
+    {
+        public List<TestSuite> TestSuites { get; set; }
+
+        public List<TestResult> TestResults { get; set; }
     }
 }   
