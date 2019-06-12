@@ -104,12 +104,20 @@ namespace Eagle
     {
         public async Task OnTestCompletion(string listenerUri, MyResult result)
         {
-            using (var httpClient = new HttpClient())
+            try
             {
-                var serializedResult = JsonConvert.SerializeObject(result);
-                var content = new StringContent(serializedResult);
-                await httpClient.PostAsync(listenerUri, content);
+                using (var httpClient = new HttpClient())
+                {
+                    var serializedResult = JsonConvert.SerializeObject(result);
+                    var content = new StringContent(serializedResult);
+                    await httpClient.PostAsync(listenerUri, content);
+                }
             }
+            catch (Exception e)
+            {
+                
+            }
+            
         }
     }
 }   
