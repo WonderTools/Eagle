@@ -10,15 +10,17 @@ namespace Eagle
     public class EagleEngine
     {
         private readonly IMyLogger _logger;
+        private readonly IResultHandler _handler;
         private readonly ITestQueue _testQueue;
         private TestRunner _testRunner;
         private List<TestSuite> _testSuites;
         private Dictionary<string,(TestPackage TestPackage, string FullName)> _idToSchedulingParametersMap;
         
-        public EagleEngine(IMyLogger logger)
+        public EagleEngine(IMyLogger logger, IResultHandler handler)
         {
             _testQueue = new ThreadSafeQueue();
             _logger = logger;
+            _handler = handler;
         }
 
         public async Task Process()
@@ -37,17 +39,19 @@ namespace Eagle
             return _testQueue.AddToQueue(id);
         }
 
-        public async Task<MyResult> ExecuteTest(string id, string nodeName, string requestId)
+        public async Task<MyResult> ExecuteTest(string id, string nodeName, string requestId, string uri)
         {
             var result = await _testRunner.RunTestCaseNew(id);
             var discoveredTestSuites = GetDiscoveredTestSuites();
-            return new MyResult()
+            var executeTest = new MyResult()
             {
                 TestResults = result,
                 TestSuites = discoveredTestSuites,
                 NodeName =  nodeName,
                 RequestId= requestId,
             };
+            await _handler.OnTestCompletion(uri, executeTest);
+            return executeTest;
         }
 
 
@@ -87,5 +91,18 @@ namespace Eagle
 
         public string NodeName { get; set; }
         public string RequestId { get; set; }
+    }
+
+    public interface IResultHandler
+    {
+        Task OnTestCompletion(string listenerUri, MyResult result);
+    }
+
+    public class HttpRequestResultHandler : IResultHandler
+    {
+        public async Task OnTestCompletion(string listenerUri, MyResult result)
+        {
+            
+        }
     }
 }   

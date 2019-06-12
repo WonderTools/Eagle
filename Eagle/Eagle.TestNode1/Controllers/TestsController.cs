@@ -16,13 +16,16 @@ namespace Eagle.TestNode1.Controllers
         [HttpPost("execute")]
         public async Task<MyResult> Execute([FromBody] ExecuteParameters value)
         {
-            var eagleEngine = new EagleEngine(new MyLogger());
+            IResultHandler handler = new HttpRequestResultHandler();
+            var eagleEngine = new EagleEngine(new MyLogger(), handler);
             eagleEngine.Initialize(new EagleEventListener(), typeof(TestClass));
-            var result = await eagleEngine.ExecuteTest(value.Id, value.NodeName, value.RequestId);
+            var result = await eagleEngine.ExecuteTest(value.Id, value.NodeName, value.RequestId, value.CallBackUrl);
             return result;
             
         }
     }
+
+
 
     public class EagleEventListener : IEagleEventListener
     {
