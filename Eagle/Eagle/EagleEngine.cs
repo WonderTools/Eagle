@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 
 namespace Eagle
@@ -102,7 +104,12 @@ namespace Eagle
     {
         public async Task OnTestCompletion(string listenerUri, MyResult result)
         {
-            
+            using (var httpClient = new HttpClient())
+            {
+                var serializedResult = JsonConvert.SerializeObject(result);
+                var content = new StringContent(serializedResult);
+                await httpClient.PostAsync(listenerUri, content);
+            }
         }
     }
 }   
