@@ -37,7 +37,7 @@ namespace Eagle
             return _testQueue.AddToQueue(id);
         }
 
-        public async Task<MyResult> ExecuteTest(string id)
+        public async Task<MyResult> ExecuteTest(string id, string nodeName)
         {
             var result = await _testRunner.RunTestCaseNew(id);
             var discoveredTestSuites = GetDiscoveredTestSuites();
@@ -45,6 +45,7 @@ namespace Eagle
             {
                 TestResults = result,
                 TestSuites = discoveredTestSuites,
+                NodeName =  nodeName,
             };
         }
 
@@ -82,5 +83,7 @@ namespace Eagle
         public List<TestSuite> TestSuites { get; set; }
 
         public List<TestResult> TestResults { get; set; }
+
+        public string NodeName { get; set; }
     }
 }   

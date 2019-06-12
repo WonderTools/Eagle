@@ -18,8 +18,9 @@ namespace Eagle.TestNode1.Controllers
         {
             var eagleEngine = new EagleEngine(new MyLogger());
             eagleEngine.Initialize(new EagleEventListener(), typeof(TestClass));
-            var result = await eagleEngine.ExecuteTest(value.Id);
+            var result = await eagleEngine.ExecuteTest(value.Id, value.NodeName);
             return result;
+            
         }
     }
 
@@ -42,7 +43,6 @@ namespace Eagle.TestNode1.Controllers
     {
         public string NodeName { get; set; }
         public string Id { get; set; }
-
         public string CallBackUrl { get; set; }
     }
 }
