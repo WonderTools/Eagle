@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Eagle.Dashboard.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Eagle.Dashboard.Controllers
 {
@@ -7,7 +8,7 @@ namespace Eagle.Dashboard.Controllers
     public class NodesController : ControllerBase
     {
         [HttpPost]
-        public ActionResult CreateNode()
+        public ActionResult CreateNode(NodeCreationParameters creationParameters)
         {
             return Ok();
         }
