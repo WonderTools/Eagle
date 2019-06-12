@@ -43,6 +43,8 @@ namespace Eagle
 
         public async Task<MyResult> ExecuteTest(string id, string nodeName, string requestId, string uri)
         {
+
+            //TODO When Id is empty all test should be executed
             var result = await _testRunner.RunTestCaseNew(id);
             var discoveredTestSuites = GetDiscoveredTestSuites();
             var executeTest = new MyResult()
@@ -100,8 +102,11 @@ namespace Eagle
         Task OnTestCompletion(string listenerUri, MyResult result);
     }
 
+
+    
     public class HttpRequestResultHandler : IResultHandler
     {
+        //TODO The exception should not be always swallowed. This should be swallowed only in development mode set by a configuration in appsettings.json 
         public async Task OnTestCompletion(string listenerUri, MyResult result)
         {
             try
