@@ -42,4 +42,45 @@ namespace Eagle.Dashboard.Controllers
         {
         }
     }
+
+    [Route("api/tests")]
+    [ApiController]
+    public class TestsController: ControllerBase
+    {
+        [HttpGet]
+        public ActionResult GetTests()
+        {
+            return Ok();
+        }
+
+        [HttpPost("schedule")]
+        public ActionResult ScheduleTests([FromBody]string id)
+        {
+            return Ok();
+        }
+
+
+    }
+
+    [Route("api/process")]
+    [ApiController]
+    public class ProcessController : ControllerBase
+    {
+        [HttpPost]
+        public ActionResult Process()
+        {
+            return Ok();
+        }
+    }
+
+    [Route("api/nodes")]
+    [ApiController]
+    public class NodesController : ControllerBase
+    {
+        [HttpPost]
+        public ActionResult CreateNode()
+        {
+            return Ok();
+        }
+    }
 }
