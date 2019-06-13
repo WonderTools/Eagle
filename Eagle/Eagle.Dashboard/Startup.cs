@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -33,6 +34,7 @@ namespace Eagle.Dashboard
             services.AddTransient<DashboardService>();
             services.AddTransient<IDataStore, DataStore>();
             services.AddTransient<ITestScheduler, HttpTestScheduler>();
+            services.AddDbContext<DashboardContext>(options => options.UseInMemoryDatabase("BoardGames"));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Eagle Dashboard", Version = "v1" });

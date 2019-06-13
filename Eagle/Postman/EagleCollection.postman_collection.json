@@ -136,6 +136,68 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "ScheduleAllTests",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nodeName\": \"string\",\r\n  \"id\": \"\",\r\n  \"callBackUrl\": \"string\",\r\n  \"requestId\": \"string\"\r\n}"
+				},
+				"url": {
+					"raw": "https://localhost:5011/api/tests/execute",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5011",
+					"path": [
+						"api",
+						"tests",
+						"execute"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ScheduleSpecificTests",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nodeName\": \"string\",\r\n  \"id\": \"idFeature.Infrastructure.EagleFeature\",\r\n  \"callBackUrl\": \"string\",\r\n  \"requestId\": \"string\"\r\n}"
+				},
+				"url": {
+					"raw": "https://localhost:5011/api/tests/execute",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5011",
+					"path": [
+						"api",
+						"tests",
+						"execute"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
