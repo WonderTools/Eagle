@@ -50,19 +50,42 @@ namespace Eagle.Dashboard.Services
 
         public async Task AddResults(MyResult result)
         {
-            //AdjustId(result.NodeName, result.TestSuites);
-
+            AdjustId(result.NodeName, result.TestSuites);
+            AdjustId(result.NodeName, result.TestResults);
 
             await _dataStore.AddDiscoveredTests(result.NodeName, result.TestSuites);
             await _dataStore.AddTestResults(result.NodeName, result.TestResults);
+        }
+
+        private void AdjustId(string nodeName, List<TestResult> testResults)
+        {
+            foreach (var testResult in testResults)
+            {
+                testResult.Id = GetAdjustedId(nodeName, testResult.Id);
+            }
         }
 
         private void AdjustId(string nodeName, List<TestSuite> resultTestSuites)
         {
             foreach (var resultTestSuite in resultTestSuites)
             {
-                //resultTestSuite.Id = nodeName + "-->--" + resultTestSuite.Id;
+                resultTestSuite.Id = GetAdjustedId(nodeName, resultTestSuite.Id);
+                AdjustId(nodeName, resultTestSuite.TestCases);
+                AdjustId(nodeName, resultTestSuite.TestSuites);
             }
+        }
+
+        private static void AdjustId(string nodeName, List<TestCase> testCases)
+        {
+            foreach (var testCase in testCases)
+            {
+                testCase.Id = GetAdjustedId(nodeName, testCase.Id);
+            }
+        }
+
+        private static string GetAdjustedId(string nodeName, string baseId)
+        {
+            return nodeName + "-->--" + baseId;
         }
     }
 }
