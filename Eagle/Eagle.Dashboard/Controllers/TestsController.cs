@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using Eagle.Dashboard.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Eagle.Dashboard.Controllers
 {
@@ -7,7 +9,7 @@ namespace Eagle.Dashboard.Controllers
     public class TestsController: ControllerBase
     {
         [HttpGet]
-        public ActionResult GetTests()
+        public ActionResult<List<TestSuiteModel>> GetTests()
         {
             return Ok();
         }
@@ -17,7 +19,5 @@ namespace Eagle.Dashboard.Controllers
         {
             return Ok();
         }
-
-
     }
 }
