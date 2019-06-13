@@ -130,6 +130,7 @@ namespace Eagle
                 StartTime = x.StartTime,
                 EndTime = x.EndTime,
                 DurationInMs = x.Duration * 1000,
+                Result = x.Result,
 
             }).ToList();
         }
