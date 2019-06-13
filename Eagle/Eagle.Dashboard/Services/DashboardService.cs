@@ -50,8 +50,19 @@ namespace Eagle.Dashboard.Services
 
         public async Task AddResults(MyResult result)
         {
+            //AdjustId(result.NodeName, result.TestSuites);
+
+
             await _dataStore.AddDiscoveredTests(result.NodeName, result.TestSuites);
             await _dataStore.AddTestResults(result.NodeName, result.TestResults);
+        }
+
+        private void AdjustId(string nodeName, List<TestSuite> resultTestSuites)
+        {
+            foreach (var resultTestSuite in resultTestSuites)
+            {
+                //resultTestSuite.Id = nodeName + "-->--" + resultTestSuite.Id;
+            }
         }
     }
 }
