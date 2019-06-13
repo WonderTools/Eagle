@@ -4,16 +4,21 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Eagle.Dashboard.Services;
+using Newtonsoft.Json;
 
 namespace Eagle.Dashboard.Dependencies
 {
     public class HttpTestScheduler: ITestScheduler
     {
-        public Task Schedule(string nodeName, string uri, string testId, string requestId)
+        public async Task Schedule(string nodeName, string uri, string testId, string requestId, string callBackUri)
         {
             HttpClient httpClient= new HttpClient();
-            throw new NotImplementedException();
+            var parameters = new ExecuteParameters
+                {NodeName = nodeName, Id = testId, CallBackUrl = callBackUri, RequestId = requestId};
+            await httpClient.PostAsync(uri, new StringContent(JsonConvert.SerializeObject(parameters)));
+
         }
+
     }
 
     public class ExecuteParameters

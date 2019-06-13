@@ -31,7 +31,7 @@ namespace Eagle.Dashboard.Services
         {
             try
             {
-                await _testScheduler.Schedule(creationParameters.NodeName, creationParameters.Uri, string.Empty, requestId);
+                await _testScheduler.Schedule(creationParameters.NodeName, creationParameters.Uri, string.Empty, requestId, String.Empty);
                 return true;
             }
             catch (Exception e)
