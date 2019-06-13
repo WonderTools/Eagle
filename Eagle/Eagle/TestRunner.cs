@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 using Eagle.NUnitResult;
 using NUnit.Engine;
 
@@ -81,8 +82,23 @@ namespace Eagle
 
         public async Task<List<TestResult>> RunTestCaseNew(string id)
         {
-            var schedulingParameters = _idToSchedulingParametersMap[id];
-            return await RunTestCaseNew(schedulingParameters.TestPackage, schedulingParameters.FullName);
+            if (!string.IsNullOrWhiteSpace(id))
+            {
+                var schedulingParameters = _idToSchedulingParametersMap[id];
+                return await RunTestCaseNew(schedulingParameters.TestPackage, schedulingParameters.FullName);
+            }
+            else
+            {
+                List<TestResult> results = new List<TestResult>();
+                var packages = _idToSchedulingParametersMap.Select(x => x.Value.TestPackage).Distinct();
+
+                foreach (var package in packages)
+                {
+                    var rs = await RunTestCaseNew(package, "");
+                    results.AddRange(rs);
+                }
+                return results;
+            }
         }
 
         private async Task<List<TestResult>> RunTestCaseNew(TestPackage testPackage, string name)
@@ -94,7 +110,7 @@ namespace Eagle
                     //TBD: Check if the scheduling can be done with internal id
                     var filterService = engine.Services.GetService<ITestFilterService>();
                     var builder = filterService.GetTestFilterBuilder();
-                    builder.AddTest(name);
+                    if(!string.IsNullOrWhiteSpace(name)) builder.AddTest(name);
                     var filter = builder.GetFilter();
                     var x = runner.Run(new TestEventListener(), filter);
                     return await HandleResultsNew(x.ToJson());
