@@ -26,7 +26,7 @@ namespace Eagle.Dashboard.Services
             var requestId = GenerateResultId(requestTime);
             //TODO : The Uri is Currently hardcoded, but this needs to be injected. It also needs to be configured
             //TODO : This needs to be injected as we could switch to messaging using RabbitMQ
-            var isRequestSuccessful = await ScheduleTest(creationParameters, requestId, "http://localhost:5500/results");
+            var isRequestSuccessful = await ScheduleTest(creationParameters, requestId, "https://localhost:6501/api/results");
             await _dataStore.AddRequest(requestId, creationParameters.NodeName, string.Empty, requestTime, isRequestSuccessful);
         }
 
@@ -34,7 +34,7 @@ namespace Eagle.Dashboard.Services
         {
             try
             {
-                await _testScheduler.Schedule(creationParameters.NodeName, creationParameters.Uri, callBackUri, requestId, String.Empty);
+                await _testScheduler.Schedule(creationParameters.NodeName, creationParameters.Uri, string.Empty, requestId, callBackUri);
                 return true;
             }
             catch (Exception e)

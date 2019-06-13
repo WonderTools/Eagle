@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Eagle.Dashboard.Services;
 using Newtonsoft.Json;
@@ -15,7 +16,10 @@ namespace Eagle.Dashboard.Dependencies
             HttpClient httpClient= new HttpClient();
             var parameters = new ExecuteParameters
                 {NodeName = nodeName, Id = testId, CallBackUrl = callBackUri, RequestId = requestId};
-            await httpClient.PostAsync(uri, new StringContent(JsonConvert.SerializeObject(parameters)));
+
+            var stringContent = new StringContent(JsonConvert.SerializeObject(parameters));
+            stringContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var response = await httpClient.PostAsync(uri, stringContent);
 
         }
 

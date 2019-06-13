@@ -12,9 +12,8 @@ namespace Eagle.Dashboard.Database
             //TODO error must be thrown if the same node name is already in use    
         }
 
-        public Task AddRequest(string requestId, string nodeName, string testId, DateTime requestTime, bool isRequestSuccessful)
+        public async Task AddRequest(string requestId, string nodeName, string testId, DateTime requestTime, bool isRequestSuccessful)
         {
-            throw new NotImplementedException();
         }
     }
 }

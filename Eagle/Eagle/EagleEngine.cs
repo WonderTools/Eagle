@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
@@ -115,7 +116,8 @@ namespace Eagle
                 {
                     var serializedResult = JsonConvert.SerializeObject(result);
                     var content = new StringContent(serializedResult);
-                    await httpClient.PostAsync(listenerUri, content);
+                    content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                    var response =  await httpClient.PostAsync(listenerUri, content);
                 }
             }
             catch (Exception e)
