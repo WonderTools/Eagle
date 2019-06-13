@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Eagle.Dashboard.Controllers
 {
@@ -9,6 +10,7 @@ namespace Eagle.Dashboard.Controllers
         [HttpPost]
         public ActionResult AddResults(MyResult result)
         {
+            var serializedResult = JsonConvert.SerializeObject(result);
             return Ok();
         }
     }

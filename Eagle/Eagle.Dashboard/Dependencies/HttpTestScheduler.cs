@@ -20,9 +20,7 @@ namespace Eagle.Dashboard.Dependencies
             var stringContent = new StringContent(JsonConvert.SerializeObject(parameters));
             stringContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             var response = await httpClient.PostAsync(uri, stringContent);
-
         }
-
     }
 
     public class ExecuteParameters
