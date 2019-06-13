@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using Eagle.Dashboard.Services;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace Eagle.Dashboard.Controllers
@@ -7,10 +9,17 @@ namespace Eagle.Dashboard.Controllers
     [ApiController]
     public class ResultsController : ControllerBase
     {
-        [HttpPost]
-        public ActionResult AddResults(MyResult result)
+        private readonly DashboardService _service;
+
+        public ResultsController(DashboardService service)
         {
-            var serializedResult = JsonConvert.SerializeObject(result);
+            _service = service;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> AddResults(MyResult result)
+        {
+            await _service.AddResults(result);
             return Ok();
         }
     }

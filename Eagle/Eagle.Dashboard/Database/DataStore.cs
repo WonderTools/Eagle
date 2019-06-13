@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Eagle.Dashboard.Models;
 using Eagle.Dashboard.Services;
@@ -14,6 +15,16 @@ namespace Eagle.Dashboard.Database
 
         public async Task AddRequest(string requestId, string nodeName, string testId, DateTime requestTime, bool isRequestSuccessful)
         {
+        }
+
+        public async Task AddDiscoveredTests(string resultNodeName, List<TestSuite> resultTestSuites)
+        {
+
+        }
+
+        public async Task AddTestResults(string resultNodeName, List<TestResult> resultTestResults)
+        {
+
         }
     }
 }

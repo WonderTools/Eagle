@@ -47,5 +47,11 @@ namespace Eagle.Dashboard.Services
         {
             return requestTime.ToString("yyyy-MM-dd-HH:mm:ss.fff") + new Guid();
         }
+
+        public async Task AddResults(MyResult result)
+        {
+            await _dataStore.AddDiscoveredTests(result.NodeName, result.TestSuites);
+            await _dataStore.AddTestResults(result.NodeName, result.TestResults);
+        }
     }
 }
