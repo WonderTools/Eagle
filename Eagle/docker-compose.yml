@@ -9,4 +9,14 @@ services:
     ports:
       - "5010:80"
       - "5011:443"
+      
+  dashboard:
+    build:
+      context: .
+      dockerfile: dashboard.Dockerfile
+    image: "test-system/dashboard"
+    ports:
+      - "6500:80"
+      - "6501:443"
+
 
