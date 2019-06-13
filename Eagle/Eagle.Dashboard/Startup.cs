@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Eagle.Dashboard.Database;
+using Eagle.Dashboard.Dependencies;
+using Eagle.Dashboard.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,7 +30,9 @@ namespace Eagle.Dashboard
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
+            services.AddTransient<DashboardService>();
+            services.AddTransient<IDataStore, DataStore>();
+            services.AddTransient<ITestScheduler, HttpTestScheduler>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Eagle Dashboard", Version = "v1" });
