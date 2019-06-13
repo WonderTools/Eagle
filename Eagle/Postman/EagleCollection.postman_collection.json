@@ -231,6 +231,37 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "ScheduleTest",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\"node1-->--idFeature.Infrastructure.EagleFeature.AddTwoNumbers\"\r\n"
+				},
+				"url": {
+					"raw": "https://localhost:6501/api/tests/schedule",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "6501",
+					"path": [
+						"api",
+						"tests",
+						"schedule"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
