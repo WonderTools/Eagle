@@ -25,8 +25,9 @@ namespace Eagle.Dashboard.Controllers
         }
 
         [HttpPost("schedule")]
-        public ActionResult ScheduleTests([FromBody]string id)
+        public async Task<ActionResult> ScheduleTests([FromBody]string id)
         {
+            await _service.ScheduleTests(id);
             return Ok();
         }
     }

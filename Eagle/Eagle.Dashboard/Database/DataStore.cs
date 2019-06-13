@@ -106,5 +106,10 @@ namespace Eagle.Dashboard.Database
                 DurationInMs = x.DurationInMs,
             }).ToList();
         }
+
+        public async Task<string> GetUri(string nodeName)
+        {
+            return await _context.Nodes.Where(x => x.NodeName == nodeName).Select(x => x.Uri).FirstAsync();
+        }
     }
 }

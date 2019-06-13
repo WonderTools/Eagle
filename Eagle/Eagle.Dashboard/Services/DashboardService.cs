@@ -24,19 +24,26 @@ namespace Eagle.Dashboard.Services
         {
             //TODO : Validate model
             await _dataStore.CreateNode(creationParameters);
+
+            await ScheduleTestAndAddRequest(creationParameters.NodeName, creationParameters.Uri, string.Empty);
+        }
+
+        private async Task ScheduleTestAndAddRequest(string nodeName, string uri, string testId)
+        {
             var requestTime = DateTime.Now;
             var requestId = GenerateResultId(requestTime);
             //TODO : The Uri is Currently hardcoded, but this needs to be injected. It also needs to be configured
             //TODO : This needs to be injected as we could switch to messaging using RabbitMQ
-            var isRequestSuccessful = await ScheduleTest(creationParameters, requestId, "https://localhost:6501/api/results");
-            await _dataStore.AddRequest(requestId, creationParameters.NodeName, string.Empty, requestTime, isRequestSuccessful);
+            var isRequestSuccessful = await ScheduleTest(nodeName, uri, testId,
+                "https://localhost:6501/api/results", requestId);
+            await _dataStore.AddRequest(requestId, nodeName, testId, requestTime, isRequestSuccessful);
         }
 
-        private async Task<bool> ScheduleTest(NodeCreationParameters creationParameters, string requestId, string callBackUri)
+        private async Task<bool> ScheduleTest(string nodeName, string uri, string testId, string callBackUri, string requestId)
         {
             try
             {
-                await _testScheduler.Schedule(creationParameters.NodeName, creationParameters.Uri, string.Empty, requestId, callBackUri);
+                await _testScheduler.Schedule(nodeName, uri, testId, requestId, callBackUri);
                 return true;
             }
             catch (Exception e)
@@ -87,7 +94,12 @@ namespace Eagle.Dashboard.Services
 
         private static string GetAdjustedId(string nodeName, string baseId)
         {
-            return nodeName + "-->--" + baseId;
+            return nodeName + GetSeparator() + baseId;
+        }
+
+        private static string GetSeparator()
+        {
+            return "-->--";
         }
 
         public async Task<List<TestSuiteModel>> GetResults()
@@ -132,6 +144,16 @@ namespace Eagle.Dashboard.Services
                 testCases.AddRange(GetTestCases(testSuiteModel.TestSuites));
             }
             return testCases;
+        }
+
+        public async Task ScheduleTests(string id)
+        {
+            var strs = id.Split(GetSeparator());
+            if (strs.Length != 2) throw new Exception();
+            var nodeName = strs[0];
+            var testId = strs[1];
+            var uri = await _dataStore.GetUri(nodeName);
+            await ScheduleTestAndAddRequest(nodeName, uri, testId);
         }
     }
 }

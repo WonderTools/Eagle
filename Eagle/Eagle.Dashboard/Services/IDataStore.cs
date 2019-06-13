@@ -13,5 +13,6 @@ namespace Eagle.Dashboard.Services
         Task AddTestResults(string resultNodeName, List<TestResult> resultTestResults);
         Task<List<List<TestSuite>>> GetLatestTestSuites();
         Task<List<TestResult>> GetLatestTestResults();
+        Task<string> GetUri(string nodeName);
     }
 }
