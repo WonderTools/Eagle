@@ -51,6 +51,7 @@ namespace Eagle.Web
             services.AddDbContext<ResultContext>(options => options.UseInMemoryDatabase("BoardGames"));
             services.AddTransient<IResultRepository, ResultRepository>();
             services.AddSingleton<IEagleEventListener, EagleEventListener>();
+            services.AddTransient<IResultHandler, ResultHandler>();
 
         }
 
@@ -152,6 +153,13 @@ namespace Eagle.Web
                     DurationInMs = duration,
                 });
             }
+        }
+    }
+
+    public class ResultHandler : IResultHandler
+    {
+        public async Task OnTestCompletion(string listenerUri, MyResult result)
+        {
         }
     }
 }

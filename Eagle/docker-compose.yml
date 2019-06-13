@@ -1,0 +1,22 @@
+version: '3'
+services:
+
+  test-node1:
+    build:
+      context: .
+      dockerfile: dockerfile-node1.Dockerfile
+    image: "test-system/node1"
+    ports:
+      - "5010:80"
+      - "5011:443"
+      
+  dashboard:
+    build:
+      context: .
+      dockerfile: dashboard.Dockerfile
+    image: "test-system/dashboard"
+    ports:
+      - "6500:80"
+      - "6501:443"
+
+

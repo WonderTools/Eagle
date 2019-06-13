@@ -13,8 +13,10 @@ namespace Eagle
 
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<NUnitTestSuite, TestSuite>();
-                cfg.CreateMap<NUnitTestCase, TestCase>();
+                cfg.CreateMap<NUnitTestSuite, TestSuite>()
+                    .ForMember(o => o.Id, b => b.MapFrom(z => z.Fullname.GetIdFromFullName()));
+                cfg.CreateMap<NUnitTestCase, TestCase>()
+                    .ForMember(o => o.Id, b => b.MapFrom(z => z.Fullname.GetIdFromFullName()));
             });
 
             return config.CreateMapper().Map<TestSuite>(root.TestRun.TestSuite);

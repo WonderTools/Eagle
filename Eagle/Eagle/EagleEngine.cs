@@ -2,7 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 
 namespace Eagle
@@ -10,15 +13,17 @@ namespace Eagle
     public class EagleEngine
     {
         private readonly IMyLogger _logger;
+        private readonly IResultHandler _handler;
         private readonly ITestQueue _testQueue;
         private TestRunner _testRunner;
         private List<TestSuite> _testSuites;
         private Dictionary<string,(TestPackage TestPackage, string FullName)> _idToSchedulingParametersMap;
         
-        public EagleEngine(IMyLogger logger)
+        public EagleEngine(IMyLogger logger, IResultHandler handler)
         {
             _testQueue = new ThreadSafeQueue();
             _logger = logger;
+            _handler = handler;
         }
 
         public async Task Process()
@@ -36,6 +41,25 @@ namespace Eagle
             if (!_idToSchedulingParametersMap.ContainsKey(id)) throw new Exception("The Id is not found");
             return _testQueue.AddToQueue(id);
         }
+
+        public async Task<MyResult> ExecuteTest(string id, string nodeName, string requestId, string uri)
+        {
+
+            //TODO When Id is empty all test should be executed
+            var result = await _testRunner.RunTestCaseNew(id);
+            var discoveredTestSuites = GetDiscoveredTestSuites();
+            var executeTest = new MyResult()
+            {
+                TestResults = result,
+                TestSuites = discoveredTestSuites,
+                NodeName =  nodeName,
+                RequestId= requestId,
+            };
+            await _handler.OnTestCompletion(uri, executeTest);
+            return executeTest;
+        }
+
+
 
         public List<ScheduledTest> GetScheduledFeatures()
         {
@@ -61,6 +85,46 @@ namespace Eagle
             _testSuites = packageToSuiteMap.Values.ToList();
             _idToSchedulingParametersMap = initializer.GetIdToSchedulingParametersMap(packageToSuiteMap);
             _testRunner = new TestRunner(_logger, _idToSchedulingParametersMap, _testQueue, eventListener);
+        }
+    }
+
+    public class MyResult
+    {
+        public List<TestSuite> TestSuites { get; set; }
+
+        public List<TestResult> TestResults { get; set; }
+
+        public string NodeName { get; set; }
+        public string RequestId { get; set; }
+    }
+
+    public interface IResultHandler
+    {
+        Task OnTestCompletion(string listenerUri, MyResult result);
+    }
+
+
+    
+    public class HttpRequestResultHandler : IResultHandler
+    {
+        //TODO The exception should not be always swallowed. This should be swallowed only in development mode set by a configuration in appsettings.json 
+        public async Task OnTestCompletion(string listenerUri, MyResult result)
+        {
+            try
+            {
+                using (var httpClient = new HttpClient())
+                {
+                    var serializedResult = JsonConvert.SerializeObject(result);
+                    var content = new StringContent(serializedResult);
+                    content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                    var response =  await httpClient.PostAsync(listenerUri, content);
+                }
+            }
+            catch (Exception e)
+            {
+                
+            }
+            
         }
     }
 }   
