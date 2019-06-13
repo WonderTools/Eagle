@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Eagle.Dashboard.Models;
+using Microsoft.AspNetCore.Hosting.Server.Features;
 
 namespace Eagle.Dashboard.Services
 {
@@ -23,15 +24,17 @@ namespace Eagle.Dashboard.Services
             await _dataStore.CreateNode(creationParameters);
             var requestTime = DateTime.Now;
             var requestId = GenerateResultId(requestTime);
-            var isRequestSuccessful = await ScheduleTest(creationParameters, requestId);
+            //TODO : The Uri is Currently hardcoded, but this needs to be injected. It also needs to be configured
+            //TODO : This needs to be injected as we could switch to messaging using RabbitMQ
+            var isRequestSuccessful = await ScheduleTest(creationParameters, requestId, "http://localhost:5500/results");
             await _dataStore.AddRequest(requestId, creationParameters.NodeName, string.Empty, requestTime, isRequestSuccessful);
         }
 
-        private async Task<bool> ScheduleTest(NodeCreationParameters creationParameters, string requestId)
+        private async Task<bool> ScheduleTest(NodeCreationParameters creationParameters, string requestId, string callBackUri)
         {
             try
             {
-                await _testScheduler.Schedule(creationParameters.NodeName, creationParameters.Uri, string.Empty, requestId, String.Empty);
+                await _testScheduler.Schedule(creationParameters.NodeName, creationParameters.Uri, callBackUri, requestId, String.Empty);
                 return true;
             }
             catch (Exception e)
