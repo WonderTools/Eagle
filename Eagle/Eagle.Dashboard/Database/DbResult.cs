@@ -14,5 +14,6 @@ namespace Eagle.Dashboard.Database
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public double DurationInMs { get; set; }
+        public string NodeName { get; set; }
     }
 }

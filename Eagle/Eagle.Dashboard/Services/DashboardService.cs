@@ -93,7 +93,6 @@ namespace Eagle.Dashboard.Services
         public async Task<List<TestSuiteModel>> GetResults()
         {
             var listOfListOfTestSuites = await _dataStore.GetLatestTestSuites();
-            //var results = await _dataStore.GetLatestTestResults();
 
             var testSuites = listOfListOfTestSuites.SelectMany(x => x).ToList();
 
@@ -108,6 +107,19 @@ namespace Eagle.Dashboard.Services
 
             List<TestCaseModel> testCases = GetTestCases(testSuiteModels);
             var testCaseDictionary = testCases.ToDictionary(x => x.Id, x => x);
+
+
+            var results = await _dataStore.GetLatestTestResults();
+            foreach (var testResult in results)
+            {
+                if (!testCaseDictionary.ContainsKey(testResult.Id)) continue;
+                var x = testCaseDictionary[testResult.Id];
+                x.Result = testResult.Result;
+                x.StartingTime = testResult.StartTime;
+                x.FinishingTime = testResult.EndTime;
+                x.DurationInMs = testResult.DurationInMs;
+            }
+
             return testSuiteModels;
         }
 

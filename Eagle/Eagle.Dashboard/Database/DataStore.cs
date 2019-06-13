@@ -66,6 +66,7 @@ namespace Eagle.Dashboard.Database
                 StartTime = x.StartTime,
                 EndTime = x.EndTime,
                 Result = x.Result,
+                NodeName = resultNodeName,
             });
             _context.Results.AddRange(results);
             await _context.SaveChangesAsync();
@@ -89,9 +90,21 @@ namespace Eagle.Dashboard.Database
             return result;
         }
 
-        public Task<List<TestResult>> GetLatestTestResults()
+        public async Task<List<TestResult>> GetLatestTestResults()
         {
-            throw new NotImplementedException();
+            var r1 = await  _context.Results.GroupBy(x => x.Id, y=> y).ToListAsync();
+            var r2 = r1.Select(x => x.ToList()).ToList();
+            var r3 = r2.Select(x => x.OrderByDescending(y => y.SerialNumber).FirstOrDefault());
+            var r4 = r3.Where(x => x != null).ToList();
+
+            return r4.Select(x => new TestResult()
+            {
+                Id = x.Id,
+                StartTime = x.StartTime,
+                EndTime = x.EndTime,
+                Result = x.Result,
+                DurationInMs = x.DurationInMs,
+            }).ToList();
         }
     }
 }
