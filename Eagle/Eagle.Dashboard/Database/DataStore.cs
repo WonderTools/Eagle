@@ -71,9 +71,22 @@ namespace Eagle.Dashboard.Database
             await _context.SaveChangesAsync();
         }
 
-        public Task<List<List<TestSuite>>> GetLatestTestSuites()
+        public async Task<List<List<TestSuite>>> GetLatestTestSuites()
         {
-            throw new NotImplementedException();
+            //var nodePackages = await _context.NodePackages.GroupBy(x => x.NodeName, y => y)
+            //    .Select(y => y.ToList().OrderByDescending(a => a.SerialNumber).Select(x => x.Package).FirstOrDefault())
+            //    .ToListAsync();
+
+            var r1 = await _context.NodePackages.GroupBy(x => x.NodeName, y => y).ToListAsync();
+            var r2 = r1.Select(x => x.ToList()).ToList();
+            var r3 = r2.Select(x => x.OrderByDescending(y => y.SerialNumber).FirstOrDefault());
+            var r4 = r3.Where(x => x != null).ToList();
+            var nodePackages = r4.Select(x => x.Package).ToList();
+
+
+            var result = nodePackages.Where(x => !string.IsNullOrWhiteSpace(x))
+                .Select(x => JsonConvert.DeserializeObject<List<TestSuite>>(x)).ToList();
+            return result;
         }
 
         public Task<List<TestResult>> GetLatestTestResults()

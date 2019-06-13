@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Eagle.Dashboard.Models;
+using Eagle.NUnitDiscovery;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 
 namespace Eagle.Dashboard.Services
@@ -86,6 +88,38 @@ namespace Eagle.Dashboard.Services
         private static string GetAdjustedId(string nodeName, string baseId)
         {
             return nodeName + "-->--" + baseId;
+        }
+
+        public async Task<List<TestSuiteModel>> GetResults()
+        {
+            var listOfListOfTestSuites = await _dataStore.GetLatestTestSuites();
+            //var results = await _dataStore.GetLatestTestResults();
+
+            var testSuites = listOfListOfTestSuites.SelectMany(x => x).ToList();
+
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<TestSuite, TestSuiteModel>();
+                cfg.CreateMap<TestCase, TestCaseModel>();
+            });
+
+            var testSuiteModels =  config.CreateMapper().Map<List<TestSuiteModel>>(testSuites);
+
+
+            List<TestCaseModel> testCases = GetTestCases(testSuiteModels);
+            var testCaseDictionary = testCases.ToDictionary(x => x.Id, x => x);
+            return testSuiteModels;
+        }
+
+        private List<TestCaseModel> GetTestCases(List<TestSuiteModel> testSuites)
+        {
+            var testCases = new List<TestCaseModel>();
+            foreach (var testSuiteModel in testSuites)
+            {
+                testCases.AddRange(testSuiteModel.TestCases);
+                testCases.AddRange(GetTestCases(testSuiteModel.TestSuites));
+            }
+            return testCases;
         }
     }
 }

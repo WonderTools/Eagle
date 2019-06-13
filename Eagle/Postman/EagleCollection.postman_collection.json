@@ -198,6 +198,39 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "GetResults",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://localhost:6501/api/tests",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "6501",
+					"path": [
+						"api",
+						"tests"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Eagle.Dashboard.Models;
+using Eagle.Dashboard.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Eagle.Dashboard.Controllers
@@ -8,10 +10,18 @@ namespace Eagle.Dashboard.Controllers
     [ApiController]
     public class TestsController: ControllerBase
     {
-        [HttpGet]
-        public ActionResult<List<TestSuiteModel>> GetTests()
+        private readonly DashboardService _service;
+
+        public TestsController(DashboardService service)
         {
-            return Ok();
+            _service = service;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<TestSuiteModel>>> GetTests()
+        {
+            var results = await  _service.GetResults();
+            return Ok(results);
         }
 
         [HttpPost("schedule")]
