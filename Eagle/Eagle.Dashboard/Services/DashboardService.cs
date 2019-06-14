@@ -104,9 +104,15 @@ namespace Eagle.Dashboard.Services
 
         public async Task<List<TestSuiteModel>> GetResults()
         {
-            var listOfListOfTestSuites = await _dataStore.GetLatestTestSuites();
+            var dictionary = await _dataStore.GetLatestTestSuites();
 
-            var testSuites = listOfListOfTestSuites.SelectMany(x => x).ToList();
+            var testSuites = dictionary.Select(x => new TestSuite()
+            {
+                Id = x.Key + GetSeparator(),
+                FullName = x.Key,
+                Name = x.Key,
+                TestSuites = x.Value,
+            });
 
             var config = new MapperConfiguration(cfg =>
             {

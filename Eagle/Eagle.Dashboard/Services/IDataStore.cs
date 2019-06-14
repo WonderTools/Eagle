@@ -11,7 +11,7 @@ namespace Eagle.Dashboard.Services
         Task AddRequest(string requestId, string nodeName, string testId, DateTime requestTime, bool isRequestSuccessful);
         Task AddDiscoveredTests(string resultNodeName, List<TestSuite> resultTestSuites);
         Task AddTestResults(string resultNodeName, List<TestResult> resultTestResults);
-        Task<List<List<TestSuite>>> GetLatestTestSuites();
+        Task<Dictionary<string, List<TestSuite>>> GetLatestTestSuites();
         Task<List<TestResult>> GetLatestTestResults();
         Task<string> GetUri(string nodeName);
     }
