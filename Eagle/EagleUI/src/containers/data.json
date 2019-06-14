@@ -1,0 +1,128 @@
+[
+  {
+    "id": "idFeature.Infrastructure.dll",
+    "fullName": "Feature.Infrastructure.dll",
+    "name": "Feature.Infrastructure.dll",
+    "testSuites": [
+      {
+        "id": "idFeature",
+        "fullName": "Feature",
+        "name": "Feature",
+        "testSuites": [
+          {
+            "id": "idFeature.Infrastructure",
+            "fullName": "Feature.Infrastructure",
+            "name": "Infrastructure",
+            "testSuites": [
+              {
+                "id": "idFeature.Infrastructure.EagleFeature",
+                "fullName": "Feature.Infrastructure.EagleFeature",
+                "name": "EagleFeature",
+                "testSuites": [],
+                "testCases": [
+                  {
+                    "id": "idFeature.Infrastructure.EagleFeature.AddTwoNumbers",
+                    "fullName": "Feature.Infrastructure.EagleFeature.AddTwoNumbers",
+                    "name": "AddTwoNumbers",
+                    "result": null,
+                    "finishingTime": null,
+                    "startingTime": null,
+                    "durationInMs": null,
+                    "logs": ""
+                  },
+                  {
+                    "id": "idFeature.Infrastructure.EagleFeature.SubtractTwoNumbers",
+                    "fullName": "Feature.Infrastructure.EagleFeature.SubtractTwoNumbers",
+                    "name": "SubtractTwoNumbers",
+                    "result": null,
+                    "finishingTime": null,
+                    "startingTime": null,
+                    "durationInMs": null,
+                    "logs": ""
+                  }
+                ]
+              },
+              {
+                "id": "idFeature.Infrastructure.TestClass",
+                "fullName": "Feature.Infrastructure.TestClass",
+                "name": "TestClass",
+                "testSuites": [],
+                "testCases": [
+                  {
+                    "id": "idFeature.Infrastructure.TestClass.TestMethod",
+                    "fullName": "Feature.Infrastructure.TestClass.TestMethod",
+                    "name": "TestMethod",
+                    "result": null,
+                    "finishingTime": null,
+                    "startingTime": null,
+                    "durationInMs": null,
+                    "logs": ""
+                  }
+                ]
+              },
+              {
+                "id": "idFeature.Infrastructure.TestMyClass",
+                "fullName": "Feature.Infrastructure.TestMyClass",
+                "name": "TestMyClass",
+                "testSuites": [
+                  {
+                    "id": "idFeature.Infrastructure.TestMyClass.MyTest",
+                    "fullName": "Feature.Infrastructure.TestMyClass.MyTest",
+                    "name": "MyTest",
+                    "testSuites": [],
+                    "testCases": [
+                      {
+                        "id": "idFeature.Infrastructure.TestMyClass.MyTest(1)",
+                        "fullName": "Feature.Infrastructure.TestMyClass.MyTest(1)",
+                        "name": "MyTest(1)",
+                        "result": null,
+                        "finishingTime": null,
+                        "startingTime": null,
+                        "durationInMs": null,
+                        "logs": ""
+                      },
+                      {
+                        "id": "idFeature.Infrastructure.TestMyClass.MyTest(2)",
+                        "fullName": "Feature.Infrastructure.TestMyClass.MyTest(2)",
+                        "name": "MyTest(2)",
+                        "result": null,
+                        "finishingTime": null,
+                        "startingTime": null,
+                        "durationInMs": null,
+                        "logs": ""
+                      },
+                      {
+                        "id": "idFeature.Infrastructure.TestMyClass.MyTest(3)",
+                        "fullName": "Feature.Infrastructure.TestMyClass.MyTest(3)",
+                        "name": "MyTest(3)",
+                        "result": null,
+                        "finishingTime": null,
+                        "startingTime": null,
+                        "durationInMs": null,
+                        "logs": ""
+                      },
+                      {
+                        "id": "idFeature.Infrastructure.TestMyClass.MyTest(4)",
+                        "fullName": "Feature.Infrastructure.TestMyClass.MyTest(4)",
+                        "name": "MyTest(4)",
+                        "result": null,
+                        "finishingTime": null,
+                        "startingTime": null,
+                        "durationInMs": null,
+                        "logs": ""
+                      }
+                    ]
+                  }
+                ],
+                "testCases": []
+              }
+            ],
+            "testCases": []
+          }
+        ],
+        "testCases": []
+      }
+    ],
+    "testCases": []
+  }
+]
