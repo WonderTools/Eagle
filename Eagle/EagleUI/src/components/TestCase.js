@@ -7,7 +7,7 @@ const getTestResultIcon = result => {
     return <FaCheck style={{color:'green'}} />
   if(result === 'fail')
     return <FaTimes style={{color:'red'}} />
-  if(result === 'inconclusive')
+  if(result === 'Inconclusive')
     return <FaQuestion style={{color:'yellow'}} />
   if(result === null)
     return <FaExclamationTriangle style={{color:'grey'}} />

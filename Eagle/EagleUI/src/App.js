@@ -1,11 +1,23 @@
 import React from 'react'
 import TestSuite from './components/TestSuite'
 import testSuites from './containers/data.json';
+import axios  from 'axios';
 
 import './App.css'
 
 export default class App extends React.Component {
+  state = { testSuites : [] };
+
+  componentDidMount(){
+    axios.get('https://localhost:6501/api/tests')
+      .then(response=> {
+        this.setState({testSuites : response.data});  
+        console.log(response);
+      })
+  }
+
   render(){
+    const testSuites = this.state.testSuites;
     return(
       <div>
         {testSuites.map((t, index) => <TestSuite {...t} key={index}/>)}
