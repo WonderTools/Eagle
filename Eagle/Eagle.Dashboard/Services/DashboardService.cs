@@ -4,8 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Eagle.Dashboard.Models;
-using Eagle.NUnitDiscovery;
-using Microsoft.AspNetCore.Hosting.Server.Features;
 
 namespace Eagle.Dashboard.Services
 {
@@ -105,24 +103,9 @@ namespace Eagle.Dashboard.Services
         public async Task<List<TestSuiteModel>> GetResults()
         {
             var dictionary = await _dataStore.GetLatestTestSuites();
-
-            var testSuites = dictionary.Select(x => new TestSuite()
-            {
-                Id = x.Key + GetSeparator(),
-                FullName = x.Key,
-                Name = x.Key,
-                TestSuites = x.Value,
-            });
-
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<TestSuite, TestSuiteModel>();
-                cfg.CreateMap<TestCase, TestCaseModel>();
-            });
-
-            var testSuiteModels =  config.CreateMapper().Map<List<TestSuiteModel>>(testSuites);
-
-
+            var testSuites = dictionary.Select(x => GroupAsNodeTestSuite(x.Key, x.Value));
+            var testSuiteModels = ConvertToListOfListOfTestSuiteModel(testSuites);
+            
             List<TestCaseModel> testCases = GetTestCases(testSuiteModels);
             var testCaseDictionary = testCases.ToDictionary(x => x.Id, x => x);
 
@@ -139,6 +122,30 @@ namespace Eagle.Dashboard.Services
             }
 
             return testSuiteModels;
+        }
+
+
+
+        private static List<TestSuiteModel> ConvertToListOfListOfTestSuiteModel(IEnumerable<TestSuite> testSuites)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<TestSuite, TestSuiteModel>();
+                cfg.CreateMap<TestCase, TestCaseModel>();
+            });
+            var testSuiteModels = config.CreateMapper().Map<List<TestSuiteModel>>(testSuites);
+            return testSuiteModels;
+        }
+
+        private static TestSuite GroupAsNodeTestSuite(string nodeName, List<TestSuite> testSuites)
+        {
+            return new TestSuite()
+            {
+                Id = nodeName + GetSeparator(),
+                FullName = nodeName,
+                Name = nodeName,
+                TestSuites = testSuites,
+            };
         }
 
         private List<TestCaseModel> GetTestCases(List<TestSuiteModel> testSuites)

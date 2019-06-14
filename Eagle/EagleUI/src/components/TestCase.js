@@ -43,10 +43,13 @@ export default class TestCase extends Component {
 
   render() {
     const { id, name, result, finishingTime, startingTime, durationInMs } = this.props
+    const inbetween = '<->';
     return(
       <div>
       <ContextMenuTrigger id={'menu_id'+ id} >
-        {getTestResultIcon(result)} {name} <TimeAgo date={finishingTime} className="timestatus"/>
+        {getTestResultIcon(result)} {name} 
+        <span className="timestatus" ><TimeAgo date={startingTime} /> {inbetween} <TimeAgo date={finishingTime}/></span>
+        
       </ContextMenuTrigger>
     
       <ContextMenu id={'menu_id'+ id}  className="menu">
