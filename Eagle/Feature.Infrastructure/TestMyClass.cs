@@ -13,5 +13,22 @@ namespace Feature.Infrastructure
 
         }
 
+        [Test]
+        public void PassingTest()
+        {
+            Assert.Pass();
+        }
+
+        [Test]
+        public void FailingTest()
+        {
+            Assert.Fail();
+        }
+
+        [Test]
+        public void InconclusiveTest()
+        {
+            Assert.Inconclusive();
+        }
     }
 }

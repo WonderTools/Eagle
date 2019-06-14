@@ -4,14 +4,13 @@ import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu"
 import axios from 'axios';
 
 const getTestResultIcon = result => {
-  if(result === 'pass')
+  if(result === 'Passed' || result === 'passed' )
     return <FaCheck style={{color:'green'}} />
-  if(result === 'fail')
+  if(result === 'Failed' || result === 'failed')
     return <FaTimes style={{color:'red'}} />
-  if(result === 'Inconclusive')
-    return <FaQuestion style={{color:'yellow'}} />
-  if(result === null)
-    return <FaExclamationTriangle style={{color:'grey'}} />
+  if(result === 'Inconclusive' || result ==='inconclusive')
+    return <FaQuestion style={{color:'brown'}} />
+  return <FaExclamationTriangle style={{color:'grey'}} />
 }
 
 export default class TestCase extends Component {
