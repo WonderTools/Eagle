@@ -8,12 +8,18 @@ import './App.css'
 export default class App extends React.Component {
   state = { testSuites : [] };
 
-  componentDidMount(){
+  refreshData = () =>{
     axios.get('https://localhost:6501/api/tests')
       .then(response=> {
         this.setState({testSuites : response.data});  
         console.log(response);
       })
+    setTimeout(this.refreshData, 2000);
+  }
+
+
+  componentDidMount(){
+    this.refreshData();
   }
 
   render(){

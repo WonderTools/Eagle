@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 
 namespace Feature.Infrastructure
 {
@@ -29,6 +30,16 @@ namespace Feature.Infrastructure
         public void InconclusiveTest()
         {
             Assert.Inconclusive();
+        }
+
+        [Test]
+        public void FlickeringTests()
+        {
+            var second = DateTime.Now.Second;
+            var x = second / 10;
+            if (x % 3 == 0) Assert.Pass();
+            if (x % 3 == 1) Assert.Fail();
+            if (x % 3 == 2) Assert.Inconclusive();
         }
     }
 }
