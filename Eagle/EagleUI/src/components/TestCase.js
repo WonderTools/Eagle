@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { FaCheck, FaTimes, FaQuestion, FaExclamationTriangle } from 'react-icons/fa';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu"
+import axios from 'axios';
 
 const getTestResultIcon = result => {
   if(result === 'pass')
@@ -22,7 +23,22 @@ export default class TestCase extends Component {
 }
 
   handleClick =(e, data)=> {
+    
     console.log(data.foo);
+  }
+
+  scheduleTest =(e, data1)=> {
+    console.log(data1);
+    const options = {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      data: JSON.stringify(data1.id),
+      url: "https://localhost:6501/api/tests/schedule",
+    };
+    axios(options)
+    .then(response =>{
+      console.log(response);
+    });
   }
 
   render() {
@@ -34,10 +50,8 @@ export default class TestCase extends Component {
       </ContextMenuTrigger>
     
       <ContextMenu id={'menu_id'+ id}  className="menu">
-        <MenuItem onClick={this.handleClick} data={{ item: 'item 1' }}>Menu Item 1</MenuItem>
-        <MenuItem onClick={this.handleClick} data={{ item: 'item 2' }}>Menu Item 2</MenuItem>
-        <MenuItem divider />
-        <MenuItem onClick={this.handleClick} data={{ item: 'item 3' }}>Menu Item 3</MenuItem>
+        <MenuItem onClick={this.scheduleTest} data={{ id }}>Schedule Test</MenuItem>
+        <MenuItem onClick={this.handleClick} data={{ item: 'item 2' }}>Show History</MenuItem>
       </ContextMenu>
     </div>
     )
