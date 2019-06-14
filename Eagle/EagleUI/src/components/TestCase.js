@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { FaCheck, FaTimes, FaQuestion, FaExclamationTriangle } from 'react-icons/fa';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu"
 import axios from 'axios';
+import TimeAgo from 'react-timeago';
 
 const getTestResultIcon = result => {
   if(result === 'Passed' || result === 'passed' )
@@ -45,7 +46,7 @@ export default class TestCase extends Component {
     return(
       <div>
       <ContextMenuTrigger id={'menu_id'+ id} >
-        {getTestResultIcon(result)} {name}
+        {getTestResultIcon(result)} {name} <TimeAgo date={finishingTime} className="timestatus"/>
       </ContextMenuTrigger>
     
       <ContextMenu id={'menu_id'+ id}  className="menu">

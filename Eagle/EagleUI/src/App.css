@@ -38,3 +38,10 @@
   text-decoration: none;
   border-color: blue;
 }
+
+.timestatus {
+  color: gray;
+  font-size: x-small;
+  font-style: italic;
+  margin-left: 10px;
+}
