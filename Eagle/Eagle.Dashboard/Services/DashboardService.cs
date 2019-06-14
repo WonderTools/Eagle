@@ -103,7 +103,7 @@ namespace Eagle.Dashboard.Services
         public async Task<List<TestSuiteModel>> GetResults()
         {
             var dictionary = await _dataStore.GetLatestTestSuites();
-            var testSuites = dictionary.Select(x => GroupAsNodeTestSuite(x.Key, x.Value));
+            var testSuites = dictionary.Select(x => GroupAsNodeTestSuite(x.Key, x.Value)).ToList();
             var testSuiteModels = ConvertToListOfListOfTestSuiteModel(testSuites);
             
             List<TestCaseModel> testCases = GetTestCases(testSuiteModels);
@@ -121,9 +121,59 @@ namespace Eagle.Dashboard.Services
                 x.DurationInMs = testResult.DurationInMs;
             }
 
+            foreach (var testSuiteModel in testSuiteModels)
+            {
+                ComputeDerivedValueForTestSuite(testSuiteModel);
+            }
+
             return testSuiteModels;
         }
 
+        private void ComputeDerivedValueForTestSuite(TestSuiteModel testSuite)
+        {
+            foreach (var childTestSuite in testSuite.TestSuites)
+            {
+                ComputeDerivedValueForTestSuite(childTestSuite);
+            }
+
+            ComputeStartingTime(testSuite);
+            ComputeFinishingTime(testSuite);
+            ComputeResult(testSuite);
+
+        }
+
+        private static void ComputeResult(TestSuiteModel testSuite)
+        {
+            var results = testSuite.TestCases.Select(x => x.Result).ToList();
+            results.AddRange(testSuite.TestSuites.Select(x => x.Result));
+
+            var failed = "Failed";
+            var inconclusive = "Inconclusive";
+            var passed = "Passed";
+            var anyMismatch = results.Where(x => !string.IsNullOrWhiteSpace(x)).Where(x => x != failed)
+                .Where(x => x != inconclusive).Any(x => x != passed);
+            if(anyMismatch) throw new Exception("Wrong results");
+            if (results.Any(string.IsNullOrWhiteSpace)) testSuite.Result = null;
+            else if (results.Any(x => x == failed)) testSuite.Result = failed;
+            else if (results.Any(x => x == inconclusive)) testSuite.Result = inconclusive;
+            else testSuite.Result = passed;
+        }
+
+        private void ComputeFinishingTime(TestSuiteModel testSuite)
+        {
+            var finishingTimes = testSuite.TestCases.Select(x => x.FinishingTime).ToList();
+            finishingTimes.AddRange(testSuite.TestSuites.Select(x => x.FinishingTime));
+            if (finishingTimes.Any(x => !x.HasValue)) testSuite.FinishingTime = null;
+            else testSuite.FinishingTime = finishingTimes.Max();
+        }
+
+        private void ComputeStartingTime(TestSuiteModel testSuite)
+        {
+            var startingTimes = testSuite.TestCases.Select(x => x.StartingTime).ToList();
+            startingTimes.AddRange(testSuite.TestSuites.Select(x => x.StartingTime));
+            if (startingTimes.Any(x => !x.HasValue)) testSuite.StartingTime = null;
+            else testSuite.StartingTime = startingTimes.Min();
+        }
 
 
         private static List<TestSuiteModel> ConvertToListOfListOfTestSuiteModel(IEnumerable<TestSuite> testSuites)

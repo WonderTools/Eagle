@@ -49,7 +49,6 @@ export default class TestCase extends Component {
       <ContextMenuTrigger id={'menu_id'+ id} >
         {getTestResultIcon(result)} {name} 
         <span className="timestatus" ><TimeAgo date={startingTime} /> {inbetween} <TimeAgo date={finishingTime}/></span>
-        
       </ContextMenuTrigger>
     
       <ContextMenu id={'menu_id'+ id}  className="menu">
