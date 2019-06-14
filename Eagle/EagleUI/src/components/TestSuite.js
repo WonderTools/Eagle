@@ -3,6 +3,18 @@ import TestCase from './TestCase';
 import { FaChevronDown, FaChevronRight } from 'react-icons/fa';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 import axios from 'axios';
+import { FaCheck, FaTimes, FaQuestion, FaExclamationTriangle } from 'react-icons/fa';
+import TimeAgo from 'react-timeago';
+
+const getTestResultIcon = result => {
+  if(result === 'Passed' || result === 'passed' )
+    return <FaCheck style={{color:'green'}} />
+  if(result === 'Failed' || result === 'failed')
+    return <FaTimes style={{color:'red'}} />
+  if(result === 'Inconclusive' || result ==='inconclusive')
+    return <FaQuestion style={{color:'brown'}} />
+  return <FaExclamationTriangle style={{color:'grey'}} />
+}
 
 const styles = {
    alignIcon : {
@@ -40,14 +52,18 @@ export default class TestSuite extends Component {
     }
 
     render(){
-        const {name, id, testCases, testSuites} = this.props;
-        const { isOpen } = this.state
+        const {name,result, id, testCases, testSuites, finishingTime, startingTime } = this.props;
+        const { isOpen } = this.state;
+        const inbetween = '<->';
         return (
             <div>
                 <div>
                 
                 <ContextMenuTrigger id={'menu_id'+ id} >
-                <div><span onClick={()=>this.onToggle(isOpen)}>{ isOpen ? <FaChevronDown style={styles.alignIcon}/> : <FaChevronRight style={styles.alignIcon} /> }</span>{name}</div>
+                <div><span onClick={()=>this.onToggle(isOpen)}>
+                  { isOpen ? <FaChevronDown style={styles.alignIcon}/> : <FaChevronRight style={styles.alignIcon} /> }
+                </span>{getTestResultIcon(result)} {name} 
+                <span className="timestatus" ><TimeAgo date={startingTime} /> {inbetween} <TimeAgo date={finishingTime}/></span></div>
                 </ContextMenuTrigger>
                 <ContextMenu id={'menu_id'+ id}  className="menu">
                   <MenuItem onClick={this.scheduleTest} data={{ id }}>Schedule Test</MenuItem>
