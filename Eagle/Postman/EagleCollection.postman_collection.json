@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3e32e90d-ad78-4f1f-b401-084e348e0c9f",
+		"_postman_id": "83461298-0f1a-494a-a2e2-81b047cac713",
 		"name": "EagleCollection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -91,6 +91,36 @@
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n  \"uri\": \"https://localhost:5011/api/tests/execute\",\r\n  \"nodeName\": \"node1\",\r\n  \"clientSecret\": \"string\",\r\n  \"executionIntervalInMinutes\": 0\r\n}"
+				},
+				"url": {
+					"raw": "https://localhost:6501/api/nodes",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "6501",
+					"path": [
+						"api",
+						"nodes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RegisterNode2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"uri\": \"https://localhost:5021/api/tests/execute\",\r\n  \"nodeName\": \"Azure-Monitor\",\r\n  \"clientSecret\": \"string\",\r\n  \"executionIntervalInMinutes\": 0\r\n}"
 				},
 				"url": {
 					"raw": "https://localhost:6501/api/nodes",
