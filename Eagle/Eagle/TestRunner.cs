@@ -10,17 +10,15 @@ namespace Eagle
 {
     public class TestRunner
     {
-        private readonly IMyLogger _logger;
         private readonly Dictionary<string, (TestPackage TestPackage, string FullName)> _idToSchedulingParametersMap;
         private readonly ITestQueue _testQueue;
         private readonly IEagleEventListener _eventListener;
         private ScheduledTestInternal _runningTest;
         private object _lockable = new object();
 
-        public TestRunner(IMyLogger logger, Dictionary<string, (TestPackage TestPackage, string FullName)> idToSchedulingParametersMap, 
+        public TestRunner(Dictionary<string, (TestPackage TestPackage, string FullName)> idToSchedulingParametersMap, 
             ITestQueue testQueue, IEagleEventListener eventListener)
         {
-            _logger = logger;
             _idToSchedulingParametersMap = idToSchedulingParametersMap;
             _testQueue = testQueue;
             _eventListener = eventListener;

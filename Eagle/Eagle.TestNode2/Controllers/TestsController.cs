@@ -13,7 +13,7 @@ namespace Eagle.TestNode2.Controllers
         public async Task<MyResult> Execute([FromBody] ExecuteParameters value)
         {
             IResultHandler handler = new HttpRequestResultHandler();
-            var eagleEngine = new EagleEngine(new MyLogger(), handler);
+            var eagleEngine = new EagleEngine(handler);
             eagleEngine.Initialize(new EagleEventListener(), typeof(AzureResponseCodeTests));
             var result = await eagleEngine.ExecuteTest(value.Id, value.NodeName, value.RequestId, value.CallBackUrl);
             return result;
@@ -28,13 +28,6 @@ namespace Eagle.TestNode2.Controllers
         public async Task TestCompleted(string id, string result, DateTime startingTime, DateTime finishingTime, int duration)
         {
 
-        }
-    }
-
-    public class MyLogger : IMyLogger
-    {
-        public void Log(string log)
-        {
         }
     }
 
