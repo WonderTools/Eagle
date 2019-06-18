@@ -12,16 +12,14 @@ namespace Eagle
     {
         private readonly Dictionary<string, (TestPackage TestPackage, string FullName)> _idToSchedulingParametersMap;
         private readonly ITestQueue _testQueue;
-        private readonly IEagleEventListener _eventListener;
         private ScheduledTestInternal _runningTest;
         private object _lockable = new object();
 
         public TestRunner(Dictionary<string, (TestPackage TestPackage, string FullName)> idToSchedulingParametersMap, 
-            ITestQueue testQueue, IEagleEventListener eventListener)
+            ITestQueue testQueue)
         {
             _idToSchedulingParametersMap = idToSchedulingParametersMap;
             _testQueue = testQueue;
-            _eventListener = eventListener;
         }
 
         public async Task Process()
@@ -139,11 +137,6 @@ namespace Eagle
             var jsonParser = new NUnitJsonParser();
             var runTestSuite= jsonParser.GetTestSuiteFromResultJson(json);
             var testCases= GetTestCases(runTestSuite);
-            foreach (var testCase in testCases)
-            {
-                await _eventListener.TestCompleted(testCase.FullName.GetIdFromFullName(),
-                    testCase.Result, testCase.StartTime, testCase.EndTime, (int)testCase.Duration);
-            }
         }
 
         private List<ResultTestCase> GetTestCases(ResultTestSuite testSuite)

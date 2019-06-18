@@ -14,22 +14,14 @@ namespace Eagle.TestNode2.Controllers
         {
             IResultHandler handler = new HttpRequestResultHandler();
             var eagleEngine = new EagleEngine(handler);
-            eagleEngine.Initialize(new EagleEventListener(), typeof(AzureResponseCodeTests));
+            eagleEngine.Initialize(typeof(AzureResponseCodeTests));
             var result = await eagleEngine.ExecuteTest(value.Id, value.NodeName, value.RequestId, value.CallBackUrl);
             return result;
 
         }
     }
 
-
-
-    public class EagleEventListener : IEagleEventListener
-    {
-        public async Task TestCompleted(string id, string result, DateTime startingTime, DateTime finishingTime, int duration)
-        {
-
-        }
-    }
+    
 
     public class ExecuteParameters
     {

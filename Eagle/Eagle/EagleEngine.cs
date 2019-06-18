@@ -76,13 +76,13 @@ namespace Eagle
             return _testSuites;
         }
 
-        public void Initialize(IEagleEventListener eventListener, params TestAssemblyLocationHolder[] testAssembliesLocationHolder)
+        public void Initialize(params TestAssemblyLocationHolder[] testAssembliesLocationHolder)
         {
             Initializer initializer = new Initializer();
             var packageToSuiteMap = initializer.GetTestPackageToTestSuiteMap(testAssembliesLocationHolder);
             _testSuites = packageToSuiteMap.Values.ToList();
             _idToSchedulingParametersMap = initializer.GetIdToSchedulingParametersMap(packageToSuiteMap);
-            _testRunner = new TestRunner(_idToSchedulingParametersMap, _testQueue, eventListener);
+            _testRunner = new TestRunner(_idToSchedulingParametersMap, _testQueue);
         }
     }
 
