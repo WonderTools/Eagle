@@ -16,4 +16,8 @@
     <ProjectReference Include="..\Eagle.Contract\Eagle.Contract.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Contract\" />
+  </ItemGroup>
+
 </Project>

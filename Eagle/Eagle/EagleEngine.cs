@@ -11,8 +11,11 @@ using Newtonsoft.Json;
 
 namespace Eagle
 {
+    
+
     public class EagleEngine
     {
+    
         private readonly IResultHandler _handler;
         private TestRunner _testRunner;
         private List<TestSuite> _testSuites;

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Eagle
+namespace Eagle.Contract
 {
     public class TestResult
     {
@@ -8,8 +8,6 @@ namespace Eagle
         public string Result { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
-
         public double DurationInMs { get; set; }
-
     }
 }
