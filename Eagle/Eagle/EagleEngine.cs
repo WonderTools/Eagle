@@ -20,8 +20,18 @@ namespace Eagle
         private List<TestSuite> _testSuites;
         private Dictionary<string,(TestPackage TestPackage, string FullName)> _idToSchedulingParametersMap;
         
-        public EagleEngine()
+        public EagleEngine(params TestableAssembly[] testableAssemblies)
         {
+            Initialize(testableAssemblies);
+        }
+
+        private void Initialize(params TestableAssembly[] testableAssemblies)
+        {
+            Initializer initializer = new Initializer();
+            var packageToSuiteMap = initializer.GetTestPackageToTestSuiteMap(testableAssemblies);
+            _testSuites = packageToSuiteMap.Values.ToList();
+            _idToSchedulingParametersMap = initializer.GetIdToSchedulingParametersMap(packageToSuiteMap);
+            _testRunner = new TestRunner(_idToSchedulingParametersMap);
         }
 
         public async Task<MyResult> ExecuteTest(string id, string nodeName, string requestId, string uri, IResultHandler resultHandler)
@@ -46,14 +56,7 @@ namespace Eagle
             return _testSuites;
         }
 
-        public void Initialize(params TestAssemblyLocationHolder[] testAssembliesLocationHolder)
-        {
-            Initializer initializer = new Initializer();
-            var packageToSuiteMap = initializer.GetTestPackageToTestSuiteMap(testAssembliesLocationHolder);
-            _testSuites = packageToSuiteMap.Values.ToList();
-            _idToSchedulingParametersMap = initializer.GetIdToSchedulingParametersMap(packageToSuiteMap);
-            _testRunner = new TestRunner(_idToSchedulingParametersMap);
-        }
+
     }
 
     public class MyResult

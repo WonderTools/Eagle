@@ -48,10 +48,10 @@ namespace Eagle
         }
 
         public Dictionary<TestPackage, TestSuite> GetTestPackageToTestSuiteMap
-            (params TestAssemblyLocationHolder[] testAssembliesLocationHolder)
+            (params TestableAssembly[] testableAssemblies)
         {
             List<TestPackage> testPackages =
-                testAssembliesLocationHolder.Select(x => new TestPackage(x.Location)).ToList();
+                testableAssemblies.Select(x => new TestPackage(x.Location)).ToList();
             return testPackages.ToDictionary(x => x, GetTestSuite);
         }
 
