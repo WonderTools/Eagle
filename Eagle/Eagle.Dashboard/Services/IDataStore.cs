@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Eagle.Contract;
 using Eagle.Dashboard.Models;
 
 namespace Eagle.Dashboard.Services

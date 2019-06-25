@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using Eagle.Contract;
 
-namespace Eagle
+namespace Eagle.Contract
 {
     //Should this be renamed to DiscoveryTestSuite
     public class TestSuite
