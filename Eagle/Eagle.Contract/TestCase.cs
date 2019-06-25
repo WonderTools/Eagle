@@ -1,7 +1,7 @@
 ﻿namespace Eagle.Contract
 {
     //Should this be renamed to DiscoveryTestCase
-    public class TestCase1
+    public class TestCase
     {
         public string Id { get; set; }
 

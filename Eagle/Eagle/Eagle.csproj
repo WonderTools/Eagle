@@ -12,4 +12,8 @@
     <PackageReference Include="NUnit.Engine.Api" Version="3.10.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Eagle.Contract\Eagle.Contract.csproj" />
+  </ItemGroup>
+
 </Project>

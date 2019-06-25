@@ -3,12 +3,12 @@
 namespace Eagle.Contract
 {
     //Should this be renamed to DiscoveryTestSuite
-    public class TestSuite1
+    public class TestSuite
     {
-        public TestSuite1()
+        public TestSuite()
         {
-            TestSuites = new List<TestSuite1>();
-            TestCases = new List<TestCase1>();
+            TestSuites = new List<TestSuite>();
+            TestCases = new List<TestCase>();
         }
 
         public string Id { get; set; }
@@ -17,8 +17,8 @@ namespace Eagle.Contract
 
         public string Name { get; set; }
 
-        public List<TestSuite1> TestSuites { get; set; }
+        public List<TestSuite> TestSuites { get; set; }
 
-        public List<TestCase1> TestCases { get; set; }
+        public List<TestCase> TestCases { get; set; }
     }
 }
