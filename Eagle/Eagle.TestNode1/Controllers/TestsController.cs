@@ -14,7 +14,7 @@ namespace Eagle.TestNode1.Controllers
     {
         
         [HttpPost("execute")]
-        public async Task<MyResult> Execute([FromBody] ExecuteParameters value)
+        public async Task<MyResult> Execute([FromBody] TestTrigger value)
         {
             IResultHandler handler = new HttpRequestResultHandler();
             var eagleEngine = new EagleEngine(typeof(TestClass));
@@ -24,7 +24,7 @@ namespace Eagle.TestNode1.Controllers
         }
     }
 
-    public class ExecuteParameters
+    public class TestTrigger
     {
         public string NodeName { get; set; }
         public string Id { get; set; }

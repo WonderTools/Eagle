@@ -11,11 +11,8 @@ using Newtonsoft.Json;
 
 namespace Eagle
 {
-    
-
     public class EagleEngine
     {
-    
         private TestRunner _testRunner;
         private List<TestSuite> _testSuites;
         private Dictionary<string,(TestPackage TestPackage, string FullName)> _idToSchedulingParametersMap;
@@ -36,8 +33,6 @@ namespace Eagle
 
         public async Task<MyResult> ExecuteTest(string id, string nodeName, string requestId, string uri, IResultHandler resultHandler)
         {
-
-            //TODO When Id is empty all test should be executed
             var result = await _testRunner.RunTestCaseNew(id);
             var discoveredTestSuites = GetDiscoveredTestSuites();
             var executeTest = new MyResult()
