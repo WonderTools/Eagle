@@ -31,19 +31,9 @@ namespace Eagle
             _testRunner = new TestRunner(_idToSchedulingParametersMap);
         }
 
-        public async Task<MyResult> ExecuteTest(string id, string nodeName, string requestId, string uri, IResultHandler resultHandler)
+        public async Task<List<TestResult>> ExecuteTest(string id, string nodeName, string requestId, string uri, IResultHandler resultHandler)
         {
-            var result = await _testRunner.RunTestCaseNew(id);
-            var discoveredTestSuites = GetDiscoveredTestSuites();
-            var executeTest = new MyResult()
-            {
-                TestResults = result,
-                TestSuites = discoveredTestSuites,
-                NodeName =  nodeName,
-                RequestId= requestId,
-            };
-            await resultHandler.OnTestCompletion(uri, executeTest);
-            return executeTest;
+            return await _testRunner.RunTestCaseNew(id);
         }
 
         public List<TestSuite> GetDiscoveredTestSuites()

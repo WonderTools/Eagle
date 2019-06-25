@@ -19,9 +19,16 @@ namespace Eagle.TestNode1.Controllers
         {
             IResultHandler handler = new HttpRequestResultHandler();
             var eagleEngine = new EagleEngine(typeof(TestClass));
+            var testSuites = eagleEngine.GetDiscoveredTestSuites();
             var result = await eagleEngine.ExecuteTest(value.Id, value.NodeName, value.RequestId, value.CallBackUrl, handler);
-            return result;
-            
+
+            return new MyResult()
+            {
+                TestResults = result,
+                TestSuites = testSuites,
+                NodeName = value.NodeName,
+                RequestId = value.RequestId,
+            };
         }
     }
 }
