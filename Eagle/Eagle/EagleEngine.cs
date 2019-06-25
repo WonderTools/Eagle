@@ -31,9 +31,11 @@ namespace Eagle
             _testRunner = new TestRunner(_idToSchedulingParametersMap);
         }
 
-        public async Task<List<TestResult>> ExecuteTest(string id, string nodeName, string requestId, string uri, IResultHandler resultHandler)
+        public async Task<List<TestResult>> ExecuteTest(string id, IResultHandler resultHandler)
         {
-            return await _testRunner.RunTestCaseNew(id);
+            var result = await _testRunner.RunTestCaseNew(id);
+            await resultHandler.OnTestCompletion(result);
+            return result;
         }
 
         public List<TestSuite> GetDiscoveredTestSuites()
@@ -44,18 +46,10 @@ namespace Eagle
 
     }
 
-    public class MyResult
-    {
-        public List<TestSuite> TestSuites { get; set; }
 
-        public List<TestResult> TestResults { get; set; }
-
-        public string NodeName { get; set; }
-        public string RequestId { get; set; }
-    }
 
     public interface IResultHandler
     {
-        Task OnTestCompletion(string listenerUri, MyResult result);
+        Task OnTestCompletion(List<TestResult> result);
     }
 }   

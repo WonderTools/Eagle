@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Eagle.Contract;
 using Eagle.Dashboard.Models;
+using Eagle.WebTemp;
 
 namespace Eagle.Dashboard.Services
 {
