@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Contract\**" />
+    <EmbeddedResource Remove="Contract\**" />
+    <None Remove="Contract\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="NUnit" Version="3.11.0" />
@@ -14,10 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Eagle.Contract\Eagle.Contract.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Contract\" />
   </ItemGroup>
 
 </Project>

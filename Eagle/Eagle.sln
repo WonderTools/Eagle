@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eagle.Contract", "Eagle.Con
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eagle.Communication.Contract", "Eagle.Communication.Contract\Eagle.Communication.Contract.csproj", "{7FEB0BBB-0001-4E6C-9836-319E6CC965D9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eagle.WebTemp", "Eagle.WebTemp\Eagle.WebTemp.csproj", "{7C7C3DA4-097E-4C44-8120-EB32B3F53C9D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{7FEB0BBB-0001-4E6C-9836-319E6CC965D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FEB0BBB-0001-4E6C-9836-319E6CC965D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FEB0BBB-0001-4E6C-9836-319E6CC965D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C7C3DA4-097E-4C44-8120-EB32B3F53C9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C7C3DA4-097E-4C44-8120-EB32B3F53C9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C7C3DA4-097E-4C44-8120-EB32B3F53C9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C7C3DA4-097E-4C44-8120-EB32B3F53C9D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

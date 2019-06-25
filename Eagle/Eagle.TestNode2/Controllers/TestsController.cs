@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Eagle.WebTemp;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Eagle.TestNode2.Controllers
@@ -10,7 +11,7 @@ namespace Eagle.TestNode2.Controllers
     {
 
         [HttpPost("execute")]
-        public async Task<MyResult> Execute([FromBody] ExecuteParameters value)
+        public async Task<MyResult> Execute([FromBody] TestTrigger value)
         {
             IResultHandler handler = new HttpRequestResultHandler();
             var eagleEngine = new EagleEngine(typeof(AzureResponseCodeTests));
@@ -22,11 +23,5 @@ namespace Eagle.TestNode2.Controllers
 
     
 
-    public class ExecuteParameters
-    {
-        public string NodeName { get; set; }
-        public string Id { get; set; }
-        public string CallBackUrl { get; set; }
-        public string RequestId { get; set; }
-    }
+
 }

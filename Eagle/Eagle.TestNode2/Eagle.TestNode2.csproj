@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Eagle.WebTemp\Eagle.WebTemp.csproj" />
     <ProjectReference Include="..\Eagle\Eagle.csproj" />
   </ItemGroup>
 
