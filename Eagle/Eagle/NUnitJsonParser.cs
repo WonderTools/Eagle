@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Eagle.Contract;
 using Eagle.NUnitDiscovery;
 using Eagle.NUnitResult;
 using Newtonsoft.Json;

@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eagle.Dashboard", "Eagle.Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eagle.TestNode2", "Eagle.TestNode2\Eagle.TestNode2.csproj", "{035A46F4-543A-42D8-9823-DBA4580A5A13}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eagle.Contract", "Eagle.Contract\Eagle.Contract.csproj", "{77072959-9040-4DAA-BB57-8015E1B3744F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{035A46F4-543A-42D8-9823-DBA4580A5A13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{035A46F4-543A-42D8-9823-DBA4580A5A13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{035A46F4-543A-42D8-9823-DBA4580A5A13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77072959-9040-4DAA-BB57-8015E1B3744F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77072959-9040-4DAA-BB57-8015E1B3744F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77072959-9040-4DAA-BB57-8015E1B3744F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77072959-9040-4DAA-BB57-8015E1B3744F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

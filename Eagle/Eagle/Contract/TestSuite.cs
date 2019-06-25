@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Eagle.Contract;
 
 namespace Eagle
 {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Eagle.Contract;
 using Eagle.Dashboard.Models;
 
 namespace Eagle.Dashboard.Services
