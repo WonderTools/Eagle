@@ -13,9 +13,9 @@ namespace Eagle.TestNode2.Controllers
         public async Task<MyResult> Execute([FromBody] ExecuteParameters value)
         {
             IResultHandler handler = new HttpRequestResultHandler();
-            var eagleEngine = new EagleEngine(handler);
+            var eagleEngine = new EagleEngine();
             eagleEngine.Initialize(typeof(AzureResponseCodeTests));
-            var result = await eagleEngine.ExecuteTest(value.Id, value.NodeName, value.RequestId, value.CallBackUrl);
+            var result = await eagleEngine.ExecuteTest(value.Id, value.NodeName, value.RequestId, value.CallBackUrl, handler);
             return result;
 
         }

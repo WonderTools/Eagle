@@ -16,17 +16,15 @@ namespace Eagle
     public class EagleEngine
     {
     
-        private readonly IResultHandler _handler;
         private TestRunner _testRunner;
         private List<TestSuite> _testSuites;
         private Dictionary<string,(TestPackage TestPackage, string FullName)> _idToSchedulingParametersMap;
         
-        public EagleEngine(IResultHandler handler)
+        public EagleEngine()
         {
-            _handler = handler;
         }
 
-        public async Task<MyResult> ExecuteTest(string id, string nodeName, string requestId, string uri)
+        public async Task<MyResult> ExecuteTest(string id, string nodeName, string requestId, string uri, IResultHandler resultHandler)
         {
 
             //TODO When Id is empty all test should be executed
@@ -39,7 +37,7 @@ namespace Eagle
                 NodeName =  nodeName,
                 RequestId= requestId,
             };
-            await _handler.OnTestCompletion(uri, executeTest);
+            await resultHandler.OnTestCompletion(uri, executeTest);
             return executeTest;
         }
 
