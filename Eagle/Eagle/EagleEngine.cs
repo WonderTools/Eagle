@@ -42,14 +42,5 @@ namespace Eagle
         {
             return _testSuites;
         }
-
-
-    }
-
-
-
-    public interface IResultHandler
-    {
-        Task OnTestCompletion(List<TestResult> result);
     }
 }   

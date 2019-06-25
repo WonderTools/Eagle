@@ -12,7 +12,6 @@ namespace Eagle
     public class TestRunner
     {
         private readonly Dictionary<string, (TestPackage TestPackage, string FullName)> _idToSchedulingParametersMap;
-        private ScheduledTestInternal _runningTest;
 
         public TestRunner(Dictionary<string, (TestPackage TestPackage, string FullName)> idToSchedulingParametersMap)
         {
