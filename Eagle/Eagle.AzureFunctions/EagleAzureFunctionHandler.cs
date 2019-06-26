@@ -1,12 +1,9 @@
-﻿using System;
-using System.Net;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
-using WonderTools.Eagle.Communication.Contract;
 using Newtonsoft.Json;
-using WonderTools.Eagle;
+using WonderTools.Eagle.Communication.Contract;
 
-namespace Eagle.AzureFunctions
+namespace WonderTools.Eagle.AzureFunctions
 {
     public class EagleAzureFunctionHandler
     {
