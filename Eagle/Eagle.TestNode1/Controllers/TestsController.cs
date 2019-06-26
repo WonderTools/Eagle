@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Eagle.Communication.Contract;
+using WonderTools.Eagle.Communication.Contract;
 using Feature.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 

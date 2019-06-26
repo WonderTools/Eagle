@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Eagle.Communication.Contract;
+using WonderTools.Eagle.Communication.Contract;
 using WonderTools.Eagle.Contract;
 using Eagle.Dashboard.Models;
 

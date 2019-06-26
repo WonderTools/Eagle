@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Eagle.Communication.Contract;
+using WonderTools.Eagle.Communication.Contract;
 using Eagle.Dashboard.Services;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;

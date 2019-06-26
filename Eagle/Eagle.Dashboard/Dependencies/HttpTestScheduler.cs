@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using Eagle.Communication.Contract;
+using WonderTools.Eagle.Communication.Contract;
 using Eagle.Dashboard.Services;
 using Newtonsoft.Json;
 

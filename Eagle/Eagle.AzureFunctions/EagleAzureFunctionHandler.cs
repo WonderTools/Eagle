@@ -2,7 +2,7 @@
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Eagle.Communication.Contract;
+using WonderTools.Eagle.Communication.Contract;
 using Newtonsoft.Json;
 
 namespace Eagle.AzureFunctions

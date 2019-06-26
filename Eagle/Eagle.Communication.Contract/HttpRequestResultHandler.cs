@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using WonderTools.Eagle.Contract;
+using Eagle;
 using Newtonsoft.Json;
+using WonderTools.Eagle.Contract;
 
-namespace Eagle.Communication.Contract
+namespace WonderTools.Eagle.Communication.Contract
 {
     public class HttpRequestResultHandler : IResultHandler
     {

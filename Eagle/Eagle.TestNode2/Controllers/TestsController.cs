@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Eagle.Communication.Contract;
+using WonderTools.Eagle.Communication.Contract;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Eagle.TestNode2.Controllers
