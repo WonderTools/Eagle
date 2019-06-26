@@ -4,6 +4,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>WonderTools.Eagle.Contract</RootNamespace>
     <AssemblyName>WonderTools.Eagle.Contract</AssemblyName>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageProjectUrl>https://github.com/WonderTools/eagle</PackageProjectUrl>
   </PropertyGroup>
 
 </Project>
