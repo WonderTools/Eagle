@@ -4,6 +4,10 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>WonderTools.Eagle.Communication.Contract</AssemblyName>
     <RootNamespace>WonderTools.Eagle.Communication.Contract</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/WonderTools/Eagle</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
