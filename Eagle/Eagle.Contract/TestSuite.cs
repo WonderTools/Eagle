@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Eagle.Contract
+namespace WonderTools.Eagle.Contract
 {
     public class TestSuite
     {

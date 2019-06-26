@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Eagle.Contract;
+using WonderTools.Eagle.Contract;
 
 namespace Eagle.Communication.Contract
 {

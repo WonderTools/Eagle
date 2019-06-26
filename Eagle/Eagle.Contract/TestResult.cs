@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Eagle.Contract
+namespace WonderTools.Eagle.Contract
 {
     public class TestResult
     {

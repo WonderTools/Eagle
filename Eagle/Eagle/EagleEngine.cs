@@ -5,7 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using Eagle.Contract;
+using WonderTools.Eagle.Contract;
 using Newtonsoft.Json;
 
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Schema;
-using Eagle.Contract;
+using WonderTools.Eagle.Contract;
 using Eagle.NUnitResult;
 using NUnit.Engine;
 

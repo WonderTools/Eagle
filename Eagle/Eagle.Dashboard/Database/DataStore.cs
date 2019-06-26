@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Eagle.Contract;
+using WonderTools.Eagle.Contract;
 using Eagle.Dashboard.Models;
 using Eagle.Dashboard.Services;
 using Microsoft.EntityFrameworkCore;
