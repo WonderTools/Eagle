@@ -4,8 +4,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Eagle.Communication.Contract;
 using Eagle.Dashboard.Services;
-using Eagle.WebTemp;
 using Newtonsoft.Json;
 
 namespace Eagle.Dashboard.Dependencies

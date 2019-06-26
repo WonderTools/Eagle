@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
+using Eagle.Communication.Contract;
 using Eagle.Dashboard.Services;
-using Eagle.WebTemp;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 

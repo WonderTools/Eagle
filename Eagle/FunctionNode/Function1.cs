@@ -15,10 +15,14 @@ namespace FunctionNode
         {
             log.Info("C# HTTP trigger function processed a request.");
 
+            var content = await req.Content.ReadAsStringAsync();
+
             // parse query parameter
             string name = req.GetQueryNameValuePairs()
                 .FirstOrDefault(q => string.Compare(q.Key, "name", true) == 0)
                 .Value;
+
+
 
             if (name == null)
             {

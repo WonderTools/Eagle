@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Eagle.WebTemp;
+using Eagle.Communication.Contract;
 using Feature.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 

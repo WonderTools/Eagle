@@ -1,4 +1,4 @@
-﻿namespace Eagle.WebTemp
+﻿namespace Eagle.Communication.Contract
 {
     public class TestTrigger
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Eagle.Contract;
 
-namespace Eagle.WebTemp
+namespace Eagle.Communication.Contract
 {
     public class TestReport
     {

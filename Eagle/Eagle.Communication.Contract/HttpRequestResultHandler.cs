@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Eagle.Contract;
 using Newtonsoft.Json;
 
-namespace Eagle.WebTemp
+namespace Eagle.Communication.Contract
 {
     public class HttpRequestResultHandler : IResultHandler
     {
