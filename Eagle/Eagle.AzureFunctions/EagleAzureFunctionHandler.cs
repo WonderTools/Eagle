@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using WonderTools.Eagle.Communication.Contract;
 
@@ -9,7 +10,7 @@ namespace WonderTools.Eagle.AzureFunctions
 {
     public class EagleAzureFunctionHandler
     {
-        public async Task<TestReport> HandleRequest(HttpRequest request, params TestableAssembly[] assemblies)
+        public async Task<IActionResult> HandleRequest(HttpRequest request, params TestableAssembly[] assemblies)
         {
             var serializedTrigger = await new StreamReader(request.Body).ReadToEndAsync();
             var trigger = JsonConvert.DeserializeObject<TestTrigger>(serializedTrigger);
@@ -17,13 +18,14 @@ namespace WonderTools.Eagle.AzureFunctions
             var discoveredTestSuites = engine.GetDiscoveredTestSuites();
             var httpRequestResultHandler = new HttpRequestResultHandler(discoveredTestSuites, trigger.NodeName, trigger.RequestId, trigger.CallBackUrl);
             var results = await engine.ExecuteTest(httpRequestResultHandler, trigger.Id);
-            return new TestReport()
+            var result = new TestReport()
             {
                 NodeName = trigger.NodeName,
                 RequestId = trigger.RequestId,
                 TestResults = results,
                 TestSuites = discoveredTestSuites
             };
+            return new OkObjectResult($"Hello");
         }
     }
 }
