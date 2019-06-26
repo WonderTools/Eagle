@@ -57,7 +57,7 @@ namespace Eagle.Dashboard.Services
             return requestTime.ToString("yyyy-MM-dd-HH:mm:ss.fff") + new Guid();
         }
 
-        public async Task AddResults(MyResult result)
+        public async Task AddResults(TestReport result)
         {
             AdjustId(result.NodeName, result.TestSuites);
             AdjustId(result.NodeName, result.TestResults);

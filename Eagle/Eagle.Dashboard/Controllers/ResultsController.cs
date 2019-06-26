@@ -18,7 +18,7 @@ namespace Eagle.Dashboard.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddResults(MyResult result)
+        public async Task<ActionResult> AddResults(TestReport result)
         {
             await _service.AddResults(result);
             return Ok();

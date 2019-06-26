@@ -11,15 +11,15 @@ namespace Eagle.TestNode2.Controllers
     {
 
         [HttpPost("execute")]
-        public async Task<MyResult> Execute([FromBody] TestTrigger value)
+        public async Task<TestReport> Execute([FromBody] TestTrigger value)
         {
             
             var eagleEngine = new EagleEngine(typeof(AzureResponseCodeTests));
             var testSuites = eagleEngine.GetDiscoveredTestSuites();
             IResultHandler handler = new HttpRequestResultHandler(testSuites, value.NodeName, value.RequestId, value.CallBackUrl);
-            var result = await eagleEngine.ExecuteTest(value.Id, handler);
+            var result = await eagleEngine.ExecuteTest(handler, value.Id);
 
-            return new MyResult()
+            return new TestReport()
             {
                 TestResults = result,
                 TestSuites = testSuites,

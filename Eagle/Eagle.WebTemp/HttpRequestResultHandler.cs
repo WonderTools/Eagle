@@ -8,18 +8,6 @@ using Newtonsoft.Json;
 
 namespace Eagle.WebTemp
 {
-    public class Class1
-    {
-    }
-
-    public class TestTrigger
-    {
-        public string NodeName { get; set; }
-        public string Id { get; set; }
-        public string CallBackUrl { get; set; }
-        public string RequestId { get; set; }
-    }
-
     public class HttpRequestResultHandler : IResultHandler
     {
         private readonly List<TestSuite> _testSuites;
@@ -42,7 +30,7 @@ namespace Eagle.WebTemp
             {
                 using (var httpClient = new HttpClient())
                 {
-                    var myResult = new MyResult();
+                    var myResult = new TestReport();
                     myResult.RequestId = _requestId;
                     myResult.NodeName = _nodeName;
                     myResult.TestSuites = _testSuites;
@@ -57,19 +45,6 @@ namespace Eagle.WebTemp
             {
 
             }
-
         }
     }
-
-    public class MyResult
-    {
-        public List<TestSuite> TestSuites { get; set; }
-
-        public List<TestResult> TestResults { get; set; }
-
-        public string NodeName { get; set; }
-        public string RequestId { get; set; }
-    }
-
-
 }

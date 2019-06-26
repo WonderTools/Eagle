@@ -80,7 +80,19 @@ namespace Eagle
             return result;
         }
 
-        public async Task<List<TestResult>> ExecuteTest(string id, IResultHandler resultHandler)
+        public Task<List<TestResult>> ExecuteTest(IResultHandler resultHandler, string id = null)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return ExecuteAllTests(resultHandler);
+            }
+            else
+            {
+                return ExecuteTestInternal(resultHandler, id);
+            }
+        }
+
+        private async Task<List<TestResult>> ExecuteTestInternal(IResultHandler resultHandler, string id)
         {
             var testRunner = new TestRunner();
             if(!_executableTests.ContainsKey(id)) throw new Exception("Test id not found");
@@ -92,7 +104,7 @@ namespace Eagle
         }
 
 
-        public async Task<List<TestResult>> ExecuteAllTests(IResultHandler resultHandler)
+        private async Task<List<TestResult>> ExecuteAllTests(IResultHandler resultHandler)
         {
             var result = new List<TestResult>();
             foreach (var testPackage in _testPackages)
