@@ -2,7 +2,6 @@
 
 namespace Eagle.Contract
 {
-    //Should this be renamed to DiscoveryTestSuite
     public class TestSuite
     {
         public TestSuite()

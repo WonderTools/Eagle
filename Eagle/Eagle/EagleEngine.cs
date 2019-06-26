@@ -17,16 +17,12 @@ namespace Eagle
         private List<PackageAndSuite> _packageAndTestSuites;
         private Dictionary<string, ExecutableTest> _executableTests;
 
-        private TestRunner _testRunner;
-        private List<TestSuite> _testSuites;
-        private Dictionary<string,(TestPackage TestPackage, string FullName)> _idToSchedulingParametersMap;
-        
         public EagleEngine(params TestableAssembly[] testableAssemblies)
         {
-            Initialize(testableAssemblies);
+            _testPackages =
+                testableAssemblies.Select(x => new TestPackage(x.Location)).ToList();
             _packageAndTestSuites = _testPackages.Select(p => new PackageAndSuite(){ TestPackage = p, TestSuite = GetTestSuite(p)}).ToList();
             _executableTests = GetExecutableTests(_packageAndTestSuites);
-
         }
 
         private TestSuite GetTestSuite(TestPackage testPackage)
@@ -43,8 +39,7 @@ namespace Eagle
             }
         }
 
-        private Dictionary<string, ExecutableTest>
-            GetExecutableTests(List<PackageAndSuite> packageAndSuites)
+        private Dictionary<string, ExecutableTest> GetExecutableTests(List<PackageAndSuite> packageAndSuites)
         {
             var result = new Dictionary<string, ExecutableTest>();
             foreach (var packageAndSuite in packageAndSuites)
@@ -85,21 +80,27 @@ namespace Eagle
             return result;
         }
 
-        private void Initialize(params TestableAssembly[] testableAssemblies)
-        {
-            _testPackages =
-                testableAssemblies.Select(x => new TestPackage(x.Location)).ToList();
-
-            Initializer initializer = new Initializer();
-            var packageToSuiteMap = initializer.GetTestPackageToTestSuiteMap(testableAssemblies);
-            _testSuites = packageToSuiteMap.Values.ToList();
-            _idToSchedulingParametersMap = initializer.GetIdToSchedulingParametersMap(packageToSuiteMap);
-            _testRunner = new TestRunner(_idToSchedulingParametersMap);
-        }
-
         public async Task<List<TestResult>> ExecuteTest(string id, IResultHandler resultHandler)
         {
-            var result = await _testRunner.RunTestCaseNew(id);
+            var testRunner = new TestRunner();
+            if(!_executableTests.ContainsKey(id)) throw new Exception("Test id not found");
+            var executableTest = _executableTests[id];
+
+            var result = await testRunner.RunTestCase(executableTest.TestPackage, executableTest.FullName);
+            await resultHandler.OnTestCompletion(result);
+            return result;
+        }
+
+
+        public async Task<List<TestResult>> ExecuteAllTests(IResultHandler resultHandler)
+        {
+            var result = new List<TestResult>();
+            foreach (var testPackage in _testPackages)
+            {
+                var testRunner = new TestRunner();
+                var r = await testRunner.RunTestCase(testPackage);
+                result.AddRange(r);
+            }
             await resultHandler.OnTestCompletion(result);
             return result;
         }
@@ -122,6 +123,4 @@ namespace Eagle
             public TestSuite TestSuite { get; set; }
         }
     }
-
-    
 }   
