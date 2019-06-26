@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using Eagle.AzureFunctions;
+using WonderTools.Eagle.AzureFunctions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
@@ -19,7 +19,7 @@ namespace FunctionApp1
             ILogger log)
         {
             var handler = new EagleAzureFunctionHandler();
-            
+            var r = await handler.HandleRequest(req);
 
 
             log.LogInformation("C# HTTP trigger function processed a request.");

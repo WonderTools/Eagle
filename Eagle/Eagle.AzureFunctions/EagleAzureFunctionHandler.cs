@@ -1,5 +1,7 @@
-﻿using System.Net.Http;
+﻿using System.IO;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using WonderTools.Eagle.Communication.Contract;
 
@@ -7,9 +9,9 @@ namespace WonderTools.Eagle.AzureFunctions
 {
     public class EagleAzureFunctionHandler
     {
-        public async Task<TestReport> HandleRequest(HttpRequestMessage request, params TestableAssembly[] assemblies)
+        public async Task<TestReport> HandleRequest(HttpRequest request, params TestableAssembly[] assemblies)
         {
-            var serializedTrigger = await request.Content.ReadAsStringAsync();
+            var serializedTrigger = await new StreamReader(request.Body).ReadToEndAsync();
             var trigger = JsonConvert.DeserializeObject<TestTrigger>(serializedTrigger);
             var engine = new EagleEngine(assemblies);
             var discoveredTestSuites = engine.GetDiscoveredTestSuites();
