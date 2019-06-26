@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Eagle.NUnitDiscovery
+namespace WonderTools.Eagle.NUnitDiscovery
 {
     public class NUnitTestSuite
     {

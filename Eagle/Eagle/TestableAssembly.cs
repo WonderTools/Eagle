@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Eagle
+namespace WonderTools.Eagle
 {
     public class TestableAssembly
     {

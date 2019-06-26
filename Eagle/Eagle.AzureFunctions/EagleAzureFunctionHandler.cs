@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using WonderTools.Eagle.Communication.Contract;
 using Newtonsoft.Json;
+using WonderTools.Eagle;
 
 namespace Eagle.AzureFunctions
 {

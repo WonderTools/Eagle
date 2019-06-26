@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Xml.Schema;
-using WonderTools.Eagle.Contract;
-using Eagle.NUnitResult;
 using NUnit.Engine;
+using WonderTools.Eagle.Contract;
 
-namespace Eagle
+namespace WonderTools.Eagle
 {
     public class TestRunner
     {

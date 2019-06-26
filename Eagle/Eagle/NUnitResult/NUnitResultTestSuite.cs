@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Eagle.NUnitResult
+namespace WonderTools.Eagle.NUnitResult
 {
     public class NUnitResultTestSuite
     {

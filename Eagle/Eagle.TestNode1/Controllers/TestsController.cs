@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using WonderTools.Eagle.Communication.Contract;
 using Feature.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using WonderTools.Eagle;
 
 namespace Eagle.TestNode1.Controllers
 {

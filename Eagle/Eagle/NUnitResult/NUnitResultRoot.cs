@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Eagle.NUnitResult
+namespace WonderTools.Eagle.NUnitResult
 {
     
 

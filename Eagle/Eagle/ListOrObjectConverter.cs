@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Eagle
+namespace WonderTools.Eagle
 {
     public class ListOrObjectConverter<T> : JsonConverter
     {
