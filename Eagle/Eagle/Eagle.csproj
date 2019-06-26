@@ -4,6 +4,10 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>WonderTools.Eagle</RootNamespace>
     <AssemblyName>WonderTools.Eagle</AssemblyName>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/WonderTools/Eagle</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,10 +22,7 @@
     <PackageReference Include="NUnit" Version="3.11.0" />
     <PackageReference Include="NUnit.Engine" Version="3.10.0" />
     <PackageReference Include="NUnit.Engine.Api" Version="3.10.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Eagle.Contract\Eagle.Contract.csproj" />
+    <PackageReference Include="WonderTools.Eagle.Contract" Version="1.0.0" />
   </ItemGroup>
 
 </Project>
