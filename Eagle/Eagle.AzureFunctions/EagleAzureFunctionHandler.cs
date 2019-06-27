@@ -8,9 +8,9 @@ using WonderTools.Eagle.Communication.Contract;
 
 namespace WonderTools.Eagle.AzureFunctions
 {
-    public class EagleAzureFunctionHandler
+    public static class RequestHandler
     {
-        public async Task<IActionResult> HandleRequest(HttpRequest request, params TestableAssembly[] assemblies)
+        public static async Task<IActionResult> HandleRequest(HttpRequest request, params TestableAssembly[] assemblies)
         {
             var serializedTrigger = await new StreamReader(request.Body).ReadToEndAsync();
             var trigger = JsonConvert.DeserializeObject<TestTrigger>(serializedTrigger);
@@ -25,7 +25,7 @@ namespace WonderTools.Eagle.AzureFunctions
                 TestResults = results,
                 TestSuites = discoveredTestSuites
             };
-            return new OkObjectResult($"Hello");
+            return new OkObjectResult(JsonConvert.SerializeObject(result));
         }
     }
 }
