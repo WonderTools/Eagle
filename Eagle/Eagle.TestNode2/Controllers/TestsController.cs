@@ -6,6 +6,11 @@ using WonderTools.Eagle;
 
 namespace Eagle.TestNode2.Controllers
 {
+    //end point name
+    //Class Name
+    //
+
+
     [Route("api/tests")]
     [ApiController]
     public class TestsController : ControllerBase

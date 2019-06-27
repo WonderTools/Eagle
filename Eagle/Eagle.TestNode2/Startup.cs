@@ -57,6 +57,15 @@ namespace Eagle.TestNode2
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 
+            app.Use(async (context, next) =>
+            {
+                //if(context.Request.Path
+
+
+
+                await next.Invoke();
+            });
+
 
             app.UseHttpsRedirection();
             app.UseMvc();

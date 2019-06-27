@@ -6,10 +6,10 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.28" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="WonderTools.Eagle.AzureFunctions" Version="1.0.1" />
     <PackageReference Include="WonderTools.Eagle.Communication.Contract" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Eagle.AzureFunctions\Eagle.AzureFunctions.csproj" />
     <ProjectReference Include="..\Feature.Infrastructure\Feature.Infrastructure.csproj" />
   </ItemGroup>
   <ItemGroup>
