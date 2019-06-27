@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using Feature.Infrastructure;
 using WonderTools.Eagle.AzureFunctions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
@@ -20,7 +21,7 @@ namespace FunctionApp1
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
             ILogger log)
         {
-            return await HandleRequest(req);
+            return await HandleRequest(req, typeof(TestMyClass));
 
 
             log.LogInformation("C# HTTP trigger function processed a request.");
