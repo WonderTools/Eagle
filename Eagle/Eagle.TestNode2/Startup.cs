@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -59,11 +61,27 @@ namespace Eagle.TestNode2
 
             app.Use(async (context, next) =>
             {
-                //if(context.Request.Path
+                var path = context.Request.Path.ToString().ToLower();
+                if (path != "/api/tests/execute") await next.Invoke();
+                if (context.Request.Method.ToLower() != "post") await next.Invoke();
+                //using (var reader = new StreamReader(
+                //       context.Request.Body,
+                //       encoding: Encoding.UTF8,
+                //       detectEncodingFromByteOrderMarks: false,
+                //       bufferSize: bufferSize,
+                //       leaveOpen: true))
+                {
+                    var body = await reader.ReadToEndAsync();
+                    // Do some processing with body…
+
+                    // Reset the request body stream position so the next middleware can read it
+                    context.Request.Body.Position = 0;
+                }
+
+                var i = 0;
 
 
-
-                await next.Invoke();
+                
             });
 
 
