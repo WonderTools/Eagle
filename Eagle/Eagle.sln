@@ -17,9 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eagle.TestNode2", "Eagle.Te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eagle.Contract", "Eagle.Contract\Eagle.Contract.csproj", "{77072959-9040-4DAA-BB57-8015E1B3744F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eagle.Communication.Contract", "Eagle.Communication.Contract\Eagle.Communication.Contract.csproj", "{7FEB0BBB-0001-4E6C-9836-319E6CC965D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eagle.Http.Contract", "Eagle.Communication.Contract\Eagle.Http.Contract.csproj", "{7FEB0BBB-0001-4E6C-9836-319E6CC965D9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eagle.AzureFunctions", "Eagle.AzureFunctions\Eagle.AzureFunctions.csproj", "{0D4C0A11-C3D0-46C4-9042-4A395A79FC2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eagle.Http", "Eagle.AzureFunctions\Eagle.Http.csproj", "{0D4C0A11-C3D0-46C4-9042-4A395A79FC2B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionApp1", "FunctionApp1\FunctionApp1.csproj", "{1DEF7979-F177-4FE9-A7AB-D41852EA84E0}"
 EndProject

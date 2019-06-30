@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>WonderTools.Eagle.AzureFunctions</RootNamespace>
-    <AssemblyName>WonderTools.Eagle.AzureFunctions</AssemblyName>
+    <RootNamespace>WonderTools.Eagle.Http</RootNamespace>
+    <AssemblyName>WonderTools.Eagle.Http</AssemblyName>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/WonderTools/Eagle</PackageProjectUrl>
@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Eagle.Communication.Contract\Eagle.Communication.Contract.csproj" />
+    <ProjectReference Include="..\Eagle.Communication.Contract\Eagle.Http.Contract.csproj" />
     <ProjectReference Include="..\Eagle.Contract\Eagle.Contract.csproj" />
     <ProjectReference Include="..\Eagle\Eagle.Core.csproj" />
   </ItemGroup>

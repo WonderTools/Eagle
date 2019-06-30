@@ -2,12 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>WonderTools.Eagle.Communication.Contract</AssemblyName>
-    <RootNamespace>WonderTools.Eagle.Communication.Contract</RootNamespace>
+    <AssemblyName>WonderTools.Eagle.Http.Contract</AssemblyName>
+    <RootNamespace>WonderTools.Eagle.Http.Contract</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/WonderTools/Eagle</PackageProjectUrl>
+    <PackageId>WonderTools.Eagle.Http.Contract</PackageId>
+    <Authors>WonderTools</Authors>
+    <Company>WonderTools</Company>
+    <Product>WonderTools.Eagle.Http.Contract</Product>
   </PropertyGroup>
 
   <ItemGroup>
