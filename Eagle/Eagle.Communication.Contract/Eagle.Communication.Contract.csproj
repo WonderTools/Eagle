@@ -11,8 +11,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="WonderTools.Eagle" Version="1.0.0" />
-    <PackageReference Include="WonderTools.Eagle.Contract" Version="1.0.0" />
+    <ProjectReference Include="..\Eagle.Contract\Eagle.Contract.csproj" />
+    <ProjectReference Include="..\Eagle\Eagle.csproj" />
   </ItemGroup>
 
 </Project>

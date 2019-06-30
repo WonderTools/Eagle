@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Eagle.Communication.Contract\Eagle.Communication.Contract.csproj" />
+    <ProjectReference Include="..\Eagle.Contract\Eagle.Contract.csproj" />
     <ProjectReference Include="..\Eagle\Eagle.csproj" />
   </ItemGroup>
 
