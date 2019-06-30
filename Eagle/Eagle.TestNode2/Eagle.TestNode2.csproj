@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Eagle.AzureFunctions\Eagle.Http.csproj" />
+    <ProjectReference Include="..\Eagle.AzureFunctions\Eagle.Http.NUnit.csproj" />
     <ProjectReference Include="..\Eagle.Communication.Contract\Eagle.Http.Contract.csproj" />
     <ProjectReference Include="..\Eagle\Eagle.Core.csproj" />
   </ItemGroup>

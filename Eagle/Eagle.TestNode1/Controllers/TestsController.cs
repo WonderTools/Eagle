@@ -8,6 +8,7 @@ using WonderTools.Eagle;
 using WonderTools.Eagle.Core;
 using WonderTools.Eagle.Http;
 using WonderTools.Eagle.Http.Contract;
+using WonderTools.Eagle.Http.NUnit;
 
 namespace Eagle.TestNode1.Controllers
 {

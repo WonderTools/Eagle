@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using WonderTools.Eagle;
 using WonderTools.Eagle.Http;
+using WonderTools.Eagle.Http.NUnit;
 
 namespace FunctionApp1
 {

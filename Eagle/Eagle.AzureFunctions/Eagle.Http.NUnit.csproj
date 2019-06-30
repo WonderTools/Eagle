@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>WonderTools.Eagle.Http</RootNamespace>
-    <AssemblyName>WonderTools.Eagle.Http</AssemblyName>
+    <RootNamespace>WonderTools.Eagle.Http.NUnit</RootNamespace>
+    <AssemblyName>WonderTools.Eagle.Http.NUnit</AssemblyName>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/WonderTools/Eagle</PackageProjectUrl>

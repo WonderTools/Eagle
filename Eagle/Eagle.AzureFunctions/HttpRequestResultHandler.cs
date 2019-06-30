@@ -8,7 +8,7 @@ using WonderTools.Eagle.Contract;
 using WonderTools.Eagle.Core;
 using WonderTools.Eagle.Http.Contract;
 
-namespace WonderTools.Eagle.Http
+namespace WonderTools.Eagle.Http.NUnit
 {
     public class HttpRequestResultHandler : IResultHandler
     {

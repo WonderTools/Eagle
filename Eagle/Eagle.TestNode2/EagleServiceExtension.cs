@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using WonderTools.Eagle.Core;
 using WonderTools.Eagle.Http;
 using WonderTools.Eagle.Http.Contract;
+using WonderTools.Eagle.Http.NUnit;
 
 namespace Eagle.TestNode2
 {
