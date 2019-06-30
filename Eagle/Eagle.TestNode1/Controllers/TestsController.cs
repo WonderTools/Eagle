@@ -6,6 +6,7 @@ using Feature.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using WonderTools.Eagle;
 using WonderTools.Eagle.Core;
+using WonderTools.Eagle.Http;
 using WonderTools.Eagle.Http.Contract;
 
 namespace Eagle.TestNode1.Controllers
