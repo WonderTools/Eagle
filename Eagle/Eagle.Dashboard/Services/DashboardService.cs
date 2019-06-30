@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using WonderTools.Eagle.Communication.Contract;
 using WonderTools.Eagle.Contract;
 using Eagle.Dashboard.Models;
+using WonderTools.Eagle.Http.Contract;
 
 namespace Eagle.Dashboard.Services
 {

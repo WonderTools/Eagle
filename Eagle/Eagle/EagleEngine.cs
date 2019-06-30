@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using NUnit.Engine;
 using WonderTools.Eagle.Contract;
 
-namespace WonderTools.Eagle
+namespace WonderTools.Eagle.Core
 {
     public class EagleEngine
     {

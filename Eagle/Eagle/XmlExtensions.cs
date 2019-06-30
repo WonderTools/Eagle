@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 using Newtonsoft.Json;
 
-namespace WonderTools.Eagle
+namespace WonderTools.Eagle.Core
 {
     public static class XmlExtensions
     {

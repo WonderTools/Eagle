@@ -1,4 +1,4 @@
-﻿namespace WonderTools.Eagle.Communication.Contract
+﻿namespace WonderTools.Eagle.Http.Contract
 {
     public class TestTrigger
     {

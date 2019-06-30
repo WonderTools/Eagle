@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace WonderTools.Eagle.NUnitResult
+namespace WonderTools.Eagle.Core.NUnitResult
 {
     public class NUnitResultTestCase
     {

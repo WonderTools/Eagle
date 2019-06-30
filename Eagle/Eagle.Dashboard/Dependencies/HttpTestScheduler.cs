@@ -4,9 +4,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using WonderTools.Eagle.Communication.Contract;
 using Eagle.Dashboard.Services;
 using Newtonsoft.Json;
+using WonderTools.Eagle.Http.Contract;
 
 namespace Eagle.Dashboard.Dependencies
 {

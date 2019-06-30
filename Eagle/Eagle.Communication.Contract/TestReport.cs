@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using WonderTools.Eagle.Contract;
 
-namespace WonderTools.Eagle.Communication.Contract
+namespace WonderTools.Eagle.Http.Contract
 {
     public class TestReport
     {

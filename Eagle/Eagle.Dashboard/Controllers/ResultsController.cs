@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using WonderTools.Eagle.Communication.Contract;
 using Eagle.Dashboard.Services;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using WonderTools.Eagle.Http.Contract;
 
 namespace Eagle.Dashboard.Controllers
 {

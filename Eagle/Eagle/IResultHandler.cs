@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using WonderTools.Eagle.Contract;
 
-namespace WonderTools.Eagle
+namespace WonderTools.Eagle.Core
 {
     public interface IResultHandler
     {

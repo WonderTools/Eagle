@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Newtonsoft.Json;
 using WonderTools.Eagle.Contract;
-using WonderTools.Eagle.NUnitDiscovery;
-using WonderTools.Eagle.NUnitResult;
+using WonderTools.Eagle.Core.NUnitDiscovery;
+using WonderTools.Eagle.Core.NUnitResult;
 
-namespace WonderTools.Eagle
+namespace WonderTools.Eagle.Core
 {
     public class NUnitJsonParser
     {

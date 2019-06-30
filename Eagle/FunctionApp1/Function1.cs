@@ -9,8 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using WonderTools.Eagle;
-using WonderTools.Eagle.AzureFunctions;
-using WonderTools.Eagle.Communication.Contract;
+using WonderTools.Eagle.Http;
 
 namespace FunctionApp1
 {

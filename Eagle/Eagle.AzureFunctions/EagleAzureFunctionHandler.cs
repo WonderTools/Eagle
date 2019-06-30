@@ -1,12 +1,12 @@
 ﻿using System.IO;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using WonderTools.Eagle.Communication.Contract;
+using WonderTools.Eagle.Core;
+using WonderTools.Eagle.Http.Contract;
 
-namespace WonderTools.Eagle.AzureFunctions
+namespace WonderTools.Eagle.Http
 {
     public static class RequestHandler
     {

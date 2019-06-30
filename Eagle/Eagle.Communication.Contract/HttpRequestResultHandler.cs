@@ -5,8 +5,9 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using WonderTools.Eagle.Contract;
+using WonderTools.Eagle.Core;
 
-namespace WonderTools.Eagle.Communication.Contract
+namespace WonderTools.Eagle.Http.Contract
 {
     public class HttpRequestResultHandler : IResultHandler
     {

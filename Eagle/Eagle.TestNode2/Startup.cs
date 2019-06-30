@@ -18,7 +18,8 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
 using WonderTools.Eagle;
-using WonderTools.Eagle.Communication.Contract;
+using WonderTools.Eagle.Core;
+using WonderTools.Eagle.Http.Contract;
 
 namespace Eagle.TestNode2
 {

@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WonderTools.Eagle.Communication.Contract;
 using Feature.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using WonderTools.Eagle;
+using WonderTools.Eagle.Core;
+using WonderTools.Eagle.Http.Contract;
 
 namespace Eagle.TestNode1.Controllers
 {
