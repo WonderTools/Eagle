@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eagle", "Eagle\Eagle.csproj", "{96B4688D-F92F-4C28-A538-C48246233B02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eagle.Core", "Eagle\Eagle.Core.csproj", "{96B4688D-F92F-4C28-A538-C48246233B02}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Feature.Infrastructure", "Feature.Infrastructure\Feature.Infrastructure.csproj", "{D84EDFE1-8640-4CF2-B3F3-04ACAF6557D1}"
 EndProject
