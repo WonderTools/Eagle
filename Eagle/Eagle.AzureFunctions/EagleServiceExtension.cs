@@ -13,7 +13,12 @@ namespace WonderTools.Eagle.Http.NUnit
 {
     public static class EagleServiceExtension
     {
-        public static void UseHttpEagleNUnit(this IApplicationBuilder app, string eagleEndpoint, params TestableAssembly[] testableAssemblies)
+        public static void UseEagleNUnitHttp(this IApplicationBuilder app, string eagleEndpoint, params TestableAssembly[] testableAssemblies)
+        {
+            app.UseEagleNUnitHttp(eagleEndpoint, String.Empty, testableAssemblies);
+        }
+
+        public static void UseEagleNUnitHttp(this IApplicationBuilder app, string eagleEndpoint, string nodeSecret, params TestableAssembly[] testableAssemblies)
         {
             app.Use(async (context, next) =>
             {
@@ -23,25 +28,35 @@ namespace WonderTools.Eagle.Http.NUnit
                     return;
                 }
 
-                await HandleEagleRequest(context, testableAssemblies);
+                await HandleEagleRequest(context, nodeSecret, testableAssemblies);
             });
         }
 
 
-        private static async Task HandleEagleRequest(HttpContext context, params TestableAssembly[] testableAssemblies)
+        private static async Task HandleEagleRequest(HttpContext context, string nodeSecret, params TestableAssembly[] testableAssemblies)
         {
             var bodyAsText = await GetBody(context);
             TestTrigger testTrigger = JsonConvert.DeserializeObject<TestTrigger>(bodyAsText);
-
+            var response = context.Response;
+            response.ContentType = "application/json";
+            
+            if (!string.IsNullOrWhiteSpace(nodeSecret))
+            {
+                if (nodeSecret != testTrigger.NodeSecret)
+                {
+                    response.StatusCode = (int)HttpStatusCode.Forbidden;
+                    await response.WriteAsync(JsonConvert.SerializeObject("the node secret is wrong"));
+                    return;
+                }
+            }
+            response.StatusCode = (int)HttpStatusCode.OK;
             var eagleEngine = new EagleEngine(testableAssemblies);
             var testSuites = eagleEngine.GetDiscoveredTestSuites();
             IResultHandler handler = new HttpRequestResultHandler(testSuites, testTrigger.NodeName, testTrigger.RequestId,
                 testTrigger.CallBackUrl);
             var result = await eagleEngine.ExecuteTest(handler, testTrigger.Id);
 
-            var response = context.Response;
-            response.ContentType = "application/json";
-            response.StatusCode = (int)HttpStatusCode.OK;
+
             var report = new TestReport()
             {
                 TestResults = result,

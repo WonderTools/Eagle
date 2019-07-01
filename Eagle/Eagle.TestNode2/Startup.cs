@@ -58,7 +58,7 @@ namespace Eagle.TestNode2
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 
-            app.UseHttpEagleNUnit("/api/tests/execute", typeof(AzureResponseCodeTests));
+            app.UseEagleNUnitHttp("/api/tests/execute", typeof(AzureResponseCodeTests));
 
             app.UseHttpsRedirection();
             app.UseMvc();
