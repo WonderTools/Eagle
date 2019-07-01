@@ -5,10 +5,9 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.28" />
+    <PackageReference Include="WonderTools.Eagle.Http.NUnit" Version="1.1.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Eagle.AzureFunctions\Eagle.Http.NUnit.csproj" />
-    <ProjectReference Include="..\Eagle.Communication.Contract\Eagle.Http.Contract.csproj" />
     <ProjectReference Include="..\Feature.Infrastructure\Feature.Infrastructure.csproj" />
   </ItemGroup>
   <ItemGroup>

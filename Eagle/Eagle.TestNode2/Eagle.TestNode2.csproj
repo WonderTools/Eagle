@@ -10,16 +10,11 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="NUnit" Version="3.12.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
+    <PackageReference Include="WonderTools.Eagle.Http.NUnit" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Eagle.AzureFunctions\Eagle.Http.NUnit.csproj" />
-    <ProjectReference Include="..\Eagle.Communication.Contract\Eagle.Http.Contract.csproj" />
-    <ProjectReference Include="..\Eagle\Eagle.NUnit.csproj" />
   </ItemGroup>
 
 </Project>
