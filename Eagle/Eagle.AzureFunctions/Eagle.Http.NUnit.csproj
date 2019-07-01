@@ -18,12 +18,8 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Eagle.Communication.Contract\Eagle.Http.Contract.csproj" />
-    <ProjectReference Include="..\Eagle.Contract\Eagle.Contract.csproj" />
-    <ProjectReference Include="..\Eagle\Eagle.NUnit.csproj" />
+    <PackageReference Include="WonderTools.Eagle.Http.Contract" Version="1.1.0" />
+    <PackageReference Include="WonderTools.Eagle.NUnit" Version="1.0.0" />
   </ItemGroup>
 
 </Project>
