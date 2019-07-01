@@ -55,22 +55,29 @@ namespace WonderTools.Eagle.NUnit
             return result;
         }
 
-        private List<(string FullName, string Id)> GetFullNameAndIds(TestSuite suite)
+        public class FullNameAndId
         {
-            List<(string FullName, string Id)> GetFullNameAndIdsFromCases(List<TestCase> testCases)
+            public string FullName { get; set; }
+            public string Id { get; set; }
+        }
+
+
+        private List<FullNameAndId> GetFullNameAndIds(TestSuite suite)
+        {
+            List<FullNameAndId> GetFullNameAndIdsFromCases(List<TestCase> testCases)
             {
-                return testCases.Select(x => (x.FullName, x.Id)).ToList();
+                return testCases.Select(x => new FullNameAndId(){FullName = x.FullName, Id = x.Id}).ToList();
             }
 
-            List<(string FullName, string Id)> GetFullNameAndIdsFromSuites(List<TestSuite> testSuites)
+            List<FullNameAndId> GetFullNameAndIdsFromSuites(List<TestSuite> testSuites)
             {
-                var results = new List<(string FullName, string Id)>();
+                var results = new List<FullNameAndId>();
                 var r = testSuites.Select(GetFullNameAndIds).ToList();
                 r.ForEach(x => results.AddRange(x));
                 return results;
             }
 
-            var result = new List<(string FullName, string Id)>() { (suite.FullName, suite.Id) };
+            var result = new List<FullNameAndId>() { new FullNameAndId(){FullName = suite.FullName, Id= suite.Id} };
             result.AddRange(GetFullNameAndIdsFromSuites(suite.TestSuites));
             result.AddRange(GetFullNameAndIdsFromCases(suite.TestCases));
             return result;

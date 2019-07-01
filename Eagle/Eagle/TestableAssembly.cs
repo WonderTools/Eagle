@@ -12,7 +12,7 @@ namespace WonderTools.Eagle.NUnit
 
         public static implicit operator TestableAssembly(Type type)
         {
-            return new TestableAssembly() { Location = type.Assembly.Location };
+            return new TestableAssembly() { Location = type.GetTypeInfo().Assembly.Location };
         }
         public string Location { get; private set; }
     }
