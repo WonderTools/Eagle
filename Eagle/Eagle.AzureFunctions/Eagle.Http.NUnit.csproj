@@ -19,7 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Eagle.Communication.Contract\Eagle.Http.Contract.csproj" />
     <ProjectReference Include="..\Eagle.Contract\Eagle.Contract.csproj" />
-    <ProjectReference Include="..\Eagle\Eagle.Core.csproj" />
+    <ProjectReference Include="..\Eagle\Eagle.NUnit.csproj" />
   </ItemGroup>
 
   <ItemGroup>
