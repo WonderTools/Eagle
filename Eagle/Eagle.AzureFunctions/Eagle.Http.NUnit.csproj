@@ -9,6 +9,10 @@
     <PackageProjectUrl>https://github.com/WonderTools/Eagle</PackageProjectUrl>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
     <Version>1.0.1</Version>
+    <Copyright>Copyright ©2019 WonderTools</Copyright>
+    <Authors>WonderTools</Authors>
+    <RepositoryUrl>https://github.com/WonderTools/Eagle</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
