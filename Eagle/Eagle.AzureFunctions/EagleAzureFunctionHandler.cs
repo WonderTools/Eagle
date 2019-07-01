@@ -10,10 +10,20 @@ namespace WonderTools.Eagle.Http.NUnit
 {
     public static class RequestHandler
     {
-        public static async Task<IActionResult> HandleRequest(HttpRequest request, params TestableAssembly[] assemblies)
+        public static async Task<IActionResult> HandleRequest(this HttpRequest request, string nodeSecret,
+            params TestableAssembly[] assemblies)
         {
             var serializedTrigger = await new StreamReader(request.Body).ReadToEndAsync();
             var trigger = JsonConvert.DeserializeObject<TestTrigger>(serializedTrigger);
+
+            if (!string.IsNullOrWhiteSpace(nodeSecret))
+            {
+                if (nodeSecret != trigger.NodeSecret)
+                {
+                    return new ForbidResult("The node secret is invalid");
+                }
+            }
+
             var engine = new EagleEngine(assemblies);
             var discoveredTestSuites = engine.GetDiscoveredTestSuites();
             var httpRequestResultHandler = new HttpRequestResultHandler(discoveredTestSuites, trigger.NodeName, trigger.RequestId, trigger.CallBackUrl);
@@ -26,6 +36,12 @@ namespace WonderTools.Eagle.Http.NUnit
                 TestSuites = discoveredTestSuites
             };
             return new OkObjectResult(JsonConvert.SerializeObject(result));
+        }
+
+
+        public static async Task<IActionResult> HandleRequest(this HttpRequest request, params TestableAssembly[] assemblies)
+        {
+            return await request.HandleRequest(string.Empty, assemblies);
         }
     }
 }

@@ -21,9 +21,7 @@ namespace FunctionApp1
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
             ILogger log)
         {
-            return await RequestHandler.HandleRequest(req, typeof(TestMyClass));
-
-
+            return await req.HandleRequest(typeof(TestMyClass));
         }
     }
 }
