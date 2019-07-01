@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using WonderTools.Eagle.Core;
 using WonderTools.Eagle.Http.Contract;
+using WonderTools.Eagle.NUnit;
 
 namespace WonderTools.Eagle.Http.NUnit
 {

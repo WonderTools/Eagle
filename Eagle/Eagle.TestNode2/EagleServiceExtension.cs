@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
 using Newtonsoft.Json;
-using WonderTools.Eagle.Core;
 using WonderTools.Eagle.Http;
 using WonderTools.Eagle.Http.Contract;
 using WonderTools.Eagle.Http.NUnit;
+using WonderTools.Eagle.NUnit;
 
 namespace Eagle.TestNode2
 {

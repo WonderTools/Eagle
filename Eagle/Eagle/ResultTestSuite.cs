@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WonderTools.Eagle.Core
+namespace WonderTools.Eagle.NUnit
 {
     public class ResultTestSuite 
     {

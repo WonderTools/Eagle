@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Feature.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using WonderTools.Eagle;
-using WonderTools.Eagle.Core;
 using WonderTools.Eagle.Http;
 using WonderTools.Eagle.Http.Contract;
 using WonderTools.Eagle.Http.NUnit;
+using WonderTools.Eagle.NUnit;
 
 namespace Eagle.TestNode1.Controllers
 {

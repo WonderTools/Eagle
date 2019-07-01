@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WonderTools.Eagle.Core
+namespace WonderTools.Eagle.NUnit
 {
     public class ResultTestCase 
     {

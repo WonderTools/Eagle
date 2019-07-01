@@ -5,8 +5,8 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using WonderTools.Eagle.Contract;
-using WonderTools.Eagle.Core;
 using WonderTools.Eagle.Http.Contract;
+using WonderTools.Eagle.NUnit;
 
 namespace WonderTools.Eagle.Http.NUnit
 {

@@ -1,13 +1,13 @@
 ﻿using Newtonsoft.Json;
 
-namespace WonderTools.Eagle.Core.NUnitDiscovery
+namespace WonderTools.Eagle.NUnit.NUnitDiscovery
 {
     public class NUnitTestCase
     {
         [JsonProperty("@name")]
         public string Name { get; set; }
 
-        [JsonProperty("@fullname")]
+        [JsonProperty("@fullname")]     
         public string Fullname { get; set; }
     }
 }
