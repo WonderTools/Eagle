@@ -16,7 +16,7 @@
     <RepositoryUrl>https://github.com/WonderTools/Eagle</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <Version>1.1.0</Version>
-    <Copyright>Copyright ©2016 WonderTools</Copyright>
+    <Copyright>Copyright ©2019 WonderTools</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
