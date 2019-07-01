@@ -12,6 +12,11 @@
     <Authors>WonderTools</Authors>
     <Company>WonderTools</Company>
     <Product>WonderTools.Eagle.Http.Contract</Product>
+    <Description>Eagle Http Communication Contract</Description>
+    <RepositoryUrl>https://github.com/WonderTools/Eagle</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <Version>1.1.0</Version>
+    <Copyright>Copyright ©2016 WonderTools</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
