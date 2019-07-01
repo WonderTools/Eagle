@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>WonderTools.Eagle.Core</RootNamespace>
-    <AssemblyName>WonderTools.Eagle.Core</AssemblyName>
+    <RootNamespace>WonderTools.Eagle.NUnit</RootNamespace>
+    <AssemblyName>WonderTools.Eagle.NUnit</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
