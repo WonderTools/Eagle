@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
 using WonderTools.Eagle;
+using WonderTools.Eagle.Http.NUnit;
 
 namespace Eagle.TestNode2
 {
