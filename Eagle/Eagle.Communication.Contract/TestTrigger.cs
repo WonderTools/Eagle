@@ -6,5 +6,6 @@
         public string Id { get; set; }
         public string CallBackUrl { get; set; }
         public string RequestId { get; set; }
+        public string NodeSecret { get; set; }
     }
 }
