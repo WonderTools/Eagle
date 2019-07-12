@@ -39,7 +39,7 @@ namespace Eagle.Dashboard
             services.AddTransient<DashboardService>();
             services.AddTransient<IDataStore, DataStore>();
             services.AddTransient<ITestScheduler, HttpTestScheduler>();
-            services.AddDbContext<DashboardContext>(options => options.UseInMemoryDatabase("BoardGames"));
+            services.AddDbContext<DashboardContext>(options => options.UseInMemoryDatabase("EagleInMemory"));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Eagle Dashboard", Version = "v1" });

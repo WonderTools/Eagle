@@ -20,12 +20,25 @@ namespace Eagle.Dashboard.Services
             _testScheduler = testScheduler;
         }
 
-        public async Task CreateNode(NodeCreationParameters creationParameters)
+        public async Task CreateNode(NodeUpsertParameters creationParameters)
         {
             //TODO : Validate model
             await _dataStore.CreateNode(creationParameters);
 
             await ScheduleTestAndAddRequest(creationParameters.NodeName, creationParameters.Uri, string.Empty);
+        }
+        public async Task<List<Node>> GetNodes()
+        {
+           try
+           {
+                return await _dataStore.GetNodes();
+           }
+           catch(Exception e)
+           {
+                return null;
+           }
+
+           
         }
 
         private async Task ScheduleTestAndAddRequest(string nodeName, string uri, string testId)
@@ -37,6 +50,16 @@ namespace Eagle.Dashboard.Services
             var isRequestSuccessful = await ScheduleTest(nodeName, uri, testId,
                 "https://localhost:6501/api/results", requestId);
             await _dataStore.AddRequest(requestId, nodeName, testId, requestTime, isRequestSuccessful);
+        }
+
+        public async Task<bool> DeleteNode(string nodeName)
+        {
+            return await _dataStore.DeleteNode(nodeName);
+        }
+
+        public async Task<Node> UpdateNode(string nodeName, NodeUpsertParameters nodeUpsertParameters)
+        {
+           return await _dataStore.UpdateNode(nodeName, nodeUpsertParameters);
         }
 
         private async Task<bool> ScheduleTest(string nodeName, string uri, string testId, string callBackUri, string requestId)

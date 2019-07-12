@@ -34,10 +34,33 @@ namespace Eagle.Dashboard.Database
         }
 
 
-        public async Task CreateNode(NodeCreationParameters creationParameters)
+        public async Task CreateNode(NodeUpsertParameters creationParameters)
         {
-            _context.Nodes.Add(new DbNode() {NodeName = creationParameters.NodeName, Uri = creationParameters.Uri});
+             
+            _context.Nodes.Add(new DbNode()
+            {
+                NodeName = creationParameters.NodeName,
+                Uri = creationParameters.Uri,
+                ClientSecret = creationParameters.ClientSecret,
+                ExecutionIntervalInMinutes = creationParameters.ExecutionIntervalInMinutes
+            });
             await _context.SaveChangesAsync();
+        }
+
+
+
+        public async Task<List<Node>> GetNodes()
+        {
+            var nodes = _context.Nodes !=null ? 
+                _context.Nodes.Select(x => new Node()
+                {
+                    NodeName = x.NodeName,
+                    Uri = x.Uri,
+                    ExecutionIntervalInMinutes = x.ExecutionIntervalInMinutes
+                }).ToListAsync()
+                : null;
+            return await nodes;
+            
         }
 
         public async Task AddRequest(string requestId, string nodeName, string testId, DateTime requestTime, bool isRequestSuccessful)
@@ -102,5 +125,50 @@ namespace Eagle.Dashboard.Database
         {
             return await _context.Nodes.Where(x => x.NodeName == nodeName).Select(x => x.Uri).FirstAsync();
         }
+
+        public async Task<Node> UpdateNode(string nodeName, NodeUpsertParameters nodeUpsertParameters)
+        {
+            DbNode node = await GetNode(nodeName);
+
+            if (node != null)
+            {
+
+                node.NodeName = nodeUpsertParameters.NodeName;
+                node.Uri = nodeUpsertParameters.Uri;
+                node.ClientSecret = nodeUpsertParameters.ClientSecret;
+                node.ExecutionIntervalInMinutes = nodeUpsertParameters.ExecutionIntervalInMinutes;
+                //_context.Nodes.Attach(nodechanged);
+                _context.Entry(node).State = EntityState.Modified;
+                _context.Update(node);
+                await _context.SaveChangesAsync();
+                
+            }
+            Node nodechanged = await _context.Nodes.Where(x => x.NodeName == nodeUpsertParameters.NodeName).Select(x => new Node()
+            {
+                Uri = x.Uri,
+                NodeName = x.NodeName,
+                ExecutionIntervalInMinutes = x.ExecutionIntervalInMinutes,
+            }).FirstAsync();
+            return nodechanged;
+        }
+
+        private async Task<DbNode> GetNode(string nodeName)
+        {
+            return await _context.Nodes.FirstOrDefaultAsync(x => x.NodeName == nodeName);
+        }
+
+        public async Task<bool> DeleteNode(string nodeName)
+        {
+            DbNode node = await GetNode(nodeName);
+            if (node !=null)
+            {
+                _context.Remove(node);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            return false;
+        }
+
+
     }
 }

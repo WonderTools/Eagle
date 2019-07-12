@@ -24,3 +24,7 @@ Eagle/Eagle.AzureFunction/obj/
 Eagle/Eagle.AzureFunction/bin/
 Eagle/Eagle.AzureFunctions/bin/
 Eagle/Eagle.AzureFunctions/obj/
+/.vs/AzureFunctions/v15/.suo
+/.vs/slnx.sqlite
+/Eagle/FunctionApp1/Properties/PublishProfiles/EagleFunctionApp120190702101251 - Zip Deploy.pubxml
+/Eagle/Eagle.AzureFunctions/Eagle.Http.csproj.user
